@@ -15,6 +15,7 @@ public class Pelicula {
     private int duracion;
     private double puntuacion;
     private ArrayList<Generos> generos;
+    private double precio;
     // Se crea una clase ENUM para guardar los todos los generos
     // que vamos a usar en el proyecto, para darle orden y que todos se
     // escriban de la misma manera; lo hago en un ArrayList, porque una
@@ -26,11 +27,13 @@ public class Pelicula {
             String titulo,
             int duracion,
             double puntuacion,
+            double precio,
             String sinopsis,
             String rutaPortada) {
         this.titulo = titulo;
         this.duracion = duracion;
         this.puntuacion = puntuacion;
+        this.precio = precio;
         this.generos = new ArrayList<>();
         this.sinopsis = sinopsis;
         this.rutaPortada = rutaPortada;
@@ -69,5 +72,9 @@ public class Pelicula {
 
     public String getSinopsis() {
         return sinopsis;
+    }
+
+    public double getPrecio() {
+        return precio;
     }
 }

@@ -31,7 +31,6 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 		initComponents();
 		setLocationRelativeTo(this);
 		this.controladorVistaUsuario = new ControladorVistaUsuario();
-		// TODO: cambiar el número por la cantidad de peliculas que hayan
 		filas = controladorVistaUsuario.getFilas();
 		pelis = new JButton[filas][];
 		dibujarPeliculas();
@@ -46,7 +45,6 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 		int margen = 20;
 
 		for (int i = 0; i < pelis.length; i++) {
-			// TODO: ajustar len en función de la cantidad de peliculas del arraylist
 			int peliculasPorFila = controladorVistaUsuario.getPELICULAS_POR_FILA();
 //			System.out.println("peliculasPorFila: " + peliculasPorFila);
 			int len = (i == pelis.length-1) ? peliculasPorFila - filas : peliculasPorFila;
