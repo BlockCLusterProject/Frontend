@@ -22,6 +22,7 @@ public class Pelicula {
     // sola pelicula puede tener mas de 1 genero
     private String sinopsis;
     private String rutaPortada;
+    private boolean active = true;
 
     public Pelicula(
             String titulo,
@@ -29,7 +30,8 @@ public class Pelicula {
             double puntuacion,
             double precio,
             String sinopsis,
-            String rutaPortada) {
+            String rutaPortada
+            ) {
         this.titulo = titulo;
         this.duracion = duracion;
         this.puntuacion = puntuacion;
@@ -76,5 +78,9 @@ public class Pelicula {
 
     public double getPrecio() {
         return precio;
+    }
+    
+    public void setMovieState(boolean state) {
+        this.active = state;
     }
 }
