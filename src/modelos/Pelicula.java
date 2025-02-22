@@ -22,7 +22,6 @@ public class Pelicula {
     // sola pelicula puede tener mas de 1 genero
     private String sinopsis;
     private String rutaPortada;
-    private boolean active = true;
 
     public Pelicula(
             String titulo,
