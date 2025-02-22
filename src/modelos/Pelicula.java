@@ -29,7 +29,8 @@ public class Pelicula {
             double puntuacion,
             double precio,
             String sinopsis,
-            String rutaPortada) {
+            String rutaPortada
+            ) {
         this.titulo = titulo;
         this.duracion = duracion;
         this.puntuacion = puntuacion;
@@ -76,5 +77,9 @@ public class Pelicula {
 
     public double getPrecio() {
         return precio;
+    }
+    
+    public void setMovieState(boolean state) {
+        this.active = state;
     }
 }
