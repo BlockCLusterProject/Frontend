@@ -22,4 +22,8 @@ public class VentaPelicula {
     public VentaPelicula(){
         
     }
+    
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }
