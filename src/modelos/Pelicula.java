@@ -78,8 +78,5 @@ public class Pelicula {
     public double getPrecio() {
         return precio;
     }
-    
-    public void setMovieState(boolean state) {
-        this.active = state;
-    }
+
 }
