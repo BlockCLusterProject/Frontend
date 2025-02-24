@@ -27,14 +27,16 @@ public class Pelicula {
             String titulo,
             int duracion,
             double puntuacion,
+            ArrayList<Generos> generos,
             double precio,
             String sinopsis,
             String rutaPortada) {
         this.titulo = titulo;
         this.duracion = duracion;
         this.puntuacion = puntuacion;
+        this.generos = generos;
         this.precio = precio;
-        this.generos = new ArrayList<>();
+//        this.generos = new ArrayList<>();
         this.sinopsis = sinopsis;
         this.rutaPortada = rutaPortada;
     }
@@ -49,7 +51,6 @@ public class Pelicula {
                 "titulo='" + titulo + '\'' +
                 ", duracion=" + duracion +
                 ", puntuacion=" + puntuacion +
-                ", generos=" + generos +
                 ", sinopsis='" + sinopsis + '\'' +
                 '}';
     }

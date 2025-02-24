@@ -5,6 +5,7 @@
 package vistas;
 
 import modelos.Pelicula;
+import modelos.Generos;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -24,7 +25,6 @@ public class VistaPelicula extends javax.swing.JFrame {
 		initComponents();
 		setLocationRelativeTo(this);
         this.p = p;
-        System.out.println("ruta: " + p.getRutaPortada());
         loadLogo();
         loadInformation();
 	}
@@ -46,9 +46,13 @@ public class VistaPelicula extends javax.swing.JFrame {
         lblTitulo.setText(p.getTitulo());
         lblPuntuacion.setText("IMDb " + p.getPuntuacion() + " / 10");
         lblDuracion.setText(p.getDuracion() + " min");
-        lblPrecio.setText("No implementado");
+        String gens = "";
+        for(Generos genero : p.getGeneros()) {
+            gens += genero.name() + "<br/>";
+        }
+        lblGeneros.setText("<html>" + gens + "</html>");
         lblSinopsis.setText("<html>" + p.getSinopsis() + "</html>");
-        lblPrecio.setText("$ " + p.getPrecio());
+        lblPrecio.setText("$ " + p.getPrecio() + " COP");
     }
 
 	/**
@@ -74,7 +78,7 @@ public class VistaPelicula extends javax.swing.JFrame {
         lblSinopsis = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
         llll = new javax.swing.JLabel();
-        lblGeneros1 = new javax.swing.JLabel();
+        lblGeneros = new javax.swing.JLabel();
         btnComprar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -114,6 +118,8 @@ public class VistaPelicula extends javax.swing.JFrame {
                         .addComponent(lblDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -133,11 +139,6 @@ public class VistaPelicula extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(57, Short.MAX_VALUE)
-                    .addComponent(lblGeneros1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(16, 16, 16)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,21 +157,18 @@ public class VistaPelicula extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addComponent(lblDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(lblGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(lblSinopsis, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(llll)
                     .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(121, 121, 121)
-                    .addComponent(lblGeneros1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(169, Short.MAX_VALUE)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         btnComprar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -244,7 +242,7 @@ public class VistaPelicula extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblDuracion;
     private javax.swing.JLabel lblFotoPelicula;
-    private javax.swing.JLabel lblGeneros1;
+    private javax.swing.JLabel lblGeneros;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblPuntuacion;
     private javax.swing.JLabel lblSinopsis;
