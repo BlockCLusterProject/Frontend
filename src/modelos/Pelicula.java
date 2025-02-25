@@ -92,4 +92,8 @@ public class Pelicula {
     public int getCantidad() {
         return this.cantidad;
     }
+    
+    public boolean getActive() {
+        return this.active;
+    }
 }

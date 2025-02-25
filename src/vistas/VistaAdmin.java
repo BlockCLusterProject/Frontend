@@ -25,13 +25,14 @@ public class VistaAdmin extends javax.swing.JFrame {
 
     private void llenarPeliculas() {
         DefaultTableModel table = new DefaultTableModel();
-        table.setColumnIdentifiers(new Object[]{"Título", "Cantidad", "Precio"});
+        table.setColumnIdentifiers(new Object[]{"Título", "Cantidad", "Precio", "Activo"});
         System.out.println(controladorVistaVentas.getVentasPeliculas().size());
         for (int i = 0; i < controladorVistaVentas.getVentasPeliculas().size(); i++) {
             table.addRow(new Object[]{
                 controladorVistaVentas.getVentasPeliculas().get(i).getTitulo(),
                 controladorVistaVentas.getVentasPeliculas().get(i).getCantidad(),
                 controladorVistaVentas.getVentasPeliculas().get(i).getPrecio(),
+                controladorVistaVentas.getVentasPeliculas().get(i).getActive() == true ? "Si" : "No"
            });
         }
         tablaVentas.setModel(table);
