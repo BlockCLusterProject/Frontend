@@ -22,6 +22,8 @@ public class Pelicula {
     // sola pelicula puede tener mas de 1 genero
     private String sinopsis;
     private String rutaPortada;
+    private boolean active = true;
+    private int cantidad = 0;
 
     public Pelicula(
             String titulo,
@@ -78,5 +80,20 @@ public class Pelicula {
     public double getPrecio() {
         return precio;
     }
-
+    
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
+    public int getCantidad() {
+        return this.cantidad;
+    }
+    
+    public boolean getActive() {
+        return this.active;
+    }
 }
