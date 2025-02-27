@@ -5,10 +5,15 @@
 package vistas;
 
 import controladores.ControladorVistaAdmin;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableModel;
+import modelos.Pelicula;
 
-/**
- *
+/*
  * @author Dell
  */
 public class VistaAdmin extends javax.swing.JFrame {
@@ -24,17 +29,59 @@ public class VistaAdmin extends javax.swing.JFrame {
     }
 
     private void llenarPeliculas() {
-        DefaultTableModel table = new DefaultTableModel();
+        DefaultTableModel table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Hacer que solo las dos últimas columnas sean editables
+                return column >= 2; // Las columnas 2 (Precio) y 3 (Activo) serán editables
+            }
+        };
         table.setColumnIdentifiers(new Object[]{"Título", "Cantidad", "Precio", "Activo"});
-        System.out.println(controladorVistaVentas.getVentasPeliculas().size());
-        for (int i = 0; i < controladorVistaVentas.getVentasPeliculas().size(); i++) {
+        System.out.println(controladorVistaVentas.getPeliculas().size());
+        for (int i = 0; i < controladorVistaVentas.getPeliculas().size(); i++) {
             table.addRow(new Object[]{
-                controladorVistaVentas.getVentasPeliculas().get(i).getTitulo(),
-                controladorVistaVentas.getVentasPeliculas().get(i).getCantidad(),
-                controladorVistaVentas.getVentasPeliculas().get(i).getPrecio(),
-                controladorVistaVentas.getVentasPeliculas().get(i).getActive() == true ? "Si" : "No"
-           });
+                controladorVistaVentas.getPeliculas().get(i).getTitulo(),
+                controladorVistaVentas.getPeliculas().get(i).getCantidad(),
+                controladorVistaVentas.getPeliculas().get(i).getPrecio(),
+                controladorVistaVentas.getPeliculas().get(i).getActive() == true ? "Si" : "No"
+            });
         }
+
+        table.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                int column = e.getColumn();
+                ArrayList<Pelicula> peliculas = controladorVistaVentas.getPeliculas();
+                int row = e.getFirstRow();
+                Pelicula pelicula = peliculas.get(row);
+                Object newValue = table.getValueAt(row, column);
+                if (e.getType() == TableModelEvent.UPDATE && column == 3) {
+                    //pelicula.setActive();
+                    if (newValue.equals("Si") || newValue.equals("No")) {
+                        pelicula.setActive(newValue.equals("Si"));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Tienes que insertar 'Si o No'");
+                        table.setValueAt(pelicula.getActive() == true ? "Si" : "No", row, column);
+                    }
+                } else if (e.getType() == TableModelEvent.UPDATE && column == 2) {
+                    if (tryParseDouble(newValue.toString())) {
+                        pelicula.setPrecio(Double.parseDouble(newValue.toString()));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Tienes que insertar un valor número decimal");
+                        table.setValueAt(pelicula.getPrecio(), row, column);
+                    }
+                }
+            }
+
+            private boolean tryParseDouble(String value) {
+                try {
+                    Double.parseDouble(value); // Intenta parsear el String a double
+                    return true; // Si no hay excepción, devuelve true
+                } catch (NumberFormatException e) {
+                    return false; // Si hay excepción, devuelve false
+                }
+            }
+        });
         tablaVentas.setModel(table);
     }
 

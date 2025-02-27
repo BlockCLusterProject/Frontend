@@ -47,7 +47,7 @@ public class ControladorVistaAdmin {
 		peliculas.add(p13);
         }
         
-        public ArrayList<Pelicula> getVentasPeliculas (){
+        public ArrayList<Pelicula> getPeliculas (){
                 return peliculas;
         }
 }
