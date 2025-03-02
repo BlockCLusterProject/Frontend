@@ -35,7 +35,8 @@ public class Pelicula implements Serializable {
             ArrayList<Generos> generos,
             double precio,
             String sinopsis,
-            String rutaPortada
+            String rutaPortada,
+            int cantidad
             ) {
         this.titulo = titulo;
         this.duracion = duracion;

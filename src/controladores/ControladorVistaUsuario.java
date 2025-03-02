@@ -25,36 +25,36 @@ public class ControladorVistaUsuario {
 			new ArrayList<>(Arrays.asList(Generos.ACCION, Generos.COMEDIA)),
 			1000,
 			"dfkj",
-			"/img/terminator_2.jpg");
+			"/img/terminator_2.jpg", 0);
 	private Pelicula p2 = new Pelicula("Terminator 2", 137, 6.6,
 			new ArrayList<>(Arrays.asList(Generos.AVENTURA, Generos.FANTASIA)), 11000,
 			"Algunos años antes, un viajero del tiempo le reveló " +
 					"a la madre de John que su hijo sería el salvador de " +
 					"la humanidad. Cuando un nuevo androide mejorado llega " +
 					"del futuro para asesinar a John, un viejo modelo será " +
-					"enviado para protegerle.", "/img/terminator_2.jpg");
+					"enviado para protegerle.", "/img/terminator_2.jpg", 0);
 	private Pelicula p3 = new Pelicula("p3", 3, 3.3,
-		new ArrayList<>(Arrays.asList(Generos.COMEDIA, Generos.CIENCIA_FICCION)),30000, "3", "/img/terminator_2.jpg");
+		new ArrayList<>(Arrays.asList(Generos.COMEDIA, Generos.CIENCIA_FICCION)),30000, "3", "/img/terminator_2.jpg", 0);
 	private Pelicula p4 = new Pelicula("p4", 4, 4.4,
-			new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR)),40000, "4", "/img/terminator_2.jpg");
+			new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR)),40000, "4", "/img/terminator_2.jpg", 0);
 	private Pelicula p5 = new Pelicula("p5", 5, 5.5,
-new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 50000, "5", "/img/terminator_2.jpg");
+new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 50000, "5", "/img/terminator_2.jpg", 0);
 	private Pelicula p6 = new Pelicula("p6", 6, 6.6,
-new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 60000, "6", "/img/terminator_2.jpg");
+new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 60000, "6", "/img/terminator_2.jpg", 0);
 	private Pelicula p7 = new Pelicula("p7", 7, 7.7,
-new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 60000, "7", "/img/terminator_2.jpg");
+new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 60000, "7", "/img/terminator_2.jpg", 0);
 	private Pelicula p8 = new Pelicula("p8", 8, 8.8,
-new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 60000, "8", "/img/terminator_2.jpg");
+new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 60000, "8", "/img/terminator_2.jpg", 0);
 	private Pelicula p9 = new Pelicula("p9", 9, 9.9,
-new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 60000, "9", "/img/terminator_2.jpg");
+new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 60000, "9", "/img/terminator_2.jpg", 0);
 	private Pelicula p10 = new Pelicula("p10", 10, 10.0,
-new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 100000, "10", "/img/terminator_2.jpg");
+new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 100000, "10", "/img/terminator_2.jpg", 0);
 	private Pelicula p11 = new Pelicula("p11", 11, 11.1,
-new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 110000, "11", "/img/terminator_2.jpg");
+new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 110000, "11", "/img/terminator_2.jpg", 0);
 	private Pelicula p12 = new Pelicula("p12", 12, 12.2,
-new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 120000, "12", "/img/terminator_2.jpg");
+new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 120000, "12", "/img/terminator_2.jpg", 0);
 	private Pelicula p13 = new Pelicula("p13", 13, 13.3,
-new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 130000, "13", "/img/terminator_2.jpg");
+new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 130000, "13", "/img/terminator_2.jpg", 0);
 	private int PELICULAS_POR_FILA = 4;
 	private Serializadora serializadora;
 
