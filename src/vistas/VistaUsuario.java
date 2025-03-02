@@ -25,6 +25,8 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 
 	ControladorVistaUsuario controladorVistaUsuario;
 	JButton[][] pelis;
+	JLabel[][] titulos;
+	JLabel[][] puntuaciones;
 	int filas;
 
 	public VistaUsuario() {
@@ -33,31 +35,63 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 		this.controladorVistaUsuario = new ControladorVistaUsuario();
 		filas = controladorVistaUsuario.getFilas();
 		pelis = new JButton[filas][];
+		titulos = new JLabel[filas][];
+		puntuaciones = new JLabel[filas][];
 		dibujarPeliculas();
 	}
 
 
 	private void dibujarPeliculas() {
 
-		int separado = 20;
+		int separadoX = 20;
+		int separadoY = 30;
 		int ancho = 120;
 		int alto = (int) (((double) ancho) * 1.6);
 		int margen = 20;
-		System.out.println(separado);
+		int peliculasPorFila = controladorVistaUsuario.getPELICULAS_POR_FILA();
+		int cantidadPeliculas = controladorVistaUsuario.getCantidadPeliculas();
 
 		for (int i = 0; i < pelis.length; i++) {
-			int peliculasPorFila = controladorVistaUsuario.getPELICULAS_POR_FILA();
-//			System.out.println("peliculasPorFila: " + peliculasPorFila);
-			int len = (i == pelis.length-1) ? peliculasPorFila - filas : peliculasPorFila;
+			int len = (i == pelis.length-1) ? (cantidadPeliculas - (filas-1) * peliculasPorFila) : peliculasPorFila;
+			System.out.println("pelis.length:" + pelis.length + " len:" + len);
 			pelis[i] = new JButton[len];
+			titulos[i] = new JLabel[len];
+			puntuaciones[i] = new JLabel[len];
 			for (int j = 0; j < len; j++) {
 				pelis[i][j] = new JButton();
+				titulos[i][j] = new JLabel();
+				puntuaciones[i][j] = new JLabel();
 				// setbounds (posX, posY, ancho, alto)
 				pelis[i][j].setBounds(
-						(ancho + margen) * j + separado,
-						(alto + margen) * i + separado,
+						(ancho + margen) * j + separadoX,
+						(alto + margen) * i + separadoY,
 						ancho, alto
 				);
+				int ALTO_TITULO = 15;
+				double RATIO_ANCHO = 0.8;
+				titulos[i][j].setBounds(
+						(ancho + margen) * j + separadoX,
+						(alto + margen) * i + separadoY + alto * (i + 1),
+						(int) ((double) ancho * (RATIO_ANCHO)),
+						ALTO_TITULO
+				);
+//				titulos[i][j].setOpaque(true);
+				titulos[i][j].setText(controladorVistaUsuario.getTituloByIdx(i+j));
+				titulos[i][j].setBackground(Color.RED);
+				titulos[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+				titulos[i][j].setVerticalAlignment(SwingConstants.CENTER);
+				puntuaciones[i][j].setBounds(
+						(ancho + margen) * j + separadoX + (int) ((double) ancho * RATIO_ANCHO),
+						(alto + margen) * i + separadoY + alto * (i + 1),
+						(int) ((double) ancho * (1 - RATIO_ANCHO)),
+						ALTO_TITULO
+				);
+//				puntuaciones[i][j].setOpaque(true);
+				puntuaciones[i][j].setText(String.valueOf(controladorVistaUsuario.getPuntuacionByIdx(i+j)));
+				puntuaciones[i][j].setBackground(Color.BLUE);
+				puntuaciones[i][j].setForeground(Color.WHITE);
+				puntuaciones[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+				puntuaciones[i][j].setVerticalAlignment(SwingConstants.CENTER);
 				try {
 					Image img = ImageIO.read(getClass().getResource("/img/terminator_2.jpg"));
 					img = img.getScaledInstance(ancho, alto, Image.SCALE_DEFAULT);
@@ -66,10 +100,18 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 					System.out.println(ex);
 				}
 				pelis[i][j].addActionListener(this);
-				jScrollPane1.add(pelis[i][j]);
-//				panelPeliculas.add(pelis[i][j]);
+				panelPeliculas.add(pelis[i][j]);
+				panelPeliculas.add(titulos[i][j]);
+				panelPeliculas.add(puntuaciones[i][j]);
 			}
 		}
+
+		// Solución de Gemini :')
+		int anchoPanel = peliculasPorFila * (ancho + margen) + 2 * separadoX;
+		int altoPanel = filas * (alto + margen) + 2 * separadoY;
+		panelPeliculas.setPreferredSize(new Dimension(anchoPanel, altoPanel));
+		panelPeliculas.revalidate();
+		jScrollPane1.getVerticalScrollBar().setUnitIncrement(15);
 	}
 
 
@@ -101,11 +143,16 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelPeliculas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        panelPeliculas = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnHistorialCompras = new javax.swing.JButton();
+        btnCarrito = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         javax.swing.GroupLayout panelPeliculasLayout = new javax.swing.GroupLayout(panelPeliculas);
         panelPeliculas.setLayout(panelPeliculasLayout);
@@ -115,50 +162,79 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
         );
         panelPeliculasLayout.setVerticalGroup(
             panelPeliculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 342, Short.MAX_VALUE)
+            .addGap(0, 398, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setViewportView(panelPeliculas);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setText("BlockCluster");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        btnHistorialCompras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnHistorialCompras.setText("Ver Historial de Compras");
+        btnHistorialCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialComprasActionPerformed(evt);
+            }
+        });
+
+        btnCarrito.setText("Ver Carrito");
+        btnCarrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarritoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(204, 204, 204)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(panelPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 12, Short.MAX_VALUE)))
+                        .addComponent(jLabel1)
+                        .addGap(79, 79, 79)
+                        .addComponent(btnCarrito)
+                        .addGap(59, 59, 59)
+                        .addComponent(btnHistorialCompras)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(panelPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnHistorialCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCarrito))
+                        .addGap(12, 12, 12)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHistorialComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialComprasActionPerformed
+		VistaHistorialCompras vistaHistorialCompras = new VistaHistorialCompras();
+		vistaHistorialCompras.setVisible(true);
+		this.dispose();
+    }//GEN-LAST:event_btnHistorialComprasActionPerformed
+
+    private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
+        // TODO add your handling code here:
+		VistaCarrito vistaCarrito = new VistaCarrito();
+		vistaCarrito.setVisible(true);
+		this.dispose();
+    }//GEN-LAST:event_btnCarritoActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -196,6 +272,8 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCarrito;
+    private javax.swing.JButton btnHistorialCompras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelPeliculas;
