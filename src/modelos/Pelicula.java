@@ -31,7 +31,8 @@ public class Pelicula {
             double puntuacion,
             double precio,
             String sinopsis,
-            String rutaPortada
+            String rutaPortada,
+            int cantidad
             ) {
         this.titulo = titulo;
         this.duracion = duracion;
