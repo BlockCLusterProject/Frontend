@@ -8,23 +8,23 @@ package modelos;
  *
  * @author andre
  */
-public class Cliente extends Persona{
+public class Usuario {
     
-    private String usuario;
+    private String nombreUsuario;
     private String contrasena;
+    
 
-    public Cliente(String nombre, String id, String edad, String correo, String telefono, String usuario, String contrasena) {
-        super(nombre, id, edad, correo, telefono);
-        this.usuario = usuario;
+    public Usuario(String nombreUsuario, String contrasena) {
+        this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     public String getContrasena() {
@@ -34,8 +34,5 @@ public class Cliente extends Persona{
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-    
-    
-    
     
 }

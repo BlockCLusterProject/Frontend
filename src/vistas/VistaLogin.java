@@ -4,17 +4,29 @@
  */
 package vistas;
 
+import controladores.ControladorLogin;
+import modelos.Admin;
+import modelos.Cliente;
+
 /**
  *
  * @author andre
  */
 public class VistaLogin extends javax.swing.JFrame {
 
+    ControladorLogin controladorLogin;
     /**
      * Creates new form VistaLogin
      */
     public VistaLogin() {
         initComponents();
+        //ationRelativeTo(this);
+        this.controladorLogin = new ControladorLogin();
+    }
+    
+    private void limpiarCampos() {
+        jTextFieldUsuario.setText("");
+        jTextFieldContrasena.setText("");
     }
 
     /**
@@ -54,6 +66,11 @@ public class VistaLogin extends javax.swing.JFrame {
         });
 
         jButtonRegistrarse.setText("Registrarse");
+        jButtonRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegistrarseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -116,8 +133,25 @@ public class VistaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
     private void jButtonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicioActionPerformed
-        // TODO add your handling code here:
+        String usuarioIngresado = jTextFieldUsuario.getText();
+        String contrasenaIngresada = jTextFieldContrasena.getText();
+        
+        if (controladorLogin.login(usuarioIngresado, contrasenaIngresada) instanceof Admin ){
+            VistaAdmin va = new VistaAdmin();
+                va.setVisible(true);
+                this.dispose();
+        }else if (controladorLogin.login(usuarioIngresado, contrasenaIngresada)instanceof Cliente){
+            
+            VistaUsuario vu = new VistaUsuario();
+                vu.setVisible(true);
+                this.dispose();
+        }
+  
     }//GEN-LAST:event_jButtonInicioActionPerformed
+
+    private void jButtonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRegistrarseActionPerformed
 
     /**
      * @param args the command line arguments
