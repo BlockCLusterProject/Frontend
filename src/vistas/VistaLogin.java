@@ -4,17 +4,25 @@
  */
 package vistas;
 
+import controladores.ControladorLogin;
+
 /**
  *
  * @author andre
  */
 public class VistaLogin extends javax.swing.JFrame {
 
+    ControladorLogin controladorlogin;
     /**
      * Creates new form VistaLogin
      */
     public VistaLogin() {
         initComponents();
+    }
+    
+    private void limpiarCampos() {
+        jTextFieldUsuario.setText("");
+        jTextFieldContrasena.setText("");
     }
 
     /**
@@ -54,6 +62,11 @@ public class VistaLogin extends javax.swing.JFrame {
         });
 
         jButtonRegistrarse.setText("Registrarse");
+        jButtonRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegistrarseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -116,8 +129,15 @@ public class VistaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
     private void jButtonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicioActionPerformed
-        // TODO add your handling code here:
+        String usuarioIngresado = jTextFieldUsuario.getText();
+        String contrasenaIngresada = jTextFieldContrasena.getText();
+        
+  
     }//GEN-LAST:event_jButtonInicioActionPerformed
+
+    private void jButtonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRegistrarseActionPerformed
 
     /**
      * @param args the command line arguments

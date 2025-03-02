@@ -12,7 +12,13 @@ public class ControladorLogin {
     
     public ControladorLogin(){
         
+        String usuarioAdmin = "blockcluster";
+        String contrasenaAdmin = "123";
+        
         String usuario = "blockcluster";
         String contrasena = "123";
+        
     }
+    
+    
 }
