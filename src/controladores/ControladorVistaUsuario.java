@@ -6,8 +6,8 @@ package controladores;
 
 import modelos.Generos;
 import modelos.Pelicula;
+import persistencia.Serializadora;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -56,6 +56,7 @@ new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 120000, "12", "/
 	private Pelicula p13 = new Pelicula("p13", 13, 13.3,
 new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 130000, "13", "/img/terminator_2.jpg");
 	private int PELICULAS_POR_FILA = 4;
+	private Serializadora serializadora;
 
 	public ControladorVistaUsuario() {
 		peliculas = new ArrayList<>();
@@ -72,6 +73,7 @@ new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 130000, "13", "/
 		peliculas.add(p11);
 		peliculas.add(p12);
 		peliculas.add(p13);
+		serializadora = new Serializadora();
 	}
 
 	public ArrayList<Pelicula> getPeliculas() {

@@ -4,13 +4,16 @@
  */
 package modelos;
 
+import persistencia.Serializadora;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author JuanCGallo
  */
-public class Pelicula {
+public class Pelicula implements Serializable {
     private String titulo;
     private int duracion;
     private double puntuacion;
@@ -36,7 +39,6 @@ public class Pelicula {
         this.puntuacion = puntuacion;
         this.generos = generos;
         this.precio = precio;
-//        this.generos = new ArrayList<>();
         this.sinopsis = sinopsis;
         this.rutaPortada = rutaPortada;
     }

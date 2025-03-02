@@ -147,6 +147,7 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
         panelPeliculas = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnHistorialCompras = new javax.swing.JButton();
+        btnCarrito = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -178,6 +179,13 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        btnCarrito.setText("Ver Carrito");
+        btnCarrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarritoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,7 +195,9 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(213, 213, 213)
+                        .addGap(79, 79, 79)
+                        .addComponent(btnCarrito)
+                        .addGap(59, 59, 59)
                         .addComponent(btnHistorialCompras)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
@@ -202,7 +212,9 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnHistorialCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnHistorialCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCarrito))
                         .addGap(12, 12, 12)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -216,6 +228,13 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 		vistaHistorialCompras.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_btnHistorialComprasActionPerformed
+
+    private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
+        // TODO add your handling code here:
+		VistaCarrito vistaCarrito = new VistaCarrito();
+		vistaCarrito.setVisible(true);
+		this.dispose();
+    }//GEN-LAST:event_btnCarritoActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -253,6 +272,7 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCarrito;
     private javax.swing.JButton btnHistorialCompras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

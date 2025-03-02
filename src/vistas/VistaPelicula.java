@@ -4,29 +4,34 @@
  */
 package vistas;
 
+import controladores.ControladorVistaPelicula;
 import modelos.Pelicula;
 import modelos.Generos;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
  * @author JuanCGallo
  */
-public class VistaPelicula extends javax.swing.JFrame {
+public class VistaPelicula extends javax.swing.JFrame implements Serializable {
 
 	/**
 	 * Creates new form VistaPelicula
 	 */
     private Pelicula p;
+    private ControladorVistaPelicula controladorVistaPelicula;
 	public VistaPelicula(Pelicula p) {
 		initComponents();
 		setLocationRelativeTo(this);
         this.p = p;
         loadLogo();
         loadInformation();
+        controladorVistaPelicula = new ControladorVistaPelicula();
 	}
 
     private void loadLogo() {
@@ -79,6 +84,7 @@ public class VistaPelicula extends javax.swing.JFrame {
         lblPrecio = new javax.swing.JLabel();
         llll = new javax.swing.JLabel();
         lblGeneros = new javax.swing.JLabel();
+        btnAgregarAlCarrito = new javax.swing.JButton();
         btnComprar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -171,7 +177,14 @@ public class VistaPelicula extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        btnComprar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAgregarAlCarrito.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAgregarAlCarrito.setText("Agregar al Carrito");
+        btnAgregarAlCarrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarAlCarritoActionPerformed(evt);
+            }
+        });
+
         btnComprar.setText("Comprar");
         btnComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,12 +202,16 @@ public class VistaPelicula extends javax.swing.JFrame {
                     .addComponent(btn_regresar)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblFotoPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAgregarAlCarrito)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnComprar)
+                                .addGap(61, 61, 61)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -207,8 +224,10 @@ public class VistaPelicula extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblFotoPelicula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(49, 49, 49)
-                .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarAlCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnComprar))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
@@ -223,15 +242,24 @@ public class VistaPelicula extends javax.swing.JFrame {
         regresar();
     }//GEN-LAST:event_btn_regresarActionPerformed
 
+    private void btnAgregarAlCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAlCarritoActionPerformed
+        // TODO add your handling code here:
+        controladorVistaPelicula.agregarCarrito(p);
+        JOptionPane.showMessageDialog(null, "Has agregado la película: " +
+                p.getTitulo() + " por: $" + p.getPrecio() + ", al carrito!!");
+        regresar();
+    }//GEN-LAST:event_btnAgregarAlCarritoActionPerformed
+
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Has comprado la película: " +
-                p.getTitulo() + " por: $" + p.getPrecio() + ", que la distrutes!!");
-        regresar();
+        VistaCarrito vistaCarrito = new VistaCarrito();
+        vistaCarrito.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnComprarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarAlCarrito;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btn_regresar;
     private javax.swing.JLabel jLabel1;
