@@ -4,6 +4,8 @@
  */
 package controladores;
 
+import modelos.Usuario;
+
 /**
  *
  * @author andre
@@ -15,10 +17,10 @@ public class ControladorLogin {
         String usuarioAdmin = "blockcluster";
         String contrasenaAdmin = "123";
         
+        
         String usuario = "blockcluster";
         String contrasena = "123";
         
     }
-    
     
 }
