@@ -4,11 +4,17 @@
  */
 package vistas;
 
+// import controladores.ControladorVistaAdmin;
 import controladores.ControladorVistaAdmin;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableModel;
+import modelos.Pelicula;
 
-/**
- *
+/*
  * @author Dell
  */
 public class VistaAdmin extends javax.swing.JFrame {
@@ -17,24 +23,66 @@ public class VistaAdmin extends javax.swing.JFrame {
      * Creates new form VistaAdmin
      */
     private ControladorVistaAdmin controladorVistaVentas = new ControladorVistaAdmin();
-
+    
     public VistaAdmin() {
         initComponents();
         llenarPeliculas();
     }
 
     private void llenarPeliculas() {
-        DefaultTableModel table = new DefaultTableModel();
+        DefaultTableModel table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Hacer que solo las dos últimas columnas sean editables
+                return column >= 2; // Las columnas 2 (Precio) y 3 (Activo) serán editables
+            }
+        };
         table.setColumnIdentifiers(new Object[]{"Título", "Cantidad", "Precio", "Activo"});
-        System.out.println(controladorVistaVentas.getVentasPeliculas().size());
-        for (int i = 0; i < controladorVistaVentas.getVentasPeliculas().size(); i++) {
+        System.out.println(controladorVistaVentas.getPeliculas().size());
+        for (int i = 0; i < controladorVistaVentas.getPeliculas().size(); i++) {
             table.addRow(new Object[]{
-                controladorVistaVentas.getVentasPeliculas().get(i).getTitulo(),
-                controladorVistaVentas.getVentasPeliculas().get(i).getCantidad(),
-                controladorVistaVentas.getVentasPeliculas().get(i).getPrecio(),
-                controladorVistaVentas.getVentasPeliculas().get(i).getActive() == true ? "Si" : "No"
-           });
+                controladorVistaVentas.getPeliculas().get(i).getTitulo(),
+                controladorVistaVentas.getPeliculas().get(i).getCantidad(),
+                controladorVistaVentas.getPeliculas().get(i).getPrecio(),
+                controladorVistaVentas.getPeliculas().get(i).getActive() == true ? "Si" : "No"
+            });
         }
+
+        table.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                int column = e.getColumn();
+                ArrayList<Pelicula> peliculas = controladorVistaVentas.getPeliculas();
+                int row = e.getFirstRow();
+                Pelicula pelicula = peliculas.get(row);
+                Object newValue = table.getValueAt(row, column);
+                if (e.getType() == TableModelEvent.UPDATE && column == 3) {
+                    //pelicula.setActive();
+                    if (newValue.equals("Si") || newValue.equals("No")) {
+                        pelicula.setActive(newValue.equals("Si"));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Tienes que insertar 'Si o No'");
+                        table.setValueAt(pelicula.getActive() == true ? "Si" : "No", row, column);
+                    }
+                } else if (e.getType() == TableModelEvent.UPDATE && column == 2) {
+                    if (tryParseDouble(newValue.toString())) {
+                        pelicula.setPrecio(Double.parseDouble(newValue.toString()));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Tienes que insertar un valor número decimal");
+                        table.setValueAt(pelicula.getPrecio(), row, column);
+                    }
+                }
+            }
+
+            private boolean tryParseDouble(String value) {
+                try {
+                    Double.parseDouble(value); // Intenta parsear el String a double
+                    return true; // Si no hay excepción, devuelve true
+                } catch (NumberFormatException e) {
+                    return false; // Si hay excepción, devuelve false
+                }
+            }
+        });
         tablaVentas.setModel(table);
     }
 
@@ -64,6 +112,8 @@ public class VistaAdmin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaVentas = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,9 +134,21 @@ public class VistaAdmin extends javax.swing.JFrame {
 
         jLabel2.setText("Duración");
 
+        movie_duration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                movie_durationActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Puntiación");
 
         jLabel4.setText("Precio");
+
+        movie_price.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                movie_priceActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Sinopsis");
 
@@ -107,52 +169,62 @@ public class VistaAdmin extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tablaVentas);
 
+        jButton2.setText("Regresar ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Historial Ventas");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel1)
-                                .addGap(57, 57, 57)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel4)
-                                        .addGap(21, 21, 21))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(movie_title, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(movie_duration, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(movie_rate, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(movie_price))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(24, 24, 24)
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6)
-                            .addGap(24, 24, 24))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(movie_description, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(movie_image)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton1)))
-                .addGap(18, 18, 18)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(52, 52, 52))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(28, 28, 28)
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2)
+                                    .addGap(30, 30, 30))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(24, 24, 24)
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6)
+                                    .addGap(33, 33, 33))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jButton2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(movie_title)
+                                        .addComponent(movie_rate)
+                                        .addComponent(movie_description))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(movie_duration, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                                        .addComponent(movie_price)
+                                        .addComponent(movie_image))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(jButton1)))
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -172,7 +244,7 @@ public class VistaAdmin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(movie_rate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,7 +258,11 @@ public class VistaAdmin extends javax.swing.JFrame {
                             .addComponent(movie_description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(movie_image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -195,6 +271,20 @@ public class VistaAdmin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void movie_priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movie_priceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_movie_priceActionPerformed
+
+    private void movie_durationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movie_durationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_movie_durationActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        VistaLogin vl = new VistaLogin();
+        vl.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,6 +323,8 @@ public class VistaAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
