@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * @author JuanCGallo
  */
 public class Pelicula implements Serializable {
+
     private String titulo;
     private int duracion;
     private double puntuacion;
@@ -27,6 +28,8 @@ public class Pelicula implements Serializable {
     private String rutaPortada;
     private boolean active = true;
     private int cantidad = 0;
+    private static int counter = 1;
+    private int id;
 
     public Pelicula(
             String titulo,
@@ -37,7 +40,7 @@ public class Pelicula implements Serializable {
             String sinopsis,
             String rutaPortada,
             int cantidad
-            ) {
+    ) {
         this.titulo = titulo;
         this.duracion = duracion;
         this.puntuacion = puntuacion;
@@ -45,6 +48,8 @@ public class Pelicula implements Serializable {
         this.precio = precio;
         this.sinopsis = sinopsis;
         this.rutaPortada = rutaPortada;
+        this.id = this.counter;
+        this.counter++;
     }
 
     public String getRutaPortada() {
@@ -53,12 +58,12 @@ public class Pelicula implements Serializable {
 
     @Override
     public String toString() {
-        return "Pelicula{" +
-                "titulo='" + titulo + '\'' +
-                ", duracion=" + duracion +
-                ", puntuacion=" + puntuacion +
-                ", sinopsis='" + sinopsis + '\'' +
-                '}';
+        return "Pelicula{"
+                + "titulo='" + titulo + '\''
+                + ", duracion=" + duracion
+                + ", puntuacion=" + puntuacion
+                + ", sinopsis='" + sinopsis + '\''
+                + '}';
     }
 
     public String getTitulo() {
@@ -84,24 +89,28 @@ public class Pelicula implements Serializable {
     public double getPrecio() {
         return precio;
     }
-    
-    public void setPrecio(double precio){
+
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
-    
+
     public void setActive(boolean active) {
         this.active = active;
     }
-    
+
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
+
     public int getCantidad() {
         return this.cantidad;
     }
-    
+
     public boolean getActive() {
         return this.active;
+    }
+
+    public int getId() {
+        return this.id;
     }
 }
