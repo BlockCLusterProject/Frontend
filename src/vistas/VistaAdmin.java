@@ -47,14 +47,16 @@ public class VistaAdmin extends javax.swing.JFrame {
                 return column >= 1; // Las columnas 2 (Precio) y 3 (Activo) serán editables
             }
         };
-        table.setColumnIdentifiers(new Object[]{"Título", "Cantidad", "Precio", "Activo"});
+        table.setColumnIdentifiers(new Object[]{"Título", "Cantidad", "Precio", "Activo","id"});
         System.out.println(controladorVistaVentas.getPeliculas().size());
         for (int i = 0; i < controladorVistaVentas.getPeliculas().size(); i++) {
             table.addRow(new Object[]{
                 controladorVistaVentas.getPeliculas().get(i).getTitulo(),
                 controladorVistaVentas.getPeliculas().get(i).getCantidad(),
                 controladorVistaVentas.getPeliculas().get(i).getPrecio(),
-                controladorVistaVentas.getPeliculas().get(i).getActive() == true ? "Si" : "No"
+                controladorVistaVentas.getPeliculas().get(i).getActive() == true ? "Si" : "No",
+                controladorVistaVentas.getPeliculas().get(i).getId(),
+
             });
         }
 
