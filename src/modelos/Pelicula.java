@@ -25,6 +25,8 @@ public class Pelicula implements Serializable {
     // sola pelicula puede tener mas de 1 genero
     private String sinopsis;
     private String rutaPortada;
+    private boolean active = true;
+    private int cantidad = 0;
 
     public Pelicula(
             String titulo,
@@ -33,7 +35,8 @@ public class Pelicula implements Serializable {
             ArrayList<Generos> generos,
             double precio,
             String sinopsis,
-            String rutaPortada) {
+            String rutaPortada
+            ) {
         this.titulo = titulo;
         this.duracion = duracion;
         this.puntuacion = puntuacion;
@@ -79,5 +82,21 @@ public class Pelicula implements Serializable {
 
     public double getPrecio() {
         return precio;
+    }
+    
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
+    public int getCantidad() {
+        return this.cantidad;
+    }
+    
+    public boolean getActive() {
+        return this.active;
     }
 }
