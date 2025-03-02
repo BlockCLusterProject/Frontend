@@ -84,6 +84,10 @@ public class Pelicula implements Serializable {
         return precio;
     }
     
+    public void setPrecio(double precio){
+        this.precio = precio;
+    }
+    
     public void setActive(boolean active) {
         this.active = active;
     }
