@@ -5,6 +5,8 @@
 package vistas;
 
 import controladores.ControladorLogin;
+import modelos.Admin;
+import modelos.Cliente;
 
 /**
  *
@@ -12,12 +14,14 @@ import controladores.ControladorLogin;
  */
 public class VistaLogin extends javax.swing.JFrame {
 
-    ControladorLogin controladorlogin;
+    ControladorLogin controladorLogin;
     /**
      * Creates new form VistaLogin
      */
     public VistaLogin() {
         initComponents();
+        //ationRelativeTo(this);
+        this.controladorLogin = new ControladorLogin();
     }
     
     private void limpiarCampos() {
@@ -132,6 +136,16 @@ public class VistaLogin extends javax.swing.JFrame {
         String usuarioIngresado = jTextFieldUsuario.getText();
         String contrasenaIngresada = jTextFieldContrasena.getText();
         
+        if (controladorLogin.login(usuarioIngresado, contrasenaIngresada) instanceof Admin ){
+            VistaAdmin va = new VistaAdmin();
+                va.setVisible(true);
+                this.dispose();
+        }else if (controladorLogin.login(usuarioIngresado, contrasenaIngresada)instanceof Cliente){
+            
+            VistaUsuario vu = new VistaUsuario();
+                vu.setVisible(true);
+                this.dispose();
+        }
   
     }//GEN-LAST:event_jButtonInicioActionPerformed
 
