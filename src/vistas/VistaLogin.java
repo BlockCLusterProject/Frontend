@@ -150,7 +150,11 @@ public class VistaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonInicioActionPerformed
 
     private void jButtonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarseActionPerformed
-        // TODO add your handling code here:
+        
+       VistaRegistro vr = new VistaRegistro();
+                vr.setVisible(true);
+                this.dispose();
+        
     }//GEN-LAST:event_jButtonRegistrarseActionPerformed
 
     /**
