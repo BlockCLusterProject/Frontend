@@ -3,17 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<<<< Temporary merge branch 1
+            <file>file:/C:/Users/JuanCGallo/Documents/EAM/3_semestre/proyecto_desarrollo/proyecto_desarrollo/src/controladores/ControladorLogin.java</file>
             <file>file:/C:/Users/JuanCGallo/Documents/EAM/3_semestre/proyecto_desarrollo/proyecto_desarrollo/src/vistas/VistaPelicula.java</file>
+            <file>file:/C:/Users/JuanCGallo/Documents/EAM/3_semestre/proyecto_desarrollo/proyecto_desarrollo/src/vistas/VistaLogin.java</file>
+            <file>file:/C:/Users/JuanCGallo/Documents/EAM/3_semestre/proyecto_desarrollo/proyecto_desarrollo/src/vistas/VistaAdmin.java</file>
             <file>file:/C:/Users/JuanCGallo/Documents/EAM/3_semestre/proyecto_desarrollo/proyecto_desarrollo/src/vistas/VistaUsuario.java</file>
+            <file>file:/C:/Users/JuanCGallo/Documents/EAM/3_semestre/proyecto_desarrollo/proyecto_desarrollo/src/vistas/VistaRegistro.java</file>
+            <file>file:/C:/Users/JuanCGallo/Documents/EAM/3_semestre/proyecto_desarrollo/proyecto_desarrollo/src/controladores/ControladorVistaUsuario.java</file>
             <file>file:/C:/Users/JuanCGallo/Documents/EAM/3_semestre/proyecto_desarrollo/proyecto_desarrollo/src/vistas/VistaCarrito.java</file>
             <file>file:/C:/Users/JuanCGallo/Documents/EAM/3_semestre/proyecto_desarrollo/proyecto_desarrollo/src/vistas/VistaCompraPelicula.java</file>
-=========
-            <file>file:/D:/Users/PCSHOP-COL/Desktop/Desarrollo/proyecto_desarrollo/proyecto_desarrollo/src/vistas/VistaAdmin.java</file>
-            <file>file:/D:/Users/PCSHOP-COL/Desktop/Desarrollo/proyecto_desarrollo/proyecto_desarrollo/src/vistas/VistaUsuario.java</file>
-            <file>file:/D:/Users/PCSHOP-COL/Desktop/Desarrollo/proyecto_desarrollo/proyecto_desarrollo/src/controladores/ControladorVistaAdmin.java</file>
-            <file>file:/D:/Users/PCSHOP-COL/Desktop/Desarrollo/proyecto_desarrollo/proyecto_desarrollo/src/vistas/VistaPelicula.java</file>
->>>>>>>>> Temporary merge branch 2
+            <file>file:/C:/Users/JuanCGallo/Documents/EAM/3_semestre/proyecto_desarrollo/proyecto_desarrollo/src/controladores/ControladorVistaAdmin.java</file>
+            <file>file:/C:/Users/JuanCGallo/Documents/EAM/3_semestre/proyecto_desarrollo/proyecto_desarrollo/src/modelos/Pelicula.java</file>
         </group>
     </open-files>
 </project-private>
