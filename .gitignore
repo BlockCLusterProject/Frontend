@@ -2,3 +2,5 @@
 /build/
 *.xml
 *.dat
+!pom.xml
+/target/
