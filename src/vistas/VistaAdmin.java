@@ -4,13 +4,14 @@
  */
 package vistas;
 
-// import controladores.ControladorVistaAdmin;
-import controladores.ControladorVistaAdmin;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+
+import controladores.FrontEnd.ControladorVistaAdmin;
+
 import javax.swing.table.DefaultTableModel;
 import modelos.Generos;
 import modelos.Pelicula;

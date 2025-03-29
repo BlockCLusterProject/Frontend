@@ -1,6 +1,7 @@
-package controladores;
+package controladores.FrontEnd;
 
 
+import controladores.FrontEnd.ControladorVistaUsuario;
 import modelos.Pelicula;
 import persistencia.Serializadora;
 

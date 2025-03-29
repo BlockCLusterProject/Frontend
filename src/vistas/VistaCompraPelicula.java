@@ -4,8 +4,8 @@
  */
 package vistas;
 
-import controladores.ControladorVistaCompraPelicula;
-import controladores.ControladorVistaUsuario;
+import controladores.FrontEnd.ControladorVistaCompraPelicula;
+import controladores.FrontEnd.ControladorVistaUsuario;
 
 /**
  *

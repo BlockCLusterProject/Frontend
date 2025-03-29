@@ -4,12 +4,14 @@
  */
 package vistas;
 
-import controladores.ControladorVistaPelicula;
 import modelos.Pelicula;
 import modelos.Generos;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import controladores.FrontEnd.ControladorVistaPelicula;
+
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
