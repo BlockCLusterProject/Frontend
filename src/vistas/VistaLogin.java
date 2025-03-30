@@ -6,7 +6,7 @@ package vistas;
 
 import controladores.FrontEnd.ControladorLogin;
 import modelos.Admin;
-import modelos.Cliente;
+import modelos.Client;
 
 /**
  *
@@ -140,7 +140,7 @@ public class VistaLogin extends javax.swing.JFrame {
             VistaAdmin va = new VistaAdmin();
                 va.setVisible(true);
                 this.dispose();
-        }else if (controladorLogin.login(usuarioIngresado, contrasenaIngresada)instanceof Cliente){
+        }else if (controladorLogin.login(usuarioIngresado, contrasenaIngresada)instanceof Client){
             
             VistaUsuario vu = new VistaUsuario();
                 vu.setVisible(true);

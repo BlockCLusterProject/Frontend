@@ -5,9 +5,8 @@
 package controladores.FrontEnd;
 
 import modelos.Admin;
-import modelos.Cliente;
-import modelos.Persona;
-import modelos.Usuario;
+import modelos.Client;
+import modelos.Person;
 
 /**
  *
@@ -16,7 +15,7 @@ import modelos.Usuario;
 public class ControladorLogin {
     
     private Admin admin;
-    private Cliente cliente1;
+    private Client cliente1;
     
     public ControladorLogin(){
         String nombre = "juan";
@@ -37,10 +36,10 @@ public class ControladorLogin {
         String usuario = "cliente1";
         String contrasena = "cliente1";
         
-        cliente1 = new Cliente(nombreCliente,idCliente,edadCliente,correoCliente,telefonoCliente,usuario,contrasena);
+        cliente1 = new Client(nombreCliente,idCliente,edadCliente,correoCliente,telefonoCliente,usuario,contrasena);
     }
     
-    public Persona   login(String nombreUsuario, String contrasena){
+    public Person   login(String nombreUsuario, String contrasena){
         
         if(admin.getUsuario().equals(nombreUsuario) && admin.getContrasena().equals(contrasena)){
             return admin;

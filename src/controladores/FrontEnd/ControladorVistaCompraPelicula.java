@@ -1,20 +1,20 @@
 package controladores.FrontEnd;
 
-import modelos.Pelicula;
+import modelos.Movie;
 import persistencia.Serializadora;
 
 import java.util.ArrayList;
 
 public class ControladorVistaCompraPelicula {
     private Serializadora serializadora;
-    private ArrayList<Pelicula> carrito;
+    private ArrayList<Movie> carrito;
 
     public ControladorVistaCompraPelicula() {
         serializadora = new Serializadora();
         carrito = serializadora.leerCarrito();
     }
 
-    public ArrayList<Pelicula> getCarrito() {
+    public ArrayList<Movie> getCarrito() {
         return carrito;
     }
 }

@@ -8,7 +8,7 @@ package modelos;
  *
  * @author andre
  */
-public class Admin extends Persona{
+public class Admin extends Person{
     
     private String usuario;
     private String contrasena;

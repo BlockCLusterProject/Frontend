@@ -4,7 +4,7 @@
  */
 package vistas;
 
-import modelos.Pelicula;
+import modelos.Movie;
 import modelos.Generos;
 
 import javax.imageio.ImageIO;
@@ -25,9 +25,9 @@ public class VistaPelicula extends javax.swing.JFrame implements Serializable {
 	/**
 	 * Creates new form VistaPelicula
 	 */
-    private Pelicula p;
+    private Movie p;
     private ControladorVistaPelicula controladorVistaPelicula;
-	public VistaPelicula(Pelicula p) {
+	public VistaPelicula(Movie p) {
 		initComponents();
 		setLocationRelativeTo(this);
         this.p = p;

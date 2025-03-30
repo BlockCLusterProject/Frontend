@@ -2,14 +2,14 @@ package controladores.FrontEnd;
 
 
 import controladores.FrontEnd.ControladorVistaUsuario;
-import modelos.Pelicula;
+import modelos.Movie;
 import persistencia.Serializadora;
 
 import java.util.ArrayList;
 
 public class ControladorVistaCarrito {
     private Serializadora serializadora;
-    private ArrayList<Pelicula> carrito;
+    private ArrayList<Movie> carrito;
     private ControladorVistaUsuario controladorVistaUsuario;
 
     public ControladorVistaCarrito() {
@@ -18,7 +18,7 @@ public class ControladorVistaCarrito {
         controladorVistaUsuario = new ControladorVistaUsuario();
     }
 
-    public ArrayList<Pelicula> getCarrito() {
+    public ArrayList<Movie> getCarrito() {
         return carrito;
     }
 
