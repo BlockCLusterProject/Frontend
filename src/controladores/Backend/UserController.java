@@ -4,10 +4,16 @@
  */
 package controladores.Backend;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  *
- * @author Dell
+ * @author JuanCGallo
  */
+@RestController
+@RequestMapping("api/users")
 public class UserController {
+    private final UserService userService;
     
 }

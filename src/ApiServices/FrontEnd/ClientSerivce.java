@@ -25,10 +25,10 @@ public interface ClientSerivce {
         @Query("password") String password
     );
     
-    @GET("/api/user/available_movies")
+    @GET("/api/users/available_movies")
     Call<Client> getAvailableMovies();
 
-    @GET("/api/user/available_movies")
+    @GET("/api/users/available_movies")
     Call<List<Client>> getAvailableMovies(
         @Query("genre") int genre
     );
