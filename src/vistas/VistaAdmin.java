@@ -14,7 +14,7 @@ import controladores.FrontEnd.ControladorVistaAdmin;
 
 import javax.swing.table.DefaultTableModel;
 import modelos.Generos;
-import modelos.Pelicula;
+import modelos.Movie;
 
 /*
  * @author Dell
@@ -65,9 +65,9 @@ public class VistaAdmin extends javax.swing.JFrame {
             @Override
             public void tableChanged(TableModelEvent e) {
                 int column = e.getColumn();
-                ArrayList<Pelicula> peliculas = controladorVistaVentas.getPeliculas();
+                ArrayList<Movie> peliculas = controladorVistaVentas.getPeliculas();
                 int row = e.getFirstRow();
-                Pelicula pelicula = peliculas.get(row);
+                Movie pelicula = peliculas.get(row);
                 Object newValue = table.getValueAt(row, column);
                 if (e.getType() == TableModelEvent.UPDATE && column == 3) {
                     //pelicula.setActive();
@@ -340,7 +340,7 @@ public class VistaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_goBackActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        ArrayList<Pelicula> peliculas = controladorVistaVentas.getPeliculas();
+        ArrayList<Movie> peliculas = controladorVistaVentas.getPeliculas();
         String title = movie_title.getText();
         int duration = Integer.parseInt(movie_duration.getText());
         double score = Double.parseDouble(movie_rate.getText());
@@ -351,7 +351,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         ArrayList<Generos> generos = new ArrayList<>();
         generos.add((Generos) movie_genre.getSelectedItem());
 
-        Pelicula pelicula = new Pelicula(title, duration, score, generos, price, description, image, quantity);
+        Movie pelicula = new Movie(title, duration, score, generos, price, description, image, quantity);
         peliculas.add(pelicula);
         llenarPeliculas();
     }//GEN-LAST:event_btn_addActionPerformed

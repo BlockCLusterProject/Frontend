@@ -8,7 +8,7 @@ package modelos;
  *
  * @author andre
  */
-public class Persona {
+public class Person {
     
     private String nombre;
     private String id;
@@ -16,7 +16,7 @@ public class Persona {
     private String correo;
     private String telefono;
 
-    public Persona(String nombre, String id, String edad, String correo, String telefono) {
+    public Person(String nombre, String id, String edad, String correo, String telefono) {
         this.nombre = nombre;
         this.id = id;
         this.edad = edad;

@@ -4,7 +4,7 @@
  */
 package vistas;
 
-import modelos.Pelicula;
+import modelos.Movie;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -124,7 +124,7 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 		for(int i = 0; i < pelis.length; i++) {
 			for(int j = 0; j < pelis[i].length; j++) {
 				if(e.getSource().equals(pelis[i][j])) {
-					Pelicula pelicula = controladorVistaUsuario.entregarPelicula(i * peliculasPorFila + j);
+					Movie pelicula = controladorVistaUsuario.entregarPelicula(i * peliculasPorFila + j);
 					System.out.println(pelicula);
 					VistaPelicula vistaPelicula = new VistaPelicula(pelicula);
 					vistaPelicula.setVisible(true);

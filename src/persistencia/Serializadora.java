@@ -4,7 +4,7 @@
  */
 package persistencia;
 
-import modelos.Pelicula;
+import modelos.Movie;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @author JuanCGallo
  */
 public class Serializadora {
-	public void guardarCarrito(ArrayList<Pelicula> carrito) {
+	public void guardarCarrito(ArrayList<Movie> carrito) {
         try {
             FileOutputStream archivo = new FileOutputStream("carrito.dat");
             ObjectOutputStream escritor = new ObjectOutputStream(archivo);
@@ -28,11 +28,11 @@ public class Serializadora {
         }
     }
 
-    public ArrayList<Pelicula> leerCarrito() {
+    public ArrayList<Movie> leerCarrito() {
         try {
             FileInputStream archivo = new FileInputStream("carrito.dat");
             ObjectInputStream lector = new ObjectInputStream(archivo);
-            return (ArrayList<Pelicula>) lector.readObject();
+            return (ArrayList<Movie>) lector.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return new ArrayList<>();

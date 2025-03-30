@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author JuanCGallo
  */
-public class Pelicula implements Serializable {
+public class Movie implements Serializable {
 
     private String titulo;
     private int duracion;
@@ -31,7 +31,7 @@ public class Pelicula implements Serializable {
     private static int counter = 1;
     private int id;
 
-    public Pelicula(
+    public Movie(
             String titulo,
             int duracion,
             double puntuacion,

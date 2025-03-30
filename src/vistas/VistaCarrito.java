@@ -4,7 +4,7 @@
  */
 package vistas;
 
-import modelos.Pelicula;
+import modelos.Movie;
 import persistencia.Serializadora;
 
 import javax.imageio.ImageIO;
@@ -51,7 +51,7 @@ public class VistaCarrito extends javax.swing.JFrame {
 		int ancho = 120;
 		int alto = (int) (((double) ancho) * 1.6);
 		int margen = 20;
-		ArrayList<Pelicula> carrito = controladorVistaCarrito.getCarrito();
+		ArrayList<Movie> carrito = controladorVistaCarrito.getCarrito();
 		int peliculasPorFila = controladorVistaUsuario.getPELICULAS_POR_FILA();
 		int cantidadPeliculas = carrito.size();
 

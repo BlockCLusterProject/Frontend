@@ -5,7 +5,7 @@
 package vistas;
 
 import javax.swing.JOptionPane;
-import modelos.Usuario;
+import modelos.Client;
 
 /**
  *
@@ -323,7 +323,7 @@ public class VistaRegistro extends javax.swing.JFrame {
         String confirmacion = jTextFieldConfirmacion.getText();
         
         if (contrasena.equals(confirmacion)){
-            Usuario usuario = new Usuario(nombre,id,edad,correo,telefono,nombreUsuario,contrasena);
+            Client usuario = new Client(nombre,id,edad,correo,telefono,nombreUsuario,contrasena);
             
             VistaUsuario vu = new VistaUsuario();
             vu.setVisible(true);

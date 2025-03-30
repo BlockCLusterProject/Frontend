@@ -9,5 +9,5 @@ package modelos;
  * @author Dell
  */
 public class CompraPelicula {
-    Pelicula pelicula;
+    Movie pelicula;
 }

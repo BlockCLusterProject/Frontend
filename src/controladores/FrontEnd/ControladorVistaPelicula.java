@@ -1,6 +1,6 @@
 package controladores.FrontEnd;
 
-import modelos.Pelicula;
+import modelos.Movie;
 import persistencia.Serializadora;
 
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ControladorVistaPelicula {
 
     private Serializadora serializadora;
-    private ArrayList<Pelicula> carrito;
+    private ArrayList<Movie> carrito;
 
 
     public ControladorVistaPelicula() {
@@ -16,10 +16,10 @@ public class ControladorVistaPelicula {
         carrito = serializadora.leerCarrito();
     }
 
-    public void agregarCarrito(Pelicula pelicula) {
+    public void agregarCarrito(Movie pelicula) {
         carrito.add(pelicula);
         serializadora.guardarCarrito(carrito);
-        for(Pelicula p : carrito) {
+        for(Movie p : carrito) {
             System.out.println(p);
         }
         System.out.println("Guarda en carrito");
