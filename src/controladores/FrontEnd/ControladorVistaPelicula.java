@@ -1,4 +1,4 @@
-package controladores;
+package controladores.FrontEnd;
 
 import modelos.Pelicula;
 import persistencia.Serializadora;

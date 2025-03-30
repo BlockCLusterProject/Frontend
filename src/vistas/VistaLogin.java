@@ -4,7 +4,7 @@
  */
 package vistas;
 
-import controladores.ControladorLogin;
+import controladores.FrontEnd.ControladorLogin;
 import modelos.Admin;
 import modelos.Cliente;
 
