@@ -4,13 +4,15 @@
  */
 package vistas;
 
-import controladores.ControladorVistaCarrito;
-import controladores.ControladorVistaUsuario;
 import modelos.Pelicula;
 import persistencia.Serializadora;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import controladores.FrontEnd.ControladorVistaCarrito;
+import controladores.FrontEnd.ControladorVistaUsuario;
+
 import java.awt.*;
 import java.util.ArrayList;
 
