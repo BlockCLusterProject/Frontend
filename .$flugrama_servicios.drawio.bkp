@@ -1,0 +1,52 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
+  <diagram name="Página-1" id="XhmhW-54w4citOXvU2bv">
+    <mxGraphModel dx="875" dy="524" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="mwR7CIDRmfHUwOVGIR3e-1" target="mwR7CIDRmfHUwOVGIR3e-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-1" value="Vista" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="354" y="980" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-2" value="" style="endArrow=none;html=1;rounded=0;fillColor=#fa6800;strokeColor=#C73500;strokeWidth=9;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="229" y="640" as="sourcePoint" />
+            <mxPoint x="599" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="mwR7CIDRmfHUwOVGIR3e-4" target="mwR7CIDRmfHUwOVGIR3e-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-4" value="ControladorVista" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="880" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-5" value="ServiceVista" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="780" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-6" value="ClienteService" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="254" y="680" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-13" value="UserService" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="254" y="530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-14" value="AdminService" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="444" y="680" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-15" value="AdminService" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="444" y="530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-16" value="UserController" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="254" y="420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-17" value="AdminService" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="444" y="420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mwR7CIDRmfHUwOVGIR3e-18" value="Repository" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="290" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
