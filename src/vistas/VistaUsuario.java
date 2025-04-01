@@ -108,7 +108,7 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 			}
 		}
 
-		// Solución de Gemini :')
+		// Solucion de Gemini :')
 		int anchoPanel = peliculasPorFila * (ancho + margen) + 2 * separadoX;
 		int altoPanel = filas * (alto + margen) + 2 * separadoY;
 		panelPeliculas.setPreferredSize(new Dimension(anchoPanel, altoPanel));
@@ -246,14 +246,12 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_btnHistorialComprasActionPerformed
 
     private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
-        // TODO add your handling code here:
 		VistaCarrito vistaCarrito = new VistaCarrito();
 		vistaCarrito.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        // TODO add your handling code here:
 		VistaLogin vistaLogin = new VistaLogin();
 		vistaLogin.setVisible(true);
 		this.dispose();
