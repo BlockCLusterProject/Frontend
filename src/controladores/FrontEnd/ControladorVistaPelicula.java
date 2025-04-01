@@ -1,5 +1,6 @@
 package controladores.FrontEnd;
 
+import ApiServices.FrontEnd.ClientSerivce;
 import modelos.Movie;
 import persistencia.Serializadora;
 
@@ -9,11 +10,13 @@ public class ControladorVistaPelicula {
 
     private Serializadora serializadora;
     private ArrayList<Movie> carrito;
+    private ClientSerivce service;
 
 
     public ControladorVistaPelicula() {
         serializadora = new Serializadora();
         carrito = serializadora.leerCarrito();
+        service = new ClientSerivce();
     }
 
     public void agregarCarrito(Movie pelicula) {
@@ -22,6 +25,5 @@ public class ControladorVistaPelicula {
         for(Movie p : carrito) {
             System.out.println(p);
         }
-        System.out.println("Guarda en carrito");
     }
 }

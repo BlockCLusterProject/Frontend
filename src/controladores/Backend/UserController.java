@@ -32,7 +32,10 @@ public class UserController {
 
     @GetMapping("/available_movies")
     public ResponseEntity<List<Movie>> getAvailableMovies(
-            @RequestParam(required = false) int genre) {
+            @RequestParam(required = false) Integer genre) {
+    	if(genre == null) {
+    		genre = 0;
+    	}
         List<Movie> movies = userService.searchByFilters(genre);
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }

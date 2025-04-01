@@ -4,12 +4,14 @@
  */
 package controladores.FrontEnd;
 
+import ApiServices.FrontEnd.ClientSerivce;
 import modelos.Generos;
 import modelos.Movie;
 import persistencia.Serializadora;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -17,7 +19,8 @@ import java.util.Arrays;
  */
 public class ControladorVistaUsuario {
     //  TODO: sacar lista de peliculas de una DB o de donde sea
-	private ArrayList<Movie> peliculas;
+	private List<Movie> peliculas;
+	/*
 	private Movie p1 = new Movie(
 			"gogogo",
 			120,
@@ -55,10 +58,20 @@ new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 110000, "11", "/
 new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 120000, "12", "/img/terminator_2.jpg", 0);
 	private Movie p13 = new Movie("p13", 13, 13.3,
 new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 130000, "13", "/img/terminator_2.jpg", 0);
+	 */
+
 	private int PELICULAS_POR_FILA = 4;
 	private Serializadora serializadora;
+	private ClientSerivce service;
 
 	public ControladorVistaUsuario() {
+		serializadora = new Serializadora();
+		service = new ClientSerivce();
+		peliculas = service.getAvailableMovies();
+	}
+
+	/*
+	private void initMovies() {
 		peliculas = new ArrayList<>();
 		peliculas.add(p1);
 		peliculas.add(p2);
@@ -73,10 +86,10 @@ new ArrayList<>(Arrays.asList(Generos.DRAMA, Generos.TERROR))	, 130000, "13", "/
 		peliculas.add(p11);
 		peliculas.add(p12);
 		peliculas.add(p13);
-		serializadora = new Serializadora();
 	}
+	 */
 
-	public ArrayList<Movie> getPeliculas() {
+	public List<Movie> getPeliculas() {
 		return peliculas;
 	}
 
