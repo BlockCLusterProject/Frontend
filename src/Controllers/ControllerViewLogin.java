@@ -2,22 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controladores.FrontEnd;
+package Controllers;
 
-import modelos.Admin;
-import modelos.Client;
-import modelos.Person;
+import Models.Admin;
+import Models.Client;
+import Models.Person;
 
 /**
  *
  * @author andre
  */
-public class ControladorLogin {
+public class ControllerViewLogin {
     
     private Admin admin;
     private Client cliente1;
     
-    public ControladorLogin(){
+    public ControllerViewLogin(){
         String nombre = "juan";
         String id = "123";
         String edad = "25";

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vistas;
+package Views;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -10,23 +10,23 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
-import controladores.FrontEnd.ControladorVistaAdmin;
+import Controllers.ControllerViewAdmin;
 
 import javax.swing.table.DefaultTableModel;
-import modelos.Generos;
-import modelos.Movie;
+import Models.Genre;
+import Models.Movie;
 
 /*
  * @author Dell
  */
-public class VistaAdmin extends javax.swing.JFrame {
+public class AdminView extends javax.swing.JFrame {
 
     /**
      * Creates new form VistaAdmin
      */
-    private ControladorVistaAdmin controladorVistaVentas = new ControladorVistaAdmin();
+    private ControllerViewAdmin controladorVistaVentas = new ControllerViewAdmin();
 
-    public VistaAdmin() {
+    public AdminView() {
         initComponents();
         llenarPeliculas();
         setGenres();
@@ -35,7 +35,7 @@ public class VistaAdmin extends javax.swing.JFrame {
     private void setGenres() {
         movie_genre.removeAllItems();
 
-        for (Generos genero : Generos.values()) {
+        for (Genre genero : Genre.values()) {
             movie_genre.addItem(genero.name());
         }
     }
@@ -334,7 +334,7 @@ public class VistaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_movie_durationActionPerformed
 
     private void btn_goBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_goBackActionPerformed
-        VistaLogin vl = new VistaLogin();
+        LoginView vl = new LoginView();
         vl.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_goBackActionPerformed
@@ -348,8 +348,8 @@ public class VistaAdmin extends javax.swing.JFrame {
         String description = movie_description.getText();
         String image = movie_image.getText();
         int quantity = Integer.parseInt(movie_quantity.getText());
-        ArrayList<Generos> generos = new ArrayList<>();
-        generos.add((Generos) movie_genre.getSelectedItem());
+        ArrayList<Genre> generos = new ArrayList<>();
+        generos.add((Genre) movie_genre.getSelectedItem());
 
         Movie pelicula = new Movie(title, duration, score, generos, price, description, image, quantity);
         peliculas.add(pelicula);
@@ -373,20 +373,20 @@ public class VistaAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaAdmin().setVisible(true);
+                new AdminView().setVisible(true);
             }
         });
     }

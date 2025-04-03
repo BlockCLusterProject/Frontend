@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ApiServices.FrontEnd;
+package ApiServices;
 
 import java.io.IOException;
 import java.util.List;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import modelos.Client;
-import modelos.Movie;
+import Models.Client;
+import Models.Movie;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;

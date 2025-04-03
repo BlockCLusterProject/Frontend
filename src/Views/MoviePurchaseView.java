@@ -2,27 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vistas;
+package Views;
 
-import controladores.FrontEnd.ControladorVistaCompraPelicula;
-import controladores.FrontEnd.ControladorVistaUsuario;
+import Controllers.ControllerViewMoviePurchase;
+import Controllers.ControllerViewUser;
 
 /**
  *
  * @author JuanCGallo
  */
-public class VistaCompraPelicula extends javax.swing.JFrame {
+public class MoviePurchaseView extends javax.swing.JFrame {
 
 	/**
 	 * Creates new form VistaCompraPelicula
 	 */
 
-	ControladorVistaCompraPelicula controladorVistaCompraPelicula;
+	 ControllerViewMoviePurchase controladorVistaCompraPelicula;
 
-	public VistaCompraPelicula() {
+	public MoviePurchaseView() {
 		initComponents();
 		setLocationRelativeTo(this);
-		controladorVistaCompraPelicula = new ControladorVistaCompraPelicula();
+		controladorVistaCompraPelicula = new ControllerViewMoviePurchase();
 		llenarLabel();
 	}
 
@@ -82,20 +82,20 @@ public class VistaCompraPelicula extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(VistaCompraPelicula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(MoviePurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(VistaCompraPelicula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(MoviePurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(VistaCompraPelicula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(MoviePurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(VistaCompraPelicula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(MoviePurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		//</editor-fold>
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new VistaCompraPelicula().setVisible(true);
+				new MoviePurchaseView().setVisible(true);
 			}
 		});
 	}
