@@ -34,7 +34,7 @@ public class UserView extends javax.swing.JFrame implements ActionListener {
 	public UserView() {
 		initComponents();
 		setLocationRelativeTo(this);
-		this.controladorVistaUsuario = new ControllerViewUser();
+		this.controladorVistaUsuario = new ControllerViewUser(null);
 		filas = controladorVistaUsuario.getFilas();
 		pelis = new JButton[filas][];
 		titulos = new JLabel[filas][];
