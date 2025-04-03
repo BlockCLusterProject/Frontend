@@ -2,9 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package modelos;
-
-import persistencia.Serializadora;
+package Models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ public class Movie implements Serializable {
     private String titulo;
     private int duracion;
     private double puntuacion;
-    private ArrayList<Generos> generos;
+    private ArrayList<Genre> generos;
     private double precio;
     // Se crea una clase ENUM para guardar los todos los generos
     // que vamos a usar en el proyecto, para darle orden y que todos se
@@ -35,7 +33,7 @@ public class Movie implements Serializable {
             String titulo,
             int duracion,
             double puntuacion,
-            ArrayList<Generos> generos,
+            ArrayList<Genre> generos,
             double precio,
             String sinopsis,
             String rutaPortada,
@@ -78,7 +76,7 @@ public class Movie implements Serializable {
         return puntuacion;
     }
 
-    public ArrayList<Generos> getGeneros() {
+    public ArrayList<Genre> getGeneros() {
         return generos;
     }
 

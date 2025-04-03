@@ -2,21 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vistas;
+package Views;
 
 import javax.swing.JOptionPane;
-import modelos.Client;
+import Models.Client;
 
 /**
  *
  * @author andre
  */
-public class VistaRegistro extends javax.swing.JFrame {
+public class RegisterView extends javax.swing.JFrame {
 
     /**
      * Creates new form VistaRegistro
      */
-    public VistaRegistro() {
+    public RegisterView() {
         initComponents();
     }
 
@@ -306,7 +306,7 @@ public class VistaRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonInfantilActionPerformed
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
-        VistaLogin vl = new VistaLogin();
+        LoginView vl = new LoginView();
         vl.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonVolverActionPerformed
@@ -325,7 +325,7 @@ public class VistaRegistro extends javax.swing.JFrame {
         if (contrasena.equals(confirmacion)){
             Client usuario = new Client(nombre,id,edad,correo,telefono,nombreUsuario,contrasena);
             
-            VistaUsuario vu = new VistaUsuario();
+            UserView vu = new UserView();
             vu.setVisible(true);
             this.dispose();
         }else {
@@ -369,20 +369,20 @@ public class VistaRegistro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaRegistro().setVisible(true);
+                new RegisterView().setVisible(true);
             }
         });
     }

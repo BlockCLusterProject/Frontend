@@ -2,26 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vistas;
+package Views;
 
-import controladores.FrontEnd.ControladorLogin;
-import modelos.Admin;
-import modelos.Client;
+import Controllers.ControllerViewLogin;
+
+import Models.Admin;
+import Models.Client;
 
 /**
  *
  * @author andre
  */
-public class VistaLogin extends javax.swing.JFrame {
+public class LoginView extends javax.swing.JFrame {
 
-    ControladorLogin controladorLogin;
+    ControllerViewLogin controladorLogin;
     /**
      * Creates new form VistaLogin
      */
-    public VistaLogin() {
+    public LoginView() {
         initComponents();
         //ationRelativeTo(this);
-        this.controladorLogin = new ControladorLogin();
+        this.controladorLogin = new ControllerViewLogin();
     }
     
     private void limpiarCampos() {
@@ -137,12 +138,12 @@ public class VistaLogin extends javax.swing.JFrame {
         String contrasenaIngresada = jTextFieldContrasena.getText();
         
         if (controladorLogin.login(usuarioIngresado, contrasenaIngresada) instanceof Admin ){
-            VistaAdmin va = new VistaAdmin();
+            AdminView va = new AdminView();
                 va.setVisible(true);
                 this.dispose();
         }else if (controladorLogin.login(usuarioIngresado, contrasenaIngresada)instanceof Client){
             
-            VistaUsuario vu = new VistaUsuario();
+            UserView vu = new UserView();
                 vu.setVisible(true);
                 this.dispose();
         }
@@ -151,7 +152,7 @@ public class VistaLogin extends javax.swing.JFrame {
 
     private void jButtonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarseActionPerformed
         
-       VistaRegistro vr = new VistaRegistro();
+       RegisterView vr = new RegisterView();
                 vr.setVisible(true);
                 this.dispose();
         
@@ -174,20 +175,20 @@ public class VistaLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaLogin().setVisible(true);
+                new LoginView().setVisible(true);
             }
         });
     }

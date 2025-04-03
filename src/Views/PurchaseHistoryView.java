@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vistas;
+package Views;
 
 /**
  *
  * @author JuanCGallo
  */
-public class VistaHistorialCompras extends javax.swing.JFrame {
+public class PurchaseHistoryView extends javax.swing.JFrame {
 
 	/**
 	 * Creates new form VistaHistorialCompras
 	 */
-	public VistaHistorialCompras() {
+	public PurchaseHistoryView() {
 		initComponents();
 		setLocationRelativeTo(this);
 	}
@@ -90,7 +90,7 @@ public class VistaHistorialCompras extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-		VistaUsuario vistaUsuario = new VistaUsuario();
+		UserView vistaUsuario = new UserView();
 		vistaUsuario.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
@@ -112,20 +112,20 @@ public class VistaHistorialCompras extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(VistaHistorialCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(PurchaseHistoryView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(VistaHistorialCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(PurchaseHistoryView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(VistaHistorialCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(PurchaseHistoryView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(VistaHistorialCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(PurchaseHistoryView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		//</editor-fold>
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new VistaHistorialCompras().setVisible(true);
+				new PurchaseHistoryView().setVisible(true);
 			}
 		});
 	}

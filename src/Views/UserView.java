@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vistas;
+package Views;
 
-import modelos.Movie;
+import Models.Movie;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import controladores.FrontEnd.ControladorVistaUsuario;
+import Controllers.ControllerViewUser;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,22 +19,22 @@ import java.awt.event.ActionListener;
  *
  * @author JuanCGallo
  */
-public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
+public class UserView extends javax.swing.JFrame implements ActionListener {
 
 	/**
 	 * Creates new form VistaUsuario
 	 */
 
-	ControladorVistaUsuario controladorVistaUsuario;
+	ControllerViewUser controladorVistaUsuario;
 	JButton[][] pelis;
 	JLabel[][] titulos;
 	JLabel[][] puntuaciones;
 	int filas;
 
-	public VistaUsuario() {
+	public UserView() {
 		initComponents();
 		setLocationRelativeTo(this);
-		this.controladorVistaUsuario = new ControladorVistaUsuario();
+		this.controladorVistaUsuario = new ControllerViewUser();
 		filas = controladorVistaUsuario.getFilas();
 		pelis = new JButton[filas][];
 		titulos = new JLabel[filas][];
@@ -126,7 +126,7 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 				if(e.getSource().equals(pelis[i][j])) {
 					Movie pelicula = controladorVistaUsuario.entregarPelicula(i * peliculasPorFila + j);
 					System.out.println(pelicula);
-					VistaPelicula vistaPelicula = new VistaPelicula(pelicula);
+					MovieView vistaPelicula = new MovieView(pelicula);
 					vistaPelicula.setVisible(true);
 					this.dispose();
 				}
@@ -240,19 +240,19 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHistorialComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialComprasActionPerformed
-		VistaHistorialCompras vistaHistorialCompras = new VistaHistorialCompras();
+		PurchaseHistoryView vistaHistorialCompras = new PurchaseHistoryView();
 		vistaHistorialCompras.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_btnHistorialComprasActionPerformed
 
     private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
-		VistaCarrito vistaCarrito = new VistaCarrito();
+		ShoppingCarView vistaCarrito = new ShoppingCarView();
 		vistaCarrito.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-		VistaLogin vistaLogin = new VistaLogin();
+		LoginView vistaLogin = new LoginView();
 		vistaLogin.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
@@ -274,20 +274,20 @@ public class VistaUsuario extends javax.swing.JFrame implements ActionListener {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(VistaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(VistaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(VistaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(VistaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		//</editor-fold>
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new VistaUsuario().setVisible(true);
+				new UserView().setVisible(true);
 			}
 		});
 	}

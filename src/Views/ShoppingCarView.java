@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vistas;
+package Views;
 
-import modelos.Movie;
-import persistencia.Serializadora;
+import Models.Movie;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import controladores.FrontEnd.ControladorVistaCarrito;
-import controladores.FrontEnd.ControladorVistaUsuario;
+import Controllers.ControllerViewShoppingCar;
+import Controllers.ControllerViewUser;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,23 +19,23 @@ import java.util.ArrayList;
  *
  * @author JuanCGallo
  */
-public class VistaCarrito extends javax.swing.JFrame {
+public class ShoppingCarView extends javax.swing.JFrame {
 
 	/**
 	 * Creates new form VistaCarrito
 	 */
-	private ControladorVistaCarrito controladorVistaCarrito;
-	private ControladorVistaUsuario controladorVistaUsuario;
+	private ControllerViewShoppingCar controladorVistaCarrito;
+	private ControllerViewUser controladorVistaUsuario;
 	JButton[][] pelis;
 	JLabel[][] titulos;
 	JLabel[][] puntuaciones;
 	int filas;
 
-	public VistaCarrito() {
+	public ShoppingCarView() {
 		initComponents();
 		setLocationRelativeTo(this);
-		controladorVistaCarrito = new ControladorVistaCarrito();
-		controladorVistaUsuario = new ControladorVistaUsuario();
+		controladorVistaCarrito = new ControllerViewShoppingCar();
+		controladorVistaUsuario = new ControllerViewUser();
 		filas = controladorVistaCarrito.getFilas();
 		pelis = new JButton[filas][];
 		titulos = new JLabel[filas][];
@@ -212,7 +211,7 @@ public class VistaCarrito extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVaciarCarritoActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-		VistaCompraPelicula vistaCompraPelicula = new VistaCompraPelicula();
+		PurchaseHistoryView vistaCompraPelicula = new PurchaseHistoryView();
 		vistaCompraPelicula.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_btnComprarActionPerformed
@@ -234,20 +233,20 @@ public class VistaCarrito extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(VistaCarrito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(ShoppingCarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(VistaCarrito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(ShoppingCarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(VistaCarrito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(ShoppingCarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(VistaCarrito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(ShoppingCarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		//</editor-fold>
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new VistaCarrito().setVisible(true);
+				new ShoppingCarView().setVisible(true);
 			}
 		});
 	}

@@ -1,21 +1,18 @@
-package controladores.FrontEnd;
+package Controllers;
 
 
-import controladores.FrontEnd.ControladorVistaUsuario;
-import modelos.Movie;
-import persistencia.Serializadora;
+import Controllers.ControllerViewUser;
+import Models.Movie;
 
 import java.util.ArrayList;
 
-public class ControladorVistaCarrito {
-    private Serializadora serializadora;
+public class ControllerViewShoppingCar {
     private ArrayList<Movie> carrito;
-    private ControladorVistaUsuario controladorVistaUsuario;
+    private ControllerViewUser controladorVistaUsuario;
 
-    public ControladorVistaCarrito() {
-        serializadora = new Serializadora();
-        carrito = serializadora.leerCarrito();
-        controladorVistaUsuario = new ControladorVistaUsuario();
+    public ControllerViewShoppingCar() {
+    	carrito = new ArrayList<>();
+        controladorVistaUsuario = new ControllerViewUser();
     }
 
     public ArrayList<Movie> getCarrito() {
@@ -24,7 +21,6 @@ public class ControladorVistaCarrito {
 
     public void vaciarCarrito() {
         carrito.clear();
-        serializadora.guardarCarrito(carrito);
     }
 
     public int getFilas() {

@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vistas;
+package Views;
 
-import modelos.Movie;
-import modelos.Generos;
+import Models.Movie;
+import Models.Genre;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import controladores.FrontEnd.ControladorVistaPelicula;
+import Controllers.ControllerViewMovie;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -20,20 +20,20 @@ import java.util.ArrayList;
  *
  * @author JuanCGallo
  */
-public class VistaPelicula extends javax.swing.JFrame implements Serializable {
+public class MovieView extends javax.swing.JFrame {
 
 	/**
 	 * Creates new form VistaPelicula
 	 */
     private Movie p;
-    private ControladorVistaPelicula controladorVistaPelicula;
-	public VistaPelicula(Movie p) {
+    private ControllerViewMovie controladorVistaPelicula;
+	public MovieView(Movie p) {
 		initComponents();
 		setLocationRelativeTo(this);
         this.p = p;
         loadLogo();
         loadInformation();
-        controladorVistaPelicula = new ControladorVistaPelicula();
+        controladorVistaPelicula = new ControllerViewMovie();
 	}
 
     private void loadLogo() {
@@ -54,7 +54,7 @@ public class VistaPelicula extends javax.swing.JFrame implements Serializable {
         lblPuntuacion.setText("IMDb " + p.getPuntuacion() + " / 10");
         lblDuracion.setText(p.getDuracion() + " min");
         String gens = "";
-        for(Generos genero : p.getGeneros()) {
+        for(Genre genero : p.getGeneros()) {
             gens += genero.name() + "<br/>";
         }
         lblGeneros.setText("<html>" + gens + "</html>");
@@ -236,7 +236,7 @@ public class VistaPelicula extends javax.swing.JFrame implements Serializable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void regresar() {
-        VistaUsuario vistaUsuario = new VistaUsuario();
+        UserView vistaUsuario = new UserView();
         vistaUsuario.setVisible(true);
         this.dispose();
     }
@@ -254,7 +254,7 @@ public class VistaPelicula extends javax.swing.JFrame implements Serializable {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-        VistaCarrito vistaCarrito = new VistaCarrito();
+        ShoppingCarView vistaCarrito = new ShoppingCarView();
         vistaCarrito.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnComprarActionPerformed

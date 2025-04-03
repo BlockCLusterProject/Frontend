@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ApiServices.FrontEnd;
+package ApiServices;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -14,8 +14,8 @@ import retrofit2.http.Query;
 
 import java.util.List;
 
-import modelos.Client;
-import modelos.Movie;
+import Models.Client;
+import Models.Movie;
 
 /**
  *
