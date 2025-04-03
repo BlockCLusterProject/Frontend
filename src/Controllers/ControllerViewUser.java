@@ -4,7 +4,7 @@
  */
 package Controllers;
 
-import ApiServices.ClientSerivce;
+import ApiServices.ClientService;
 import Models.Genre;
 import Models.Movie;
 
@@ -21,10 +21,10 @@ public class ControllerViewUser {
 	private List<Movie> peliculas;
 
 	private int PELICULAS_POR_FILA = 4;
-	private ClientSerivce service;
+	private ClientService service;
 
 	public ControllerViewUser() {
-		service = new ClientSerivce();
+		service = new ClientService();
 		peliculas = service.getAvailableMovies();
 	}
 
