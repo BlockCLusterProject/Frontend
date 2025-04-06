@@ -5,6 +5,8 @@
 package Views;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -24,10 +26,12 @@ public class AdminView extends javax.swing.JFrame {
     /**
      * Creates new form VistaAdmin
      */
-    private ControllerViewAdmin controladorVistaVentas = new ControllerViewAdmin();
+    private ControllerViewAdmin controllerAdminView = new ControllerViewAdmin();
 
     public AdminView() {
         initComponents();
+        setLocationRelativeTo(this);
+        controllerAdminView.generateMovies(0);
         llenarPeliculas();
         setGenres();
     }
@@ -49,14 +53,14 @@ public class AdminView extends javax.swing.JFrame {
             }
         };
         table.setColumnIdentifiers(new Object[]{"Título", "Cantidad", "Precio", "Activo","id"});
-        System.out.println(controladorVistaVentas.getPeliculas().size());
-        for (int i = 0; i < controladorVistaVentas.getPeliculas().size(); i++) {
+        System.out.println(controllerAdminView.getPeliculas().size());
+        for (int i = 0; i < controllerAdminView.getPeliculas().size(); i++) {
             table.addRow(new Object[]{
-                controladorVistaVentas.getPeliculas().get(i).getTitulo(),
-                controladorVistaVentas.getPeliculas().get(i).getCantidad(),
-                controladorVistaVentas.getPeliculas().get(i).getPrecio(),
-                controladorVistaVentas.getPeliculas().get(i).getActive() == true ? "Si" : "No",
-                controladorVistaVentas.getPeliculas().get(i).getId(),
+                controllerAdminView.getPeliculas().get(i).getTitulo(),
+                controllerAdminView.getPeliculas().get(i).getCantidad(),
+                controllerAdminView.getPeliculas().get(i).getPrecio(),
+                controllerAdminView.getPeliculas().get(i).getActive() == true ? "Si" : "No",
+                controllerAdminView.getPeliculas().get(i).getId(),
 
             });
         }
@@ -65,7 +69,7 @@ public class AdminView extends javax.swing.JFrame {
             @Override
             public void tableChanged(TableModelEvent e) {
                 int column = e.getColumn();
-                ArrayList<Movie> peliculas = controladorVistaVentas.getPeliculas();
+                List<Movie> peliculas = controllerAdminView.getPeliculas();
                 int row = e.getFirstRow();
                 Movie pelicula = peliculas.get(row);
                 Object newValue = table.getValueAt(row, column);
@@ -138,6 +142,7 @@ public class AdminView extends javax.swing.JFrame {
         movie_quantity = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         movie_genre = new javax.swing.JComboBox<>();
+        consultMovies = new javax.swing.JToggleButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -176,6 +181,12 @@ public class AdminView extends javax.swing.JFrame {
 
         jLabel5.setText("Sinopsis");
 
+        movie_description.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                movie_descriptionActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Image");
 
         btn_add.setText("Agregar Película");
@@ -209,9 +220,22 @@ public class AdminView extends javax.swing.JFrame {
 
         jLabel7.setText("Cantidad");
 
+        movie_quantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                movie_quantityActionPerformed(evt);
+            }
+        });
+
         jLabel8.setText("Generos");
 
         movie_genre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        consultMovies.setText("Consultar Peliculas");
+        consultMovies.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultMoviesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,55 +244,65 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addGap(30, 30, 30))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6)
-                                .addGap(33, 33, 33))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(movie_quantity, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(movie_title, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                                    .addComponent(movie_rate, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(movie_description, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(18, 18, 18)
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(movie_title, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(movie_rate, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(movie_description, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(movie_quantity, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(movie_duration, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                                     .addComponent(movie_price)
                                     .addComponent(movie_image, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(movie_genre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(movie_genre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(42, 42, 42)
+                                        .addComponent(jLabel5))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(48, 48, 48)
+                                        .addComponent(jLabel1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(64, 64, 64)
+                                        .addComponent(jLabel2)
+                                        .addGap(30, 30, 30))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(24, 24, 24)
+                                        .addComponent(jLabel6)
+                                        .addGap(33, 33, 33)))))
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addGap(52, 52, 52))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btn_goBack, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(btn_add)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel8)
-                        .addGap(46, 46, 46)))
+                        .addGap(46, 46, 46))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(consultMovies, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_goBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -282,9 +316,9 @@ public class AdminView extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(movie_title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(movie_duration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(movie_duration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(movie_title, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -295,13 +329,13 @@ public class AdminView extends javax.swing.JFrame {
                             .addComponent(movie_price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(movie_description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(movie_image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(movie_image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(movie_description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
@@ -310,12 +344,13 @@ public class AdminView extends javax.swing.JFrame {
                             .addComponent(movie_quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(movie_genre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(btn_add)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_add)
+                            .addComponent(consultMovies))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton3)
-                            .addComponent(btn_goBack))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(btn_goBack)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
@@ -340,7 +375,7 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_goBackActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        ArrayList<Movie> peliculas = controladorVistaVentas.getPeliculas();
+        List<Movie> peliculas = controllerAdminView.getPeliculas();
         String title = movie_title.getText();
         int duration = Integer.parseInt(movie_duration.getText());
         double score = Double.parseDouble(movie_rate.getText());
@@ -348,13 +383,25 @@ public class AdminView extends javax.swing.JFrame {
         String description = movie_description.getText();
         String image = movie_image.getText();
         int quantity = Integer.parseInt(movie_quantity.getText());
-        ArrayList<Genre> generos = new ArrayList<>();
+        List<Genre> generos = new ArrayList<>();
         generos.add((Genre) movie_genre.getSelectedItem());
 
         Movie pelicula = new Movie(title, duration, score, generos, price, description, image, quantity);
         peliculas.add(pelicula);
         llenarPeliculas();
     }//GEN-LAST:event_btn_addActionPerformed
+
+    private void consultMoviesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultMoviesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultMoviesActionPerformed
+
+    private void movie_descriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movie_descriptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_movie_descriptionActionPerformed
+
+    private void movie_quantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movie_quantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_movie_quantityActionPerformed
 
     /**
      * @param args the command line arguments
@@ -394,6 +441,7 @@ public class AdminView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_goBack;
+    private javax.swing.JToggleButton consultMovies;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

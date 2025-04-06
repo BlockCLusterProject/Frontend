@@ -55,9 +55,10 @@ interface ClientApiService {
 }
 
 public class ClientService {
-	Dotenv dotenv = Dotenv.load();
-	private static final String BASE_URL = System.getenv("API_URL");
-	private static ClientApiService apiService;
+
+    Dotenv dotenv = Dotenv.load();
+    private final String BASE_URL = dotenv.get("API_URL");
+    private ClientApiService apiService;
 
 	public ClientService() {
 		Retrofit retrofit = new Retrofit.Builder()

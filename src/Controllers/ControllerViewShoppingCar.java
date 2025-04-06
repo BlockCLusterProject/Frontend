@@ -3,24 +3,29 @@ package Controllers;
 
 import Controllers.ControllerViewUser;
 import Models.Movie;
+import persistence.Serializer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerViewShoppingCar {
-    private ArrayList<Movie> carrito;
+    private List<Movie> carrito;
     private ControllerViewUser controladorVistaUsuario;
+    private Serializer serializer;
 
     public ControllerViewShoppingCar() {
-    	carrito = new ArrayList<>();
-        controladorVistaUsuario = new ControllerViewUser();
+        controladorVistaUsuario = new ControllerViewUser(null);
+        this.serializer = new Serializer();
+    	carrito = serializer.readShoppingCar();
     }
 
-    public ArrayList<Movie> getCarrito() {
+    public List<Movie> getCarrito() {
         return carrito;
     }
 
     public void vaciarCarrito() {
         carrito.clear();
+        serializer.saveShoppingCar(carrito);
     }
 
     public int getFilas() {
@@ -36,6 +41,10 @@ public class ControllerViewShoppingCar {
             }
             return c;
         }
+    }
+    
+    public void saveCarrito() {
+    	serializer.saveShoppingCar(carrito);
     }
 
 }
