@@ -392,7 +392,10 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void consultMoviesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultMoviesActionPerformed
-        // TODO add your handling code here:
+    	List<Movie> movies = controllerAdminView.getTrendingMovies();
+    	for(int i = 0; i < movies.size(); i++) {
+    		System.out.print(movies.get(i).getTitulo());
+    	}
     }//GEN-LAST:event_consultMoviesActionPerformed
 
     private void movie_descriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movie_descriptionActionPerformed
