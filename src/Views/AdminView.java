@@ -5,6 +5,8 @@
 package Views;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -65,7 +67,7 @@ public class AdminView extends javax.swing.JFrame {
             @Override
             public void tableChanged(TableModelEvent e) {
                 int column = e.getColumn();
-                ArrayList<Movie> peliculas = controladorVistaVentas.getPeliculas();
+                List<Movie> peliculas = controladorVistaVentas.getPeliculas();
                 int row = e.getFirstRow();
                 Movie pelicula = peliculas.get(row);
                 Object newValue = table.getValueAt(row, column);
@@ -340,7 +342,7 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_goBackActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        ArrayList<Movie> peliculas = controladorVistaVentas.getPeliculas();
+        List<Movie> peliculas = controladorVistaVentas.getPeliculas();
         String title = movie_title.getText();
         int duration = Integer.parseInt(movie_duration.getText());
         double score = Double.parseDouble(movie_rate.getText());
@@ -348,7 +350,7 @@ public class AdminView extends javax.swing.JFrame {
         String description = movie_description.getText();
         String image = movie_image.getText();
         int quantity = Integer.parseInt(movie_quantity.getText());
-        ArrayList<Genre> generos = new ArrayList<>();
+        List<Genre> generos = new ArrayList<>();
         generos.add((Genre) movie_genre.getSelectedItem());
 
         Movie pelicula = new Movie(title, duration, score, generos, price, description, image, quantity);
