@@ -4,6 +4,7 @@
  */
 package Views;
 
+import ApiServices.ClientService;
 import Controllers.ControllerViewLogin;
 
 import Models.Admin;
@@ -16,13 +17,15 @@ import Models.Client;
 public class LoginView extends javax.swing.JFrame {
 
     ControllerViewLogin controladorLogin;
+    ClientService service;
     /**
      * Creates new form VistaLogin
      */
     public LoginView() {
         initComponents();
         //ationRelativeTo(this);
-        this.controladorLogin = new ControllerViewLogin();
+        this.service = new ClientService();
+        this.controladorLogin = new ControllerViewLogin(service);
     }
     
     private void limpiarCampos() {
@@ -134,14 +137,14 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
     private void jButtonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicioActionPerformed
-        String usuarioIngresado = jTextFieldUsuario.getText();
-        String contrasenaIngresada = jTextFieldContrasena.getText();
+        String loginUser = jTextFieldUsuario.getText();
+        String passwordEntered = jTextFieldContrasena.getText();
         
-        if (controladorLogin.login(usuarioIngresado, contrasenaIngresada) instanceof Admin ){
+        if (controladorLogin.validateAdmin(loginUser, passwordEntered) instanceof Admin ){
             AdminView va = new AdminView();
                 va.setVisible(true);
                 this.dispose();
-        }else if (controladorLogin.login(usuarioIngresado, contrasenaIngresada)instanceof Client){
+        }else if (controladorLogin.validateClient(loginUser, passwordEntered)instanceof Client){
             
             UserView vu = new UserView();
                 vu.setVisible(true);

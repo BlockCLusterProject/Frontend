@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import ApiServices.ClientService;
 import Models.Admin;
 import Models.Client;
 import Models.Person;
@@ -16,8 +17,11 @@ public class ControllerViewLogin {
     
     private Admin admin;
     private Client cliente1;
-    
-    public ControllerViewLogin(){
+    ClientService service;
+    public ControllerViewLogin(ClientService service){
+    	
+    	this.service = service;
+    	
         String nombre = "juan";
         String id = "123";
         String edad = "25";
@@ -39,13 +43,18 @@ public class ControllerViewLogin {
         cliente1 = new Client(nombreCliente,idCliente,edadCliente,correoCliente,telefonoCliente,usuario,contrasena);
     }
     
-    public Person   login(String nombreUsuario, String contrasena){
+    public Client   validateClient(String userName, String password){
         
-        if(admin.getUsuario().equals(nombreUsuario) && admin.getContrasena().equals(contrasena)){
+        /*if(admin.getUsuario().equals(nombreUsuario) && admin.getContrasena().equals(contrasena)){
             return admin;
         }else if(cliente1.getUsuario().equals(nombreUsuario) && cliente1.getContrasena().equals(contrasena)){
             return cliente1;
         }
-        return null;
+        return null;*/
+    	return service.validateClient(userName,password);
+    }
+    
+    public Admin validateAdmin (String userName, String password) {
+    	return service.validateAdmin(userName,password);
     }
 }
