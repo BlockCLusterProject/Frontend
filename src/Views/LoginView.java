@@ -139,14 +139,14 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
     private void jButtonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicioActionPerformed
-        String loginUser = jTextFieldUsuario.getText();
+        String user = jTextFieldUsuario.getText();
         String passwordEntered = jTextFieldContrasena.getText();
         
-        if (controladorLogin.validateAdmin(loginUser, passwordEntered) instanceof Admin ){
+        if (controladorLogin.validateAdmin(user, passwordEntered) instanceof Admin ){
             AdminView va = new AdminView();
                 va.setVisible(true);
                 this.dispose();
-        }else if (controladorLogin.validateClient(loginUser, passwordEntered)instanceof Client){
+        }else if (controladorLogin.validateClient(user, passwordEntered)instanceof Client){
             
             UserView vu = new UserView();
                 vu.setVisible(true);
