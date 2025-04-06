@@ -23,11 +23,14 @@ public class ControllerViewUser {
 	private int PELICULAS_POR_FILA = 4;
 	private ClientService service;
 
-	public ControllerViewUser() {
-		service = new ClientService();
-		peliculas = service.getAvailableMovies();
+	public ControllerViewUser(ClientService service) {
+		this.service = service == null ? new ClientService() : service;
+		peliculas = initMovies();
 	}
-
+	
+	public List<Movie> initMovies() {
+		return service.getAvailableMovies();
+	}
 
 	public List<Movie> getPeliculas() {
 		return peliculas;

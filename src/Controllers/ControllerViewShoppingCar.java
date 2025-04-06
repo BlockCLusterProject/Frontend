@@ -12,7 +12,7 @@ public class ControllerViewShoppingCar {
 
     public ControllerViewShoppingCar() {
     	carrito = new ArrayList<>();
-        controladorVistaUsuario = new ControllerViewUser();
+        controladorVistaUsuario = new ControllerViewUser(null);
     }
 
     public ArrayList<Movie> getCarrito() {
