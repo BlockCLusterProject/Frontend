@@ -31,4 +31,8 @@ public class ControllerViewAdmin {
 	public List<Movie> getPeliculas() {
 		return peliculas;
 	}
+	
+	public List<Movie> getTrendingMovies(){
+		List<Movie> trendingMovies = service.getTrendingMovies();
+	}
 }

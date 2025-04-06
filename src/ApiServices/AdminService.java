@@ -77,4 +77,19 @@ public class AdminService {
             return null;
         }
     }
+    
+    public List<Movie> getTrendingMovies(){
+    	try {
+    		Response<List<Movie>> response = apiService.getMovieDbMovies(0).execute();
+    		if (response.isSuccessful()) {
+                return response.body();
+            } else {
+                System.out.println("Error: " + response.code());
+                return null;
+            }
+    	} catch  (IOException e){
+    		 e.printStackTrace();
+             return null;
+    	}
+    }
 }
