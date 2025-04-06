@@ -3,24 +3,26 @@ package Controllers;
 import ApiServices.ClientService;
 
 import Models.Movie;
+import persistence.Serializer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerViewMovie {
 
-    private ArrayList<Movie> carrito;
+    private List<Movie> carrito;
     private ClientService service;
+    private Serializer serializer;
 
 
     public ControllerViewMovie() {
-    	carrito = new ArrayList<>();
         service = new ClientService();
+        serializer = new Serializer();
+    	carrito = serializer.readShoppingCar();
     }
 
     public void agregarCarrito(Movie pelicula) {
         carrito.add(pelicula);
-        for(Movie p : carrito) {
-            System.out.println(p);
-        }
+        serializer.saveShoppingCar(carrito);
     }
 }
