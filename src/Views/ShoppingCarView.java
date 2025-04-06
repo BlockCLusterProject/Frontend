@@ -5,6 +5,7 @@
 package Views;
 
 import Models.Movie;
+import persistence.Serializer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,7 +14,7 @@ import Controllers.ControllerViewShoppingCar;
 import Controllers.ControllerViewUser;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -34,8 +35,8 @@ public class ShoppingCarView extends javax.swing.JFrame {
 	public ShoppingCarView() {
 		initComponents();
 		setLocationRelativeTo(this);
-		controladorVistaCarrito = new ControllerViewShoppingCar();
-		controladorVistaUsuario = new ControllerViewUser(null);
+		this.controladorVistaCarrito = new ControllerViewShoppingCar();
+		this.controladorVistaUsuario = new ControllerViewUser(null);
 		filas = controladorVistaCarrito.getFilas();
 		pelis = new JButton[filas][];
 		titulos = new JLabel[filas][];
@@ -50,7 +51,7 @@ public class ShoppingCarView extends javax.swing.JFrame {
 		int ancho = 120;
 		int alto = (int) (((double) ancho) * 1.6);
 		int margen = 20;
-		ArrayList<Movie> carrito = controladorVistaCarrito.getCarrito();
+		List<Movie> carrito = controladorVistaCarrito.getCarrito();
 		int peliculasPorFila = controladorVistaUsuario.getPELICULAS_POR_FILA();
 		int cantidadPeliculas = carrito.size();
 
@@ -145,6 +146,11 @@ public class ShoppingCarView extends javax.swing.JFrame {
         });
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         btnComprar.setText("Comprar");
         btnComprar.addActionListener(new java.awt.event.ActionListener() {
@@ -206,15 +212,22 @@ public class ShoppingCarView extends javax.swing.JFrame {
 
     private void btnVaciarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarCarritoActionPerformed
 		controladorVistaCarrito.vaciarCarrito();
-		JOptionPane.showMessageDialog(null, "Se vació el carrito :'(");
+		JOptionPane.showMessageDialog(null, "Se vaci� el carrito :'(");
 		dibujarCarrito();
     }//GEN-LAST:event_btnVaciarCarritoActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-		PurchaseHistoryView vistaCompraPelicula = new PurchaseHistoryView();
+    	controladorVistaCarrito.vaciarCarrito();
+		MoviePurchaseView vistaCompraPelicula = new MoviePurchaseView();
 		vistaCompraPelicula.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_btnComprarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+    	UserView userView = new UserView();
+    	userView.setVisible(true);
+    	this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
 	/**
 	 * @param args the command line arguments
