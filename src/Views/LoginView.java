@@ -4,6 +4,8 @@
  */
 package Views;
 
+import javax.swing.JOptionPane;
+
 import ApiServices.ClientService;
 import Controllers.ControllerViewLogin;
 
@@ -149,6 +151,13 @@ public class LoginView extends javax.swing.JFrame {
             UserView vu = new UserView();
                 vu.setVisible(true);
                 this.dispose();
+        }else {
+        	JOptionPane.showMessageDialog(
+                    null,                                   
+                    "Por favor verifique que el usuario y contraseña sean correctos \n (si aun no tiene un usuario debe registrarse)",
+                    "Usuario No Registrado",                     
+                    JOptionPane.ERROR_MESSAGE               
+                );
         }
   
     }//GEN-LAST:event_jButtonInicioActionPerformed
