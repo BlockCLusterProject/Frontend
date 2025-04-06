@@ -35,7 +35,7 @@ public class ShoppingCarView extends javax.swing.JFrame {
 		initComponents();
 		setLocationRelativeTo(this);
 		controladorVistaCarrito = new ControllerViewShoppingCar();
-		controladorVistaUsuario = new ControllerViewUser();
+		controladorVistaUsuario = new ControllerViewUser(null);
 		filas = controladorVistaCarrito.getFilas();
 		pelis = new JButton[filas][];
 		titulos = new JLabel[filas][];

@@ -38,12 +38,12 @@ interface ClientApiService {
     // @GET("api/movies")
 }
 
-public class ClientSerivce {
+public class ClientService {
     Dotenv dotenv = Dotenv.load();
     private static final String BASE_URL = System.getenv("API_URL");
     private static ClientApiService apiService;
 
-    public ClientSerivce() {
+    public ClientService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

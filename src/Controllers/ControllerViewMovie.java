@@ -1,6 +1,6 @@
 package Controllers;
 
-import ApiServices.ClientSerivce;
+import ApiServices.ClientService;
 
 import Models.Movie;
 
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 public class ControllerViewMovie {
 
     private ArrayList<Movie> carrito;
-    private ClientSerivce service;
+    private ClientService service;
 
 
     public ControllerViewMovie() {
     	carrito = new ArrayList<>();
-        service = new ClientSerivce();
+        service = new ClientService();
     }
 
     public void agregarCarrito(Movie pelicula) {

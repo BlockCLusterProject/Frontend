@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import ApiServices.AdminService;
-import ApiServices.ClientSerivce;
 import Models.Genre;
 import Models.Movie;
 
