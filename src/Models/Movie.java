@@ -6,6 +6,7 @@ package Models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -33,7 +34,7 @@ public class Movie implements Serializable {
             String titulo,
             int duracion,
             double puntuacion,
-            ArrayList<Genre> generos,
+            List<Genre> generos2,
             double precio,
             String sinopsis,
             String rutaPortada,
@@ -42,7 +43,6 @@ public class Movie implements Serializable {
         this.titulo = titulo;
         this.duracion = duracion;
         this.puntuacion = puntuacion;
-        this.generos = generos;
         this.precio = precio;
         this.sinopsis = sinopsis;
         this.rutaPortada = rutaPortada;
