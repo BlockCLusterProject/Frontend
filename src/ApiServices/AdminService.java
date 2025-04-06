@@ -51,8 +51,8 @@ interface AdminApiService {
 }
 
 public class AdminService {
-    Dotenv dotenv = Dotenv.load();
-    private static final String BASE_URL = System.getenv("API_URL");
+    static Dotenv dotenv = Dotenv.load();
+    private static final String BASE_URL = dotenv.get("API_URL");
     private static AdminApiService apiService;
 
     public AdminService() {
