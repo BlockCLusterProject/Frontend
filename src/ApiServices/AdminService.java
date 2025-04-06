@@ -23,13 +23,13 @@ import Models.Movie;
  */
 public interface AdminService {
     // API MOVIEDB
-    @GET("/api/trending_movies")
-    Call<List<Client>> buscarPeliculas(
+    @GET("/api/movie/trending_movies")
+    Call<List<Client>> getMovieDbMovies(
         @Query("genre") int genre
     );
 
-    @GET("/api/trending_movies")
-    Call<List<Client>> buscarPeliculas(
+    @GET("/api/movie/available_movies")
+    Call<List<Client>> getOwnMovies(
         @Query("genre") int genre,
         @Query("movie_name") String movieName  
     );
