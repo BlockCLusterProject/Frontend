@@ -26,10 +26,12 @@ public class AdminView extends javax.swing.JFrame {
     /**
      * Creates new form VistaAdmin
      */
-    private ControllerViewAdmin controladorVistaVentas = new ControllerViewAdmin();
+    private ControllerViewAdmin controllerAdminView = new ControllerViewAdmin();
 
     public AdminView() {
         initComponents();
+        setLocationRelativeTo(this);
+        controllerAdminView.generateMovies(0);
         llenarPeliculas();
         setGenres();
     }
@@ -51,14 +53,14 @@ public class AdminView extends javax.swing.JFrame {
             }
         };
         table.setColumnIdentifiers(new Object[]{"Título", "Cantidad", "Precio", "Activo","id"});
-        System.out.println(controladorVistaVentas.getPeliculas().size());
-        for (int i = 0; i < controladorVistaVentas.getPeliculas().size(); i++) {
+        System.out.println(controllerAdminView.getPeliculas().size());
+        for (int i = 0; i < controllerAdminView.getPeliculas().size(); i++) {
             table.addRow(new Object[]{
-                controladorVistaVentas.getPeliculas().get(i).getTitulo(),
-                controladorVistaVentas.getPeliculas().get(i).getCantidad(),
-                controladorVistaVentas.getPeliculas().get(i).getPrecio(),
-                controladorVistaVentas.getPeliculas().get(i).getActive() == true ? "Si" : "No",
-                controladorVistaVentas.getPeliculas().get(i).getId(),
+                controllerAdminView.getPeliculas().get(i).getTitulo(),
+                controllerAdminView.getPeliculas().get(i).getCantidad(),
+                controllerAdminView.getPeliculas().get(i).getPrecio(),
+                controllerAdminView.getPeliculas().get(i).getActive() == true ? "Si" : "No",
+                controllerAdminView.getPeliculas().get(i).getId(),
 
             });
         }
@@ -67,7 +69,7 @@ public class AdminView extends javax.swing.JFrame {
             @Override
             public void tableChanged(TableModelEvent e) {
                 int column = e.getColumn();
-                List<Movie> peliculas = controladorVistaVentas.getPeliculas();
+                List<Movie> peliculas = controllerAdminView.getPeliculas();
                 int row = e.getFirstRow();
                 Movie pelicula = peliculas.get(row);
                 Object newValue = table.getValueAt(row, column);
@@ -342,7 +344,7 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_goBackActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        List<Movie> peliculas = controladorVistaVentas.getPeliculas();
+        List<Movie> peliculas = controllerAdminView.getPeliculas();
         String title = movie_title.getText();
         int duration = Integer.parseInt(movie_duration.getText());
         double score = Double.parseDouble(movie_rate.getText());

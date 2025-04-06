@@ -35,8 +35,7 @@ interface AdminApiService {
 
     @GET("/api/movie/available_movies")
     Call<List<Movie>> getOwnMovies(
-            @Query("genre") int genre,
-            @Query("movie_name") String movieName);
+            @Query("genre") int genre);
 
     // OWN BACK
     @POST("/api/movie")
@@ -52,8 +51,8 @@ interface AdminApiService {
 }
 
 public class AdminService {
-    Dotenv dotenv = Dotenv.load();
-    private static final String BASE_URL = System.getenv("API_URL");
+    static Dotenv dotenv = Dotenv.load();
+    private static final String BASE_URL = dotenv.get("API_URL");
     private static AdminApiService apiService;
 
     public AdminService() {
@@ -64,9 +63,9 @@ public class AdminService {
         apiService = retrofit.create(AdminApiService.class);
     }
 
-    public List<Movie> getAvailableMovies(int genre, String movieName) {
+    public List<Movie> getAvailableMovies(int genre) {
         try {
-            Response<List<Movie>> response = apiService.getOwnMovies(genre,movieName).execute();
+            Response<List<Movie>> response = apiService.getOwnMovies(genre).execute();
             if (response.isSuccessful()) {
                 return response.body();
             } else {

@@ -23,8 +23,8 @@ public class ControllerViewAdmin {
 		service = new AdminService();
 	}
 
-	public List<Movie> generateMovies(int genre, String movieName){
-		peliculas = service.getAvailableMovies(genre, movieName);
+	public List<Movie> generateMovies(int genre){
+		peliculas = service.getAvailableMovies(genre);
 		return this.peliculas;
 	}
 
