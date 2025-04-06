@@ -1,17 +1,21 @@
 package Controllers;
 
 import Models.Movie;
+import persistence.Serializer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerViewMoviePurchase {
-    private ArrayList<Movie> carrito;
+    private List<Movie> carrito;
+    private Serializer serializer;
 
     public ControllerViewMoviePurchase() {
-    	carrito = new ArrayList<>();
+    	serializer = new Serializer();
+    	carrito = serializer.readShoppingCar();
     }
 
-    public ArrayList<Movie> getCarrito() {
+    public List<Movie> getCarrito() {
         return carrito;
     }
 }
