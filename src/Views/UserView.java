@@ -52,6 +52,7 @@ public class UserView extends javax.swing.JFrame implements ActionListener {
 		int margen = 20;
 		int peliculasPorFila = controladorVistaUsuario.getPELICULAS_POR_FILA();
 		int cantidadPeliculas = controladorVistaUsuario.getCantidadPeliculas();
+		int counter = 0;
 
 		for (int i = 0; i < pelis.length; i++) {
 			int len = (i == pelis.length-1) ? (cantidadPeliculas - (filas-1) * peliculasPorFila) : peliculasPorFila;
@@ -77,7 +78,6 @@ public class UserView extends javax.swing.JFrame implements ActionListener {
 						(int) ((double) ancho * (RATIO_ANCHO)),
 						ALTO_TITULO
 				);
-//				titulos[i][j].setOpaque(true);
 				titulos[i][j].setText(controladorVistaUsuario.getTituloByIdx(i+j));
 				titulos[i][j].setBackground(Color.RED);
 				titulos[i][j].setHorizontalAlignment(SwingConstants.CENTER);
@@ -88,14 +88,15 @@ public class UserView extends javax.swing.JFrame implements ActionListener {
 						(int) ((double) ancho * (1 - RATIO_ANCHO)),
 						ALTO_TITULO
 				);
-//				puntuaciones[i][j].setOpaque(true);
 				puntuaciones[i][j].setText(String.valueOf(controladorVistaUsuario.getPuntuacionByIdx(i+j)));
 				puntuaciones[i][j].setBackground(Color.BLUE);
 				puntuaciones[i][j].setForeground(Color.WHITE);
 				puntuaciones[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				puntuaciones[i][j].setVerticalAlignment(SwingConstants.CENTER);
 				try {
-					Image img = ImageIO.read(getClass().getResource("/img/terminator_2.jpg"));
+					Image img = ImageIO.read(getClass().getResource(
+							"https://image.tmdb.org/t/p/original/" + 
+					controladorVistaUsuario.entregarPelicula(counter).getRutaPortada()));
 					img = img.getScaledInstance(ancho, alto, Image.SCALE_DEFAULT);
 					pelis[i][j].setIcon(new ImageIcon(img));
 				} catch (Exception ex) {
