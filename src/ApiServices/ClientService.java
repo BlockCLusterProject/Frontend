@@ -29,20 +29,25 @@ interface ClientApiService {
 			@Query("password") String password
 			);
 
-	// LOGIN VALIDATION 
+	// Login Client Validation 
 	@GET("/api/users/validateClient")
 	Call<Client> validateClient(
 			@Query("user") String user,
 			@Query("password") String password
 			);
-	
-	// LOGIN VALIDATION 
-		@GET("/api/users/validateAdmin")
-		Call<Admin> validateAdmin(
-				@Query("user") String user,
-				@Query("password") String password
-				);
 
+	// Login Admin Validation
+	@GET("/api/users/validateAdmin")
+	Call<Admin> validateAdmin(
+			@Query("user") String user,
+			@Query("password") String password
+			);
+	
+	// Register Client
+	@POST("/api/user/addUser")
+	Call<Client> registerClient(
+			@Body Client user);
+	
 
 	@GET("/api/users/available_movies")
 	Call<List<Movie>> getAvailableMovies();
@@ -56,9 +61,9 @@ interface ClientApiService {
 
 public class ClientService {
 
-    Dotenv dotenv = Dotenv.load();
-    private final String BASE_URL = dotenv.get("API_URL");
-    private ClientApiService apiService;
+	Dotenv dotenv = Dotenv.load();
+	private final String BASE_URL = dotenv.get("API_URL");
+	private ClientApiService apiService;
 
 	public ClientService() {
 		Retrofit retrofit = new Retrofit.Builder()
@@ -84,7 +89,7 @@ public class ClientService {
 			return null;
 		}
 	}
-	
+
 	public Client validateClient(String user, String password) {
 		try {
 			Response<Client> response = apiService.validateClient(user, password).execute();
@@ -99,7 +104,7 @@ public class ClientService {
 			return null;
 		}
 	}
-	
+
 	public Admin validateAdmin(String user, String password) {
 		try {
 			Response<Admin> response = apiService.validateAdmin(user, password).execute();
@@ -112,6 +117,21 @@ public class ClientService {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public boolean registerClient(Client user) {
+		try {
+			Response<Client> response = apiService.registerClient(user).execute();
+			if(response.isSuccessful()) {
+				return true;
+			} else {
+				System.out.println("Error: " + response.code());
+				return false;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 

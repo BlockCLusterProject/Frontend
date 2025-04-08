@@ -5,6 +5,9 @@
 package Views;
 
 import javax.swing.JOptionPane;
+
+import ApiServices.ClientService;
+import Controllers.ControllerViewRegister;
 import Models.Client;
 
 /**
@@ -13,10 +16,13 @@ import Models.Client;
  */
 public class RegisterView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VistaRegistro
-     */
+	ControllerViewRegister controller;
+	ClientService service;
+	
     public RegisterView() {
+    	service = new ClientService();
+    	this.controller = new ControllerViewRegister(service);
+    	
         initComponents();
     }
 
@@ -323,7 +329,9 @@ public class RegisterView extends javax.swing.JFrame {
         String confirmacion = jTextFieldConfirmacion.getText();
         
         if (contrasena.equals(confirmacion)){
-            Client usuario = new Client(nombre,id,edad,correo,telefono,nombreUsuario,contrasena);
+            Client user = new Client(nombre,id,edad,correo,telefono,nombreUsuario,contrasena);
+            
+            controller.registerClient(user);
             
             UserView vu = new UserView();
             vu.setVisible(true);
