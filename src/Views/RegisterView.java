@@ -20,7 +20,9 @@ public class RegisterView extends javax.swing.JFrame {
 	ClientService service;
 	
     public RegisterView() {
+    	service = new ClientService();
     	this.controller = new ControllerViewRegister(service);
+    	
         initComponents();
     }
 
