@@ -43,7 +43,7 @@ interface AdminApiService {
     @POST("/api/movie")
     Call<Movie> createMovie(@Body Movie movie);
 
-    @PATCH("api/movie")
+    @PATCH("api/movie/update_movies")
     Call<Movie> updateMovie(@Query("id_movie") int idMovie, @Body Movie movie);
 
     @DELETE("api/movie")
@@ -101,6 +101,7 @@ public class AdminService {
     public boolean updateMovie(int idMovie, Movie movie) {
     	try {
     		Response<Movie> response = apiService.updateMovie(idMovie, movie).execute();
+    		System.out.println(response);
     		if (response.isSuccessful()) {
                 return true;
             } else {
