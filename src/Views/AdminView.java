@@ -77,6 +77,7 @@ public class AdminView extends javax.swing.JFrame {
                     //pelicula.setActive();
                     if (newValue.equals("Si") || newValue.equals("No")) {
                         pelicula.setActive(newValue.equals("Si"));
+                        controllerAdminView.updateMovie(pelicula.getId(), pelicula);
                     } else {
                         JOptionPane.showMessageDialog(null, "Tienes que insertar 'Si o No'");
                         table.setValueAt(pelicula.getActive() == true ? "Si" : "No", row, column);
@@ -84,6 +85,7 @@ public class AdminView extends javax.swing.JFrame {
                 } else if (e.getType() == TableModelEvent.UPDATE && column == 2) {
                     if (tryParseDouble(newValue.toString())) {
                         pelicula.setPrecio(Double.parseDouble(newValue.toString()));
+                        controllerAdminView.updateMovie(pelicula.getId(), pelicula);
                     } else {
                         JOptionPane.showMessageDialog(null, "Tienes que insertar un valor número decimal");
                         table.setValueAt(pelicula.getPrecio(), row, column);
@@ -91,6 +93,7 @@ public class AdminView extends javax.swing.JFrame {
                 } else if (e.getType() == TableModelEvent.UPDATE && column == 1) {
                     if (tryParseDouble(newValue.toString())) {
                         pelicula.setCantidad(Integer.parseInt(newValue.toString()));
+                        controllerAdminView.updateMovie(pelicula.getId(), pelicula);
                     } else {
                         JOptionPane.showMessageDialog(null, "Tienes que insertar un valor número entero");
                         table.setValueAt(pelicula.getCantidad(), row, column);

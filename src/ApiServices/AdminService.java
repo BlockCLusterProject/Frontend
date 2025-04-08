@@ -12,12 +12,14 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import Models.Client;
 import Models.Movie;
@@ -41,11 +43,14 @@ interface AdminApiService {
     @POST("/api/movie")
     Call<Movie> createMovie(@Body Movie movie);
 
-    @PATCH("api/movie")
+    @PATCH("api/movie/update_movies")
     Call<Movie> updateMovie(@Query("id_movie") int idMovie, @Body Movie movie);
 
     @DELETE("api/movie")
     Call<Movie> deleteMovie(@Query("id_movie") int idMovie);
+    
+    @PATCH("api/movie")
+    Call<Movie> updateUser(@Path("id") int userId, @Body Map<String, Movie> updates);
 
     // @GET("api/movies")
 }
@@ -90,6 +95,22 @@ public class AdminService {
     	} catch  (IOException e){
     		 e.printStackTrace();
              return null;
+    	}
+    }
+    
+    public boolean updateMovie(int idMovie, Movie movie) {
+    	try {
+    		Response<Movie> response = apiService.updateMovie(idMovie, movie).execute();
+    		System.out.println(response);
+    		if (response.isSuccessful()) {
+                return true;
+            } else {
+                System.out.println("Error: " + response.code());
+                return false;
+            }
+    	} catch  (IOException e){
+    		 e.printStackTrace();
+             return false;
     	}
     }
 }
