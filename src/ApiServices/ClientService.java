@@ -44,7 +44,7 @@ interface ClientApiService {
 			);
 	
 	// Register Client
-	@POST("/api/user/")
+	@POST("/api/user/addUser")
 	Call<Client> registerClient(
 			@Body Client user);
 	
