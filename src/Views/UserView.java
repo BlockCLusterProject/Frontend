@@ -56,9 +56,11 @@ public class UserView extends javax.swing.JFrame implements ActionListener {
 		int counter = 0;
 		
 		//TODO ****** BORAR ****** TODO//
+		/*
 		for(Movie movie : controladorVistaUsuario.getPeliculas()) {
 			System.out.println(movie.getTitulo());
 		}
+		*/
 
 		for (int i = 0; i < pelis.length; i++) {
 			int len = (i == pelis.length-1) ? (cantidadPeliculas - (filas-1) * peliculasPorFila) : peliculasPorFila;
@@ -67,6 +69,7 @@ public class UserView extends javax.swing.JFrame implements ActionListener {
 			titulos[i] = new JLabel[len];
 			puntuaciones[i] = new JLabel[len];
 			for (int j = 0; j < len; j++) {
+				// System.out.println(controladorVistaUsuario.getPeliculas().get(counter));
 				pelis[i][j] = new JButton();
 				titulos[i][j] = new JLabel();
 				puntuaciones[i][j] = new JLabel();

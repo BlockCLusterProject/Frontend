@@ -25,4 +25,5 @@ public class ControllerViewMovie {
         carrito.add(pelicula);
         serializer.saveShoppingCar(carrito);
     }
+    
 }
