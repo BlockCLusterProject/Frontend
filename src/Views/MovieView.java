@@ -14,6 +14,7 @@ import Controllers.ControllerViewMovie;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -38,11 +39,13 @@ public class MovieView extends javax.swing.JFrame {
 
     private void loadLogo() {
         try {
-            Image img = ImageIO.read(getClass().getResource(p.getRutaPortada()));
-            img = img.getScaledInstance(
-                    lblFotoPelicula.getWidth(),
-                    lblFotoPelicula.getHeight(),
-                    Image.SCALE_DEFAULT);
+			URL imageUrl = new URL(
+				"https://image.tmdb.org/t/p/w300" + p.getRutaPortada());
+			Image img = ImageIO.read(imageUrl);
+			img = img.getScaledInstance(
+					lblFotoPelicula.getWidth(),
+					lblFotoPelicula.getHeight(), 
+					Image.SCALE_DEFAULT);
             lblFotoPelicula.setIcon(new ImageIcon(img));
         } catch (Exception ex) {
             System.out.println(ex);
@@ -54,7 +57,7 @@ public class MovieView extends javax.swing.JFrame {
         lblPuntuacion.setText("IMDb " + p.getPuntuacion() + " / 10");
         lblDuracion.setText(p.getDuracion() + " min");
         String gens = "";
-        for(Genre genero : p.getGeneros()) {
+        for(Genre genero : p.getGenres()) {
             gens += genero.name() + "<br/>";
         }
         lblGeneros.setText("<html>" + gens + "</html>");
@@ -102,15 +105,15 @@ public class MovieView extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setText("TÃ­tulo:");
+        jLabel1.setText("Título:");
 
-        jLabel2.setText("PuntuaciÃ³n:");
+        jLabel2.setText("Puntuación:");
 
-        jLabel3.setText("DuraciÃ³n:");
+        jLabel3.setText("Duración:");
 
         jLabel4.setText("Sinopsis:");
 
-        jLabel5.setText("GÃ©neros:");
+        jLabel5.setText("Géneros:");
 
         llll.setText("Precio:");
 
