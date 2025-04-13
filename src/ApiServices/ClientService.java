@@ -15,6 +15,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.http.*;
 
 /**
@@ -56,7 +57,11 @@ interface ClientApiService {
 	Call<List<Movie>> getMoviesByGenre(
 			@Path("genre") int genre
 			);
-	// @GET("api/movies")
+}
+
+interface QrApiService {
+	@GET("/api/users/generate-qr")
+	Call<String> generateQr(@Query("message") String message);
 }
 
 public class ClientService {
@@ -64,13 +69,16 @@ public class ClientService {
 	Dotenv dotenv = Dotenv.load();
 	private final String BASE_URL = dotenv.get("API_URL");
 	private ClientApiService apiService;
+	private QrApiService qrService;
 
 	public ClientService() {
 		Retrofit retrofit = new Retrofit.Builder()
 				.baseUrl(BASE_URL)
+				.addConverterFactory(ScalarsConverterFactory.create())
 				.addConverterFactory(GsonConverterFactory.create())
 				.build();
 		apiService = retrofit.create(ClientApiService.class);
+		qrService = retrofit.create(QrApiService.class);
 	}
 
 	public List<Client> searchUsers(String user, String password) {
@@ -165,4 +173,20 @@ public class ClientService {
 		}
 	}
 
+	public String generateQr(String message) {
+		try {
+			System.out.println("Envía petición");
+			Response<String> response = qrService.generateQr(message).execute();
+			System.out.println("Recibe petición");
+			if(response.isSuccessful()) {
+				return response.body();
+			} else {
+				System.out.println("Error: " + response.code());
+				return null;
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
