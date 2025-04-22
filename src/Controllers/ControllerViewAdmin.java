@@ -25,6 +25,7 @@ public class ControllerViewAdmin {
 
 	public List<Movie> generateMovies(int genre){
 		peliculas = service.getAvailableMovies(genre);
+		System.out.println(peliculas.get(0).getTitulo());
 		return this.peliculas;
 	}
 
@@ -39,5 +40,9 @@ public class ControllerViewAdmin {
 	
 	public boolean updateMovie(int idMovie, Movie movie) {
 		return service.updateMovie(idMovie, movie);
+	}
+	
+	public Movie createMovie(Movie movie) {
+		return service.createMovie(movie);
 	}
 }
