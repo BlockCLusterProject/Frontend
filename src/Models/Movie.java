@@ -15,7 +15,6 @@ import com.couchbase.client.core.deps.com.google.gson.annotations.SerializedName
  */
 public class Movie implements Serializable {
 	// MOVIE FRONTEND
-	@JsonProperty("title")
     private String titulo;
 	@JsonProperty("runtime")
     private int duracion;
@@ -31,7 +30,8 @@ public class Movie implements Serializable {
     private String sinopsis;
     @JsonProperty("backdrop_path")
     private String rutaPortada;
-    private boolean active = true;
+    @JsonProperty("active")
+    private boolean active;
     private int cantidad = 0;
     private static int counter = 1;
     private int id;

@@ -40,7 +40,7 @@ interface AdminApiService {
             @Query("genre") int genre);
 
     // OWN BACK
-    @POST("/api/movie")
+    @POST("/api/movie/create_movie")
     Call<Movie> createMovie(@Body Movie movie);
 
     @PATCH("api/movie/update_movies")
@@ -111,6 +111,19 @@ public class AdminService {
     	} catch  (IOException e){
     		 e.printStackTrace();
              return false;
+    	}
+    }
+    
+    public Movie createMovie(Movie movie) {
+    	try {
+    		Response<Movie> response = apiService.createMovie(movie).execute();
+    		if(response.isSuccessful()) {
+    			return response.body();
+    		} else {
+    			return null;
+    		}
+    	} catch (IOException e) {
+    		return null;
     	}
     }
 }
