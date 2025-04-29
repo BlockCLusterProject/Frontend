@@ -4,6 +4,8 @@
  */
 package Views;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import ApiServices.ClientService;
@@ -319,17 +321,19 @@ public class RegisterView extends javax.swing.JFrame {
 
     private void jButtonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarseActionPerformed
         
-        String nombre = jTextFieldNombre.getText(); 
+        String name = jTextFieldNombre.getText(); 
         String id = jTextFieldId.getText();
-        String edad = jTextFieldEdad.getText();
-        String correo = jTextFieldCorreo.getText(); 
-        String telefono = jTextFieldTelefono.getText();
-        String nombreUsuario = jTextFieldUsuario.getText();
-        String contrasena = jTextFieldContrasena.getText();
-        String confirmacion = jTextFieldConfirmacion.getText();
+        String age = jTextFieldEdad.getText();
+        String gmail = jTextFieldCorreo.getText(); 
+        String phone = jTextFieldTelefono.getText();
+        String userName = jTextFieldUsuario.getText();
+        String passwword = jTextFieldContrasena.getText();
+        String confirmation = jTextFieldConfirmacion.getText();
         
-        if (contrasena.equals(confirmacion)){
-            Client user = new Client(nombre,id,edad,correo,telefono,nombreUsuario,contrasena);
+        List<String> preference = null;
+        
+        if (passwword.equals(confirmation)){
+            Client user = new Client(name,id,age,gmail,phone,userName,passwword,preference);
             
             controller.registerClient(user);
             
