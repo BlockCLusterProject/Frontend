@@ -332,12 +332,37 @@ public class RegisterView extends javax.swing.JFrame {
         
         List<String> preference = null;
         
+        
+        if (jRadioButtonAccion.isSelected()) {
+            preference.add(jRadioButtonAccion.getText());
+        }
+        if (jRadioButtonComedia.isSelected()) {
+            preference.add(jRadioButtonComedia.getText());
+        }
+        if (jRadioButtonDrama.isSelected()) {
+            preference.add(jRadioButtonDrama.getText());
+        }
+        if (jRadioButtonCienciaFiccion.isSelected()) {
+            preference.add(jRadioButtonCienciaFiccion.getText());
+        }
+        if (jRadioButtonAventura.isSelected()) {
+            preference.add(jRadioButtonAventura.getText());
+        }
+        if (jRadioButtonTerror.isSelected()) {
+            preference.add(jRadioButtonTerror.getText());
+        }
+        if (jRadioButtonInfantil.isSelected()) {
+            preference.add(jRadioButtonInfantil.getText());
+        }
+        
+        
         if (passwword.equals(confirmation)){
             Client user = new Client(name,id,age,gmail,phone,userName,passwword,preference);
             
             controller.registerClient(user);
             
             UserView vu = new UserView();
+            preference.clear(); 
             vu.setVisible(true);
             this.dispose();
         }else {
