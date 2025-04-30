@@ -43,6 +43,6 @@ public class ControllerViewAdmin {
 	}
 	
 	public Movie createMovie(Movie movie) {
-		return service.createMovie(movie);
+		return service.createMovie(movie.toString());
 	}
 }

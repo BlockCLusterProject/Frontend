@@ -15,7 +15,6 @@ import javax.swing.table.DefaultTableModel;
 
 import Controllers.ControllerViewAdmin;
 
-import javax.swing.table.DefaultTableModel;
 import Models.Genre;
 import Models.Movie;
 
