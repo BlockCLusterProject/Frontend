@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ApiServices;
 
 import retrofit2.Call;
@@ -40,8 +36,8 @@ interface AdminApiService {
             @Query("genre") int genre);
 
     // OWN BACK
-    @POST("/api/movie")
-    Call<Movie> createMovie(@Body Movie movie);
+    @POST("/api/movie/create_movie")
+    Call<Movie> createMovie(@Query("movie") String movie);
 
     @PATCH("api/movie/update_movies")
     Call<Movie> updateMovie(@Query("id_movie") int idMovie, @Body Movie movie);
@@ -111,6 +107,19 @@ public class AdminService {
     	} catch  (IOException e){
     		 e.printStackTrace();
              return false;
+    	}
+    }
+    
+    public Movie createMovie(String movie) {
+    	try {
+    		Response<Movie> response = apiService.createMovie(movie).execute();
+    		if(response.isSuccessful()) {
+    			return response.body();
+    		} else {
+    			return null;
+    		}
+    	} catch (IOException e) {
+    		return null;
     	}
     }
 }

@@ -7,6 +7,7 @@ package Views;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -14,7 +15,6 @@ import javax.swing.table.DefaultTableModel;
 
 import Controllers.ControllerViewAdmin;
 
-import javax.swing.table.DefaultTableModel;
 import Models.Genre;
 import Models.Movie;
 
@@ -39,8 +39,8 @@ public class AdminView extends javax.swing.JFrame {
     private void setGenres() {
         movie_genre.removeAllItems();
 
-        for (Genre genero : Genre.values()) {
-            movie_genre.addItem(genero.name());
+        for (Genre genre : Genre.values()) {
+        	movie_genre.addItem(genre); // Aquí estás agregando objetos Genre directamente
         }
     }
 
@@ -77,6 +77,7 @@ public class AdminView extends javax.swing.JFrame {
                     //pelicula.setActive();
                     if (newValue.equals("Si") || newValue.equals("No")) {
                         pelicula.setActive(newValue.equals("Si"));
+                        System.out.println(newValue.equals("Si"));
                         controllerAdminView.updateMovie(pelicula.getId(), pelicula);
                     } else {
                         JOptionPane.showMessageDialog(null, "Tienes que insertar 'Si o No'");
@@ -144,7 +145,7 @@ public class AdminView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         movie_quantity = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        movie_genre = new javax.swing.JComboBox<>();
+        movie_genre = new javax.swing.JComboBox<Genre>();
         consultMovies = new javax.swing.JToggleButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -230,8 +231,6 @@ public class AdminView extends javax.swing.JFrame {
         });
 
         jLabel8.setText("Generos");
-
-        movie_genre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         consultMovies.setText("Consultar Peliculas");
         consultMovies.addActionListener(new java.awt.event.ActionListener() {
@@ -387,9 +386,11 @@ public class AdminView extends javax.swing.JFrame {
         String image = movie_image.getText();
         int quantity = Integer.parseInt(movie_quantity.getText());
         List<Genre> generos = new ArrayList<>();
-        generos.add((Genre) movie_genre.getSelectedItem());
+        Genre selectedGenre = (Genre) movie_genre.getSelectedItem(); // Esto funciona bien
+        generos.add(selectedGenre);
 
         Movie pelicula = new Movie(title, duration, score, generos, price, description, image, quantity);
+		controllerAdminView.createMovie(pelicula);
         peliculas.add(pelicula);
         llenarPeliculas();
     }//GEN-LAST:event_btn_addActionPerformed
@@ -462,7 +463,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField movie_description;
     private javax.swing.JTextField movie_duration;
-    private javax.swing.JComboBox<String> movie_genre;
+    private JComboBox<Genre> movie_genre;
     private javax.swing.JTextField movie_image;
     private javax.swing.JTextField movie_price;
     private javax.swing.JTextField movie_quantity;

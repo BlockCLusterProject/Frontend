@@ -15,8 +15,7 @@ import com.couchbase.client.core.deps.com.google.gson.annotations.SerializedName
  */
 public class Movie implements Serializable {
 	// MOVIE FRONTEND
-	@JsonProperty("title")
-    private String titulo;
+    private String title;
 	@JsonProperty("runtime")
     private int duracion;
     @JsonProperty("vote_average")
@@ -31,7 +30,8 @@ public class Movie implements Serializable {
     private String sinopsis;
     @JsonProperty("backdrop_path")
     private String rutaPortada;
-    private boolean active = true;
+    @JsonProperty("active")
+    private boolean active;
     private int cantidad = 0;
     private static int counter = 1;
     private int id;
@@ -46,7 +46,7 @@ public class Movie implements Serializable {
             String rutaPortada,
             int cantidad
     ) {
-        this.titulo = titulo;
+        this.title = titulo;
         this.duracion = duracion;
         this.puntuacion = puntuacion;
         this.precio = precio;
@@ -72,17 +72,22 @@ public class Movie implements Serializable {
 
     @Override
     public String toString() {
-        return "Pelicula{"
-                + "titulo='" + titulo + '\''
-                + ", generos=" + genres
-                + ", duracion=" + duracion
-                + ", puntuacion=" + puntuacion
-                + ", sinopsis='" + sinopsis + '\''
-                + '}';
+        return "{" +
+            "\"title\":\"" + title + "\"," +
+            "\"runtime\":" + duracion + "," +
+            "\"rate\":" + puntuacion + "," +
+            "\"genre_ids\":" + genre_ids + "," +
+            "\"price\":" + precio + "," +
+            "\"overview\":\"" + sinopsis + "\"," +
+            "\"backdrop_path\":\"" + rutaPortada + "\"," +
+            "\"active\":" + active + "," +
+            "\"cantidad\":" + cantidad + "," +
+            "\"id\":" + id +
+        "}";
     }
 
     public String getTitulo() {
-        return titulo;
+        return title;
     }
 
     public int getDuracion() {
