@@ -4,8 +4,19 @@
  */
 package Views;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Base64;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+
 import Controllers.ControllerViewMoviePurchase;
-import Controllers.ControllerViewUser;
+import Models.Movie;
 
 /**
  *
@@ -23,14 +34,77 @@ public class MoviePurchaseView extends javax.swing.JFrame {
 		initComponents();
 		setLocationRelativeTo(this);
 		controladorVistaCompraPelicula = new ControllerViewMoviePurchase();
-		llenarLabel();
+
+		loadLogo();
+		loadQr();
+		loadClientInfo();
+		loadCompanyInfo();
+		loadMoviesInfo();
+		loadPurchaseInfo();
+		controladorVistaCompraPelicula.vaciarCarrito();
+	}
+	
+	private void loadCompanyInfo() {
+		lblCompanyInfo.setText("<html>" + 
+				"BlockCluster" + "<br>" + 
+				"NIT: 123123123-2" + "<br>" +
+				"Armenia, Quindío" + "<br>" +
+				"Teléfono: 6067462363" + "<br>" +
+				"email: contact@blockcluster.com" + "<br>"
+	+ "</html>");
+	}
+	
+	private void loadPurchaseInfo() {
+		List<Movie> carrito = controladorVistaCompraPelicula.getCarrito();
+		double total = 0;
+		for(Movie movie : carrito) {
+			total += movie.getPrecio();
+		}
+		lblTotal.setText("$" + String.valueOf(total) + " COP");
+	}
+	
+	private void loadMoviesInfo() {
+		List<Movie> carrito = controladorVistaCompraPelicula.getCarrito();
+		String[] cols = {"Película", "Precio"};
+		DefaultTableModel model = new DefaultTableModel(cols, 0);
+		for(Movie movie : carrito) {
+			Object[] row = {movie.getTitle(), movie.getPrecio()};
+			model.addRow(row);
+		}
+		
+		tableMovies.setModel(model);
 	}
 
-	private void llenarLabel() {
-		lblMensaje.setText("<html>" + "Compraste " +
-				controladorVistaCompraPelicula.getCarrito().size() +
-				" pelÃ­culas" + "</br>" + "Que las distrufes" + "</html>");
+	private void loadClientInfo() {}
+	
+	private void loadQr(){
+		try {
+			String qr = controladorVistaCompraPelicula.generateQr("Profe ponganos 5, plis :')");
+			byte[] imageBytes = Base64.getDecoder().decode(qr);
+			InputStream is = new ByteArrayInputStream(imageBytes);
+			BufferedImage bufferedImage = ImageIO.read(is);
+			ImageIcon icon = new ImageIcon(bufferedImage);
+			Image image = icon.getImage().getScaledInstance(
+					lblQrcode.getWidth(), 
+					lblQrcode.getHeight(), 
+					Image.SCALE_SMOOTH);
+			lblQrcode.setIcon(new ImageIcon(image));
+		} catch (Exception e) {
+			e.printStackTrace();
+			lblQrcode.setIcon(null);
+			lblQrcode.setText("Error al mostrar el QR");
+		}
 	}
+	
+	private void loadLogo() {
+		ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("img/bc_logo.png"));
+		Image image = icon.getImage().getScaledInstance(
+					lblLogo.getWidth(), 
+					lblLogo.getHeight(), 
+					Image.SCALE_SMOOTH);
+		lblLogo.setIcon(new ImageIcon(image));
+	}
+
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -41,8 +115,17 @@ public class MoviePurchaseView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblMensaje = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableMovies = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
+        lblQrcode = new javax.swing.JLabel();
+        lblCompanyInfo = new javax.swing.JLabel();
+        lblClientInfo = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,28 +136,92 @@ public class MoviePurchaseView extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Cliente");
+
+        tableMovies.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Película", "Precio"
+            }
+        ));
+        jScrollPane3.setViewportView(tableMovies);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Total:");
+
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("FE47053");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(6, 6, 6))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblCompanyInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnRegresar)
+                                            .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)))
+                                .addComponent(lblQrcode, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnRegresar)))
-                .addContainerGap(157, Short.MAX_VALUE))
+                        .addGap(66, 66, 66)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblClientInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnRegresar)
-                .addGap(66, 66, 66)
-                .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnRegresar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCompanyInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblQrcode, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblClientInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -86,43 +233,18 @@ public class MoviePurchaseView extends javax.swing.JFrame {
     	this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(MoviePurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(MoviePurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(MoviePurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(MoviePurchaseView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		//</editor-fold>
-
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new MoviePurchaseView().setVisible(true);
-			}
-		});
-	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JLabel lblMensaje;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblClientInfo;
+    private javax.swing.JLabel lblCompanyInfo;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblQrcode;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JTable tableMovies;
     // End of variables declaration//GEN-END:variables
 }

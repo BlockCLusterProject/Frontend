@@ -53,10 +53,10 @@ public class AdminView extends javax.swing.JFrame {
             }
         };
         table.setColumnIdentifiers(new Object[]{"Título", "Cantidad", "Precio", "Activo","id"});
-        System.out.println(controllerAdminView.getPeliculas().size());
+        //System.out.println(controllerAdminView.getPeliculas().size());
         for (int i = 0; i < controllerAdminView.getPeliculas().size(); i++) {
             table.addRow(new Object[]{
-                controllerAdminView.getPeliculas().get(i).getTitulo(),
+                controllerAdminView.getPeliculas().get(i).getTitle(),
                 controllerAdminView.getPeliculas().get(i).getCantidad(),
                 controllerAdminView.getPeliculas().get(i).getPrecio(),
                 controllerAdminView.getPeliculas().get(i).getActive() == true ? "Si" : "No",
@@ -77,7 +77,6 @@ public class AdminView extends javax.swing.JFrame {
                     //pelicula.setActive();
                     if (newValue.equals("Si") || newValue.equals("No")) {
                         pelicula.setActive(newValue.equals("Si"));
-                        System.out.println(newValue.equals("Si"));
                         controllerAdminView.updateMovie(pelicula.getId(), pelicula);
                     } else {
                         JOptionPane.showMessageDialog(null, "Tienes que insertar 'Si o No'");
@@ -398,7 +397,7 @@ public class AdminView extends javax.swing.JFrame {
     private void consultMoviesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultMoviesActionPerformed
     	List<Movie> movies = controllerAdminView.getTrendingMovies();
     	for(int i = 0; i < movies.size(); i++) {
-    		System.out.print(movies.get(i).getTitulo());
+    		System.out.print(movies.get(i).getTitle());
     	}
     }//GEN-LAST:event_consultMoviesActionPerformed
 

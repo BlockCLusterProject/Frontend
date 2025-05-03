@@ -49,7 +49,7 @@ public class ControllerViewUser {
 	}
 
 	public String getTituloByIdx(int idx) {
-		return peliculas.get(idx).getTitulo();
+		return peliculas.get(idx).getTitle();
 	}
 
 	public double getPuntuacionByIdx(int idx) {

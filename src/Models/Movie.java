@@ -8,32 +8,45 @@ import java.io.Serializable;
 import java.util.List;
 import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonProperty;
 import com.couchbase.client.core.deps.com.google.gson.annotations.SerializedName;
+import com.couchbase.client.core.deps.com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  *
  * @author JuanCGallo
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie implements Serializable {
 	// MOVIE FRONTEND
+	@SerializedName("title")
+	@JsonProperty("title")
     private String title;
 	@JsonProperty("runtime")
+	@SerializedName("runtime")
     private int duracion;
     @JsonProperty("vote_average")
+    @SerializedName("vote_average")
     private double puntuacion;
     @JsonProperty("genres")
     @SerializedName("genres")
     private List<Genre> genres;
     @JsonProperty("genre_ids")
+    @SerializedName("genre_ids")
     private List<Integer> genre_ids;
     private double precio;
     @JsonProperty("overview")
+    @SerializedName("overview")
     private String sinopsis;
     @JsonProperty("backdrop_path")
+    @SerializedName("backdrop_path")
     private String rutaPortada;
     @JsonProperty("active")
-    private boolean active;
+    @SerializedName("active")
+    private boolean active = true;
+    @SerializedName("cantidad")
     private int cantidad = 0;
     private static int counter = 1;
+    @SerializedName("id")
+    @JsonProperty("id")
     private int id;
 
     public Movie(
@@ -90,55 +103,76 @@ public class Movie implements Serializable {
         return title;
     }
 
-    public int getDuracion() {
-        return duracion;
-    }
-    
-    public void setDuracion(int duracion) {
-    	this.duracion = duracion;
-    }
+	public void setTitle(String titulo) {
+		this.title = titulo;
+	}
 
-    public double getPuntuacion() {
-        return puntuacion;
-    }
+	public int getDuracion() {
+		return duracion;
+	}
 
-    public List<Genre> getGenres() {
-        return genres;
-    }
-    
-    public void setGenres(List<Genre> genres) {
-    	this.genres = genres;
-    }
+	public void setDuracion(int duracion) {
+		this.duracion = duracion;
+	}
 
-    public String getSinopsis() {
-        return sinopsis;
-    }
+	public double getPuntuacion() {
+		return puntuacion;
+	}
 
-    public double getPrecio() {
-        return precio;
-    }
+	public void setPuntuacion(double puntuacion) {
+		this.puntuacion = puntuacion;
+	}
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
+	public List<Genre> getGenres() {
+		return genres;
+	}
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
+	public double getPrecio() {
+		return precio;
+	}
 
-    public int getCantidad() {
-        return this.cantidad;
-    }
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
 
-    public boolean getActive() {
-        return this.active;
-    }
+	public String getSinopsis() {
+		return sinopsis;
+	}
 
-    public int getId() {
-        return this.id;
-    }
+	public void setSinopsis(String sinopsis) {
+		this.sinopsis = sinopsis;
+	}
+
+	public boolean getActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setRutaPortada(String rutaPortada) {
+		this.rutaPortada = rutaPortada;
+	}
+
 }

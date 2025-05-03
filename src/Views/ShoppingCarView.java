@@ -14,6 +14,8 @@ import Controllers.ControllerViewShoppingCar;
 import Controllers.ControllerViewUser;
 
 import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -80,7 +82,7 @@ public class ShoppingCarView extends javax.swing.JFrame {
 						   ALTO_TITULO
 				  );
 //				titulos[i][j].setOpaque(true);
-				  titulos[i][j].setText(carrito.get(i+j).getTitulo());
+				  titulos[i][j].setText(carrito.get(i+j).getTitle());
 				  titulos[i][j].setBackground(Color.RED);
 				  titulos[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				  titulos[i][j].setVerticalAlignment(SwingConstants.CENTER);
@@ -98,8 +100,13 @@ public class ShoppingCarView extends javax.swing.JFrame {
 				  puntuaciones[i][j].setVerticalAlignment(SwingConstants.CENTER);
 				  try {
 					  //TODO: cambiar ruta de acceso
-					  Image img = ImageIO.read(getClass().getResource("/img/terminator_2.jpg"));
-					  img = img.getScaledInstance(ancho, alto, Image.SCALE_DEFAULT);
+					  URL imageUrl = new URL(
+						  "https://image.tmdb.org/t/p/w300" + carrito.get(i+j).getRutaPortada());
+					  Image img = ImageIO.read(imageUrl);
+					  img = img.getScaledInstance(
+							  ancho, 
+							  alto, 
+							  Image.SCALE_DEFAULT);
 					  pelis[i][j].setIcon(new ImageIcon(img));
 				  } catch (Exception ex) {
 					  System.out.println(ex);
@@ -212,13 +219,13 @@ public class ShoppingCarView extends javax.swing.JFrame {
 
     private void btnVaciarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarCarritoActionPerformed
 		controladorVistaCarrito.vaciarCarrito();
-		JOptionPane.showMessageDialog(null, "Se vaciï¿½ el carrito :'(");
+		JOptionPane.showMessageDialog(null, "Se vació el carrito :'(");
 		dibujarCarrito();
     }//GEN-LAST:event_btnVaciarCarritoActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-    	controladorVistaCarrito.vaciarCarrito();
-		MoviePurchaseView vistaCompraPelicula = new MoviePurchaseView();
+		MoviePurchaseView vistaCompraPelicula = null;
+		vistaCompraPelicula = new MoviePurchaseView();
 		vistaCompraPelicula.setVisible(true);
 		this.dispose();
     }//GEN-LAST:event_btnComprarActionPerformed
