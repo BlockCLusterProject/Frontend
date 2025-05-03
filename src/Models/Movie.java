@@ -99,7 +99,7 @@ public class Movie implements Serializable {
         "}";
     }
 
-    public String getTitulo() {
+    public String getTitle() {
         return title;
     }
 
