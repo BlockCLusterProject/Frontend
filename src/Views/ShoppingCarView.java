@@ -82,7 +82,7 @@ public class ShoppingCarView extends javax.swing.JFrame {
 						   ALTO_TITULO
 				  );
 //				titulos[i][j].setOpaque(true);
-				  titulos[i][j].setText(carrito.get(i+j).getTitulo());
+				  titulos[i][j].setText(carrito.get(i+j).getTitle());
 				  titulos[i][j].setBackground(Color.RED);
 				  titulos[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				  titulos[i][j].setVerticalAlignment(SwingConstants.CENTER);
