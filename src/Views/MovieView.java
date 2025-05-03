@@ -53,7 +53,7 @@ public class MovieView extends javax.swing.JFrame {
     }
 
     private void loadInformation() {
-        lblTitulo.setText(p.getTitulo());
+        lblTitulo.setText(p.getTitle());
         lblPuntuacion.setText("IMDb " + p.getPuntuacion() + " / 10");
         lblDuracion.setText(p.getDuracion() + " min");
         String gens = "";
@@ -251,7 +251,7 @@ public class MovieView extends javax.swing.JFrame {
         // TODO add your handling code here:
         controladorVistaPelicula.agregarCarrito(p);
         JOptionPane.showMessageDialog(null, "Has agregado la película: " +
-                p.getTitulo() + " por: $" + p.getPrecio() + ", al carrito!!");
+                p.getTitle() + " por: $" + p.getPrecio() + ", al carrito!!");
         regresar();
     }//GEN-LAST:event_btnAgregarAlCarritoActionPerformed
 

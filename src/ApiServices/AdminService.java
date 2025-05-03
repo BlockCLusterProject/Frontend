@@ -1,12 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ApiServices;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okio.Buffer;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -24,6 +27,7 @@ import java.util.Map;
 import Models.Client;
 import Models.Movie;
 import io.github.cdimascio.dotenv.Dotenv;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  *
@@ -40,8 +44,8 @@ interface AdminApiService {
             @Query("genre") int genre);
 
     // OWN BACK
-    @POST("/api/movie")
-    Call<Movie> createMovie(@Body Movie movie);
+    @POST("/api/movie/create_movie")
+    Call<Movie> createMovie(@Query("movie") String movie);
 
     @PATCH("api/movie/update_movies")
     Call<Movie> updateMovie(@Query("id_movie") int idMovie, @Body Movie movie);
@@ -63,7 +67,7 @@ public class AdminService {
     public AdminService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(JacksonConverterFactory.create())
                 .build();
         apiService = retrofit.create(AdminApiService.class);
     }
@@ -100,8 +104,9 @@ public class AdminService {
     
     public boolean updateMovie(int idMovie, Movie movie) {
     	try {
+    		// System.out.println("Front Service");
+    		// System.out.println(movie);
     		Response<Movie> response = apiService.updateMovie(idMovie, movie).execute();
-    		System.out.println(response);
     		if (response.isSuccessful()) {
                 return true;
             } else {
@@ -111,6 +116,19 @@ public class AdminService {
     	} catch  (IOException e){
     		 e.printStackTrace();
              return false;
+    	}
+    }
+    
+    public Movie createMovie(String movie) {
+    	try {
+    		Response<Movie> response = apiService.createMovie(movie).execute();
+    		if(response.isSuccessful()) {
+    			return response.body();
+    		} else {
+    			return null;
+    		}
+    	} catch (IOException e) {
+    		return null;
     	}
     }
 }
