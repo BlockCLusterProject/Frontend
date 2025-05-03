@@ -84,15 +84,24 @@ public class Movie implements Serializable {
     }
 
     @Override
-	public String toString() {
-		return "Movie [title=" + title + ", duracion=" + duracion + ", puntuacion=" + puntuacion + ", genres="
-				+ genres + ", genre_ids=" + genre_ids + ", precio=" + precio + ", sinopsis=" + sinopsis
-				+ ", rutaPortada=" + rutaPortada + ", active=" + active + ", cantidad=" + cantidad + ", id=" + id + "]";
-	}
+    public String toString() {
+        return "{" +
+            "\"title\":\"" + title + "\"," +
+            "\"runtime\":" + duracion + "," +
+            "\"rate\":" + puntuacion + "," +
+            "\"genre_ids\":" + genre_ids + "," +
+            "\"price\":" + precio + "," +
+            "\"overview\":\"" + sinopsis + "\"," +
+            "\"backdrop_path\":\"" + rutaPortada + "\"," +
+            "\"active\":" + active + "," +
+            "\"cantidad\":" + cantidad + "," +
+            "\"id\":" + id +
+        "}";
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitulo() {
+        return title;
+    }
 
 	public void setTitle(String titulo) {
 		this.title = titulo;
