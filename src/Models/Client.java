@@ -22,6 +22,10 @@ public class Client extends Person{
         this.password = password;
         this.preference = preference;
     }
+    
+    public List<String> getPreference() {
+        return preference;
+    }
 
     public String getUser() {
         return user;
