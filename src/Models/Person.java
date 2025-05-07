@@ -15,16 +15,48 @@ public class Person {
     private String edad;
     private String correo;
     private String telefono;
+    private String user;
+    private String password;
 
-    public Person(String nombre, String id, String edad, String correo, String telefono) {
+    public Person(
+    		String nombre, 
+    		String id, 
+    		String edad, 
+    		String correo, 
+    		String telefono,
+    		String user,
+    		String password) {
         this.nombre = nombre;
         this.id = id;
         this.edad = edad;
         this.correo = correo;
         this.telefono = telefono;
+        this.user = user;
+        this.password = password;
     }
 
-    public String getNombre() {
+
+    public String getUser() {
+		return user;
+	}
+
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public String getNombre() {
         return nombre;
     }
 

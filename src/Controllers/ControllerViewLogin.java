@@ -5,8 +5,6 @@
 package Controllers;
 
 import ApiServices.ClientService;
-import Models.Admin;
-import Models.Client;
 import Models.Person;
 
 /**
@@ -22,11 +20,11 @@ public class ControllerViewLogin {
     	
     }
     
-    public Client   validateClient(String userName, String password){
+    public Person   validateClient(String userName, String password){
     	return service.validateClient(userName,password);
     }
     
-    public Admin validateAdmin (String userName, String password) {
+    public Person validateAdmin (String userName, String password) {
     	return service.validateAdmin(userName,password);
     }
 }

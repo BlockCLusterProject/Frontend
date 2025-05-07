@@ -9,8 +9,7 @@ import javax.swing.JOptionPane;
 import ApiServices.ClientService;
 import Controllers.ControllerViewLogin;
 
-import Models.Admin;
-import Models.Client;
+import Models.Person;
 
 /**
  *
@@ -142,11 +141,11 @@ public class LoginView extends javax.swing.JFrame {
         String user = jTextFieldUsuario.getText();
         String passwordEntered = jTextFieldContrasena.getText();
         
-        if (controladorLogin.validateAdmin(user, passwordEntered) instanceof Admin ){
+        if (controladorLogin.validateAdmin(user, passwordEntered) instanceof Person ){
             AdminView va = new AdminView();
                 va.setVisible(true);
                 this.dispose();
-        }else if (controladorLogin.validateClient(user, passwordEntered)instanceof Client){
+        }else if (controladorLogin.validateClient(user, passwordEntered)instanceof Person){
             
             UserView vu = new UserView();
                 vu.setVisible(true);

@@ -24,10 +24,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import Models.Client;
 import Models.Movie;
 import io.github.cdimascio.dotenv.Dotenv;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  *
