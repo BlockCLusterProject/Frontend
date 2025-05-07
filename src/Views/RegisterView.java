@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 import ApiServices.ClientService;
 import Controllers.ControllerViewRegister;
-import Models.Client;
+import Models.Person;
 
 /**
  *
@@ -357,7 +357,7 @@ public class RegisterView extends javax.swing.JFrame {
         
         
         if (passwword.equals(confirmation)){
-            Client user = new Client(name,id,age,gmail,phone,userName,passwword,preference);
+            Person user = new Person(name,id,age,gmail,phone,userName,passwword,preference);
             
             controller.registerClient(user);
             

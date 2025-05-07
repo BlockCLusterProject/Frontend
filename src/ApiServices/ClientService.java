@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import Models.Admin;
-import Models.Client;
+import Models.Person;
 import Models.Movie;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -25,29 +24,29 @@ import retrofit2.http.*;
 interface ClientApiService {
 	// LOGIN 
 	@GET("/api/users/search")
-	Call<List<Client>> searchUsers(
+	Call<List<Person>> searchUsers(
 			@Query("user") String users,
 			@Query("password") String password
 			);
 
 	// Login Client Validation 
 	@GET("/api/users/validateClient")
-	Call<Client> validateClient(
+	Call<Person> validateClient(
 			@Query("user") String user,
 			@Query("password") String password
 			);
 
 	// Login Admin Validation
 	@GET("/api/users/validateAdmin")
-	Call<Admin> validateAdmin(
+	Call<Person> validateAdmin(
 			@Query("user") String user,
 			@Query("password") String password
 			);
 	
 	// Register Client
 	@POST("/api/user/addUser")
-	Call<Client> registerClient(
-			@Body Client user);
+	Call<Person> registerClient(
+			@Body Person user);
 	
 
 	@GET("/api/users/available_movies")
@@ -81,11 +80,11 @@ public class ClientService {
 		qrService = retrofit.create(QrApiService.class);
 	}
 
-	public List<Client> searchUsers(String user, String password) {
+	public List<Person> searchUsers(String user, String password) {
 		try {
-			Response<List<Client>> response = apiService.searchUsers(user, password).execute();
+			Response<List<Person>> response = apiService.searchUsers(user, password).execute();
 			if(response.isSuccessful()) {
-				List<Client> users = response.body();
+				List<Person> users = response.body();
 				users.forEach(u -> System.out.println(u));
 				return users;
 			} else {
@@ -98,9 +97,9 @@ public class ClientService {
 		}
 	}
 
-	public Client validateClient(String user, String password) {
+	public Person validateClient(String user, String password) {
 		try {
-			Response<Client> response = apiService.validateClient(user, password).execute();
+			Response<Person> response = apiService.validateClient(user, password).execute();
 			if(response.isSuccessful()) {
 				return response.body();
 			} else {
@@ -113,9 +112,9 @@ public class ClientService {
 		}
 	}
 
-	public Admin validateAdmin(String user, String password) {
+	public Person validateAdmin(String user, String password) {
 		try {
-			Response<Admin> response = apiService.validateAdmin(user, password).execute();
+			Response<Person> response = apiService.validateAdmin(user, password).execute();
 			if(response.isSuccessful()) {
 				return response.body();
 			} else {
@@ -128,9 +127,9 @@ public class ClientService {
 		}
 	}
 	
-	public boolean registerClient(Client user) {
+	public boolean registerClient(Person user) {
 		try {
-			Response<Client> response = apiService.registerClient(user).execute();
+			Response<Person> response = apiService.registerClient(user).execute();
 			if(response.isSuccessful()) {
 				return true;
 			} else {
