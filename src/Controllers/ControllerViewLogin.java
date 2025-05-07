@@ -27,4 +27,8 @@ public class ControllerViewLogin {
     public Person validateAdmin (String userName, String password) {
     	return service.validateAdmin(userName,password);
     }
+    
+    public Person getClient(String user) {
+    	return service.getClientByUser(user);
+    }
 }

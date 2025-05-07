@@ -17,11 +17,9 @@ import java.util.List;
  * @author JuanCGallo
  */
 public class ControllerViewUser {
-    //  TODO: sacar lista de peliculas de una DB o de donde sea
-	private List<Movie> peliculas;
-
 	private int PELICULAS_POR_FILA = 4;
 	private ClientService service;
+	private List<Movie> peliculas;
 
 	public ControllerViewUser(ClientService service) {
 		this.service = service == null ? new ClientService() : service;

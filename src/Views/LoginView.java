@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import ApiServices.ClientService;
 import Controllers.ControllerViewLogin;
-
+import Models.ClientSesion;
 import Models.Person;
 
 /**
@@ -148,12 +148,13 @@ public class LoginView extends javax.swing.JFrame {
         }else if (controladorLogin.validateClient(user, passwordEntered)instanceof Person){
             
             UserView vu = new UserView();
-                vu.setVisible(true);
-                this.dispose();
+			vu.setVisible(true);
+			this.dispose();
+			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
         }else {
         	JOptionPane.showMessageDialog(
                     null,                                   
-                    "Por favor verifique que el usuario y contraseÃ±a sean correctos \n (si aun no tiene un usuario debe registrarse)",
+                    "Por favor verifique que el usuario y contraseña sean correctos \n (si aun no tiene un usuario debe registrarse)",
                     "Usuario No Registrado",                     
                     JOptionPane.ERROR_MESSAGE               
                 );

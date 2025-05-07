@@ -10,6 +10,7 @@ import java.util.List;
 import io.github.cdimascio.dotenv.Dotenv;
 import Models.Person;
 import Models.Movie;
+import Models.PurchaseHistory;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -56,6 +57,12 @@ interface ClientApiService {
 	Call<List<Movie>> getMoviesByGenre(
 			@Path("genre") int genre
 			);
+	
+	@GET("api/users/get_purchase_history")
+	Call<List<Movie>> getPurchaseHistory();
+	
+	@GET("api/users/{user}")
+	Call<Person> getClientByUser(@Path("user") String user);
 }
 
 interface QrApiService {
@@ -171,12 +178,40 @@ public class ClientService {
 			return null;
 		}
 	}
+	
+	public List<Movie> getPurchaseHistory() {
+		try {
+			Response<List<Movie>> response = apiService.getPurchaseHistory().execute();
+			if(response.isSuccessful()) {
+				return response.body();
+			} else {
+				System.out.println("Error: " + response.code());
+				return null;
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Person getClientByUser(String user) {
+		try {
+			Response<Person> response = apiService.getClientByUser(user).execute();
+			if(response.isSuccessful()) {
+				return response.body();
+			} else {
+				System.out.println("Error: " + response.code());
+				return null;
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public String generateQr(String message) {
 		try {
-			System.out.println("Envía petición");
 			Response<String> response = qrService.generateQr(message).execute();
-			System.out.println("Recibe petición");
 			if(response.isSuccessful()) {
 				return response.body();
 			} else {
