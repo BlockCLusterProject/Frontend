@@ -31,18 +31,14 @@ interface ClientApiService {
 			);
 
 	// Login Client Validation 
-	@GET("/api/users/validateClient")
-	Call<Person> validateClient(
+	@GET("/api/users/validateUser")
+	Call<Person> validateUser(
 			@Query("user") String user,
 			@Query("password") String password
-			);
-
-	// Login Admin Validation
-	@GET("/api/users/validateAdmin")
-	Call<Person> validateAdmin(
-			@Query("user") String user,
-			@Query("password") String password
-			);
+		);
+	
+	@GET("api/users/getIdRol/{rol}")
+	Call<Integer> getIdRol(@Query("rol") String rol);
 	
 	// Register Client
 	@POST("/api/user/addUser")
@@ -104,24 +100,9 @@ public class ClientService {
 		}
 	}
 
-	public Person validateClient(String user, String password) {
+	public Person validateUser(String user, String password) {
 		try {
-			Response<Person> response = apiService.validateClient(user, password).execute();
-			if(response.isSuccessful()) {
-				return response.body();
-			} else {
-				System.out.println("Error: " + response.code());
-				return null;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public Person validateAdmin(String user, String password) {
-		try {
-			Response<Person> response = apiService.validateAdmin(user, password).execute();
+			Response<Person> response = apiService.validateUser(user, password).execute();
 			if(response.isSuccessful()) {
 				return response.body();
 			} else {
@@ -134,6 +115,20 @@ public class ClientService {
 		}
 	}
 	
+	public Integer getIdRol(String rol) {
+		try {
+			Response<Integer> response = apiService.getIdRol(rol).execute();
+			if(response.isSuccessful()) {
+				return response.body();
+			} else {
+				System.out.println("Error: " + response.code());
+				return null;
+			}
+		} catch(IOException e) {
+			return null;
+		}
+	}
+
 	public boolean registerClient(Person user) {
 		try {
 			Response<Person> response = apiService.registerClient(user).execute();

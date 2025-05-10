@@ -20,15 +20,16 @@ public class ControllerViewLogin {
     	
     }
     
-    public Person   validateClient(String userName, String password){
-    	return service.validateClient(userName,password);
-    }
-    
-    public Person validateAdmin (String userName, String password) {
-    	return service.validateAdmin(userName,password);
-    }
-    
     public Person getClient(String user) {
     	return service.getClientByUser(user);
     }
+		
+	public Person validateUser(String user, String password) {
+    	return service.validateUser(user, password);
+    }
+    
+    public Integer getIdRol(String rol) {
+    	return service.getIdRol(rol);
+    }
+    
 }
