@@ -238,7 +238,7 @@
           <SubComponents>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonAccion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Acci&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="Accion"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonAccionActionPerformed"/>
@@ -259,7 +259,7 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonCienciaFiccion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ciencia Ficci&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="Ciencia Ficcion"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButtonAventura">

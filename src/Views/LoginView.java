@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import ApiServices.ClientService;
 import Controllers.ControllerViewLogin;
-
+import Models.ClientSesion;
 import Models.Person;
 
 /**
@@ -141,22 +141,26 @@ public class LoginView extends javax.swing.JFrame {
         String user = jTextFieldUsuario.getText();
         String passwordEntered = jTextFieldContrasena.getText();
         
-        if (controladorLogin.validateAdmin(user, passwordEntered) instanceof Person ){
-            AdminView va = new AdminView();
-                va.setVisible(true);
-                this.dispose();
-        }else if (controladorLogin.validateClient(user, passwordEntered)instanceof Person){
-            
-            UserView vu = new UserView();
-                vu.setVisible(true);
-                this.dispose();
-        }else {
-        	JOptionPane.showMessageDialog(
-                    null,                                   
-                    "Por favor verifique que el usuario y contraseÃ±a sean correctos \n (si aun no tiene un usuario debe registrarse)",
-                    "Usuario No Registrado",                     
-                    JOptionPane.ERROR_MESSAGE               
-                );
+        Person client = controladorLogin.validateUser(user, passwordEntered);
+        if(client.getIdRol() == controladorLogin.getIdRol("CLIENT")) {
+        	UserView userView = new UserView();
+        	userView.setVisible(true);
+        	this.dispose();
+			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
+        }
+
+        if(client.getIdRol() == controladorLogin.getIdRol("ADMIN")) {
+        	UserView userView = new UserView();
+        	userView.setVisible(true);
+        	this.dispose();
+			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
+        } else {
+			JOptionPane.showMessageDialog(
+				null,                                   
+				"Por favor verifique que el usuario y contraseña sean correctos \n (si aun no tiene un usuario debe registrarse)",
+				"Usuario No Registrado",                     
+				JOptionPane.ERROR_MESSAGE               
+			);
         }
   
     }//GEN-LAST:event_jButtonInicioActionPerformed

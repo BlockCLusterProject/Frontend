@@ -4,6 +4,13 @@
  */
 package Views;
 
+import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
+
+import Controllers.ControllerPurchaseHistoryView;
+import Models.Movie;
+
 /**
  *
  * @author JuanCGallo
@@ -13,9 +20,25 @@ public class PurchaseHistoryView extends javax.swing.JFrame {
 	/**
 	 * Creates new form VistaHistorialCompras
 	 */
+	
+	private ControllerPurchaseHistoryView controller;
 	public PurchaseHistoryView() {
 		initComponents();
+		this.controller = new ControllerPurchaseHistoryView();
 		setLocationRelativeTo(this);
+		fillTable();
+	}
+	
+	private void fillTable() {
+		List<Movie> history = controller.getHistory();
+		String[] columns = {"Título", "Géneros"};
+		DefaultTableModel model = new DefaultTableModel(columns, 0);
+		for(Movie movie : history) {
+			Object[] row = {movie.getTitle(), movie.getGenres()};
+			model.addRow(row);
+		}
+
+		jTable1.setModel(model);
 	}
 
 	/**

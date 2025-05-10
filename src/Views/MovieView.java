@@ -250,7 +250,7 @@ public class MovieView extends javax.swing.JFrame {
     private void btnAgregarAlCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAlCarritoActionPerformed
         // TODO add your handling code here:
         controladorVistaPelicula.agregarCarrito(p);
-        JOptionPane.showMessageDialog(null, "Has agregado la pelÃ­cula: " +
+        JOptionPane.showMessageDialog(null, "Has agregado la película: " +
                 p.getTitle() + " por: $" + p.getPrecio() + ", al carrito!!");
         regresar();
     }//GEN-LAST:event_btnAgregarAlCarritoActionPerformed

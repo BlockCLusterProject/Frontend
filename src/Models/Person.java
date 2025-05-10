@@ -4,6 +4,8 @@
  */
 package Models;
 
+import java.util.List;
+
 /**
  *
  * @author andre
@@ -11,28 +13,71 @@ package Models;
 public class Person {
     
     private String nombre;
-    private String id;
-    private String edad;
+    private Integer id;
+    private Integer idRol;
+    private String cedula;
+    private Integer edad;
     private String correo;
     private String telefono;
     private String user;
     private String password;
+    private List<Genre> preferences;
 
     public Person(
     		String nombre, 
-    		String id, 
-    		String edad, 
+    		Integer id, 
+    		Integer idRol,
+    		String cedula,
+    		Integer edad, 
     		String correo, 
     		String telefono,
     		String user,
     		String password) {
         this.nombre = nombre;
         this.id = id;
+        this.idRol = idRol;
+        this.cedula = cedula;
         this.edad = edad;
         this.correo = correo;
         this.telefono = telefono;
         this.user = user;
         this.password = password;
+    }
+
+    public Person(
+    		String nombre, 
+    		String cedula,
+    		Integer edad, 
+    		String correo, 
+    		String telefono,
+    		String user,
+    		String password,
+    		List<Genre> preferences) {
+        this.nombre = nombre;
+        this.cedula = cedula;
+        this.edad = edad;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.user = user;
+        this.password = password;
+        this.preferences = preferences;
+    }
+    
+    
+    public Integer getIdRol() {
+		return idRol;
+	}
+
+	public void setIdRol(Integer idRol) {
+		this.idRol = idRol;
+	}
+
+	public String getCedula() {
+    	return cedula;
+    }
+    
+    public void setCedula(String cedula) {
+    	this.cedula = cedula;
     }
 
 
@@ -64,19 +109,19 @@ public class Person {
         this.nombre = nombre;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getEdad() {
+    public Integer getEdad() {
         return edad;
     }
 
-    public void setEdad(String edad) {
+    public void setEdad(Integer edad) {
         this.edad = edad;
     }
 

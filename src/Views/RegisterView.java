@@ -4,12 +4,14 @@
  */
 package Views;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import ApiServices.ClientService;
 import Controllers.ControllerViewRegister;
+import Models.Genre;
 import Models.Person;
 
 /**
@@ -86,13 +88,13 @@ public class RegisterView extends javax.swing.JFrame {
 
         jLabelUsuario.setText("Usuario");
 
-        jLabelContrasena.setText("Contraseña");
+        jLabelContrasena.setText("Contrase�a");
 
-        jLabel5.setText("Confirmar Contraseña");
+        jLabel5.setText("Confirmar Contrase�a");
 
-        jLabel6.setText("¿Que generos te gustaria ver?");
+        jLabel6.setText("�Que generos te gustaria ver?");
 
-        jRadioButtonAccion.setText("Acción");
+        jRadioButtonAccion.setText("Accion");
         jRadioButtonAccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonAccionActionPerformed(evt);
@@ -108,7 +110,7 @@ public class RegisterView extends javax.swing.JFrame {
 
         jRadioButtonDrama.setText("Drama");
 
-        jRadioButtonCienciaFiccion.setText("Ciencia Ficción");
+        jRadioButtonCienciaFiccion.setText("Ciencia Ficcion");
 
         jRadioButtonAventura.setText("Aventura");
 
@@ -323,14 +325,14 @@ public class RegisterView extends javax.swing.JFrame {
         
         String name = jTextFieldNombre.getText(); 
         String id = jTextFieldId.getText();
-        String age = jTextFieldEdad.getText();
+        Integer age = Integer.parseInt(jTextFieldEdad.getText());
         String gmail = jTextFieldCorreo.getText(); 
         String phone = jTextFieldTelefono.getText();
         String userName = jTextFieldUsuario.getText();
         String passwword = jTextFieldContrasena.getText();
         String confirmation = jTextFieldConfirmacion.getText();
         
-        List<String> preference = null;
+        List<String> preference = new ArrayList<>();
         
         
         if (jRadioButtonAccion.isSelected()) {
@@ -355,9 +357,14 @@ public class RegisterView extends javax.swing.JFrame {
             preference.add(jRadioButtonInfantil.getText());
         }
         
+        List<Genre> genrePreferences = new ArrayList<>();
+        for(String pref : preference) {
+        	genrePreferences.add(Genre.getGenreByName(pref));
+        }
+        
         
         if (passwword.equals(confirmation)){
-            Person user = new Person(name,id,age,gmail,phone,userName,passwword,preference);
+            Person user = new Person(name,id,age,gmail,phone,userName,passwword,genrePreferences);
             
             controller.registerClient(user);
             

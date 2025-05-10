@@ -4,6 +4,7 @@
  */
 package Views;
 
+import Models.ClientSesion;
 import Models.Movie;
 
 import javax.imageio.ImageIO;
@@ -268,6 +269,7 @@ public class UserView extends javax.swing.JFrame implements ActionListener {
 		LoginView vistaLogin = new LoginView();
 		vistaLogin.setVisible(true);
 		this.dispose();
+		ClientSesion.getInstance().closeSesion();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
 	/**
