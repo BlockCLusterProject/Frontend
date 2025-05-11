@@ -82,7 +82,7 @@ public class Movie implements Serializable {
             "\"overview\":\"" + sinopsis + "\"," +
             "\"backdrop_path\":\"" + rutaPortada + "\"," +
             "\"active\":" + active + "," +
-            "\"cantidad\":" + cantidad + "," +
+            "\"cantidad\":" + cantidad +
         "}";
     }
 
