@@ -145,6 +145,19 @@ public class Person {
         return preferences;
     }
     
+    public String toString() {
+        return "{" +
+            "\"nombre\":\"" + nombre + "\"," +
+            "\"idRol\":" + 1 + "," +
+            "\"cedula\":\"" + cedula + "\"," +
+            "\"edad\":" + edad + "," +
+            "\"correo\":\"" + correo + "\"," +
+            "\"telefono\":\"" + telefono + "\"," +
+            "\"user\":\"" + user + "\"," +
+            "\"password\":\"" + password + "\"" +
+        "}";
+    }
+    
     
     
 }

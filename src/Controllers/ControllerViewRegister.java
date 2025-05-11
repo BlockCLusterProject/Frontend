@@ -14,6 +14,6 @@ public class ControllerViewRegister {
     }
     
     public boolean registerClient(Person user) {
-    	return service.registerClient(user);
+    	return service.registerClient(user.toString());
     }
 }

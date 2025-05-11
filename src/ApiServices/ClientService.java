@@ -41,9 +41,9 @@ interface ClientApiService {
 	Call<Integer> getIdRol(@Query("rol") String rol);
 	
 	// Register Client
-	@POST("/api/user/addUser")
+	@POST("api/users/addUser")
 	Call<Person> registerClient(
-			@Body Person user);
+			@Query("user") String user);
 	
 
 	@GET("/api/users/available_movies")
@@ -112,7 +112,7 @@ public class ClientService {
 		}
 	}
 
-	public boolean registerClient(Person user) {
+	public boolean registerClient(String user) {
 		try {
 			Response<Person> response = apiService.registerClient(user).execute();
 			if(response.isSuccessful()) {
