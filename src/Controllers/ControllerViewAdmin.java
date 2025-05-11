@@ -23,8 +23,8 @@ public class ControllerViewAdmin {
 		service = new AdminService();
 	}
 
-	public List<Movie> generateMovies(int genre){
-		peliculas = service.getAvailableMovies(genre);
+	public List<Movie> generateMovies(){
+		peliculas = service.getAllMovies();
 		//System.out.println(peliculas.get(0).getTitulo());
 		return this.peliculas;
 	}
@@ -46,3 +46,4 @@ public class ControllerViewAdmin {
 		return service.createMovie(movie.toString());
 	}
 }
+;

@@ -31,7 +31,7 @@ public class AdminView extends javax.swing.JFrame {
     public AdminView() {
         initComponents();
         setLocationRelativeTo(this);
-        controllerAdminView.generateMovies(0);
+        controllerAdminView.generateMovies();
         llenarPeliculas();
         setGenres();
     }
@@ -58,7 +58,7 @@ public class AdminView extends javax.swing.JFrame {
             table.addRow(new Object[]{
                 controllerAdminView.getPeliculas().get(i).getTitle(),
                 controllerAdminView.getPeliculas().get(i).getCantidad(),
-                controllerAdminView.getPeliculas().get(i).getPrecio(),
+                controllerAdminView.getPeliculas().get(i).getPrice(),
                 controllerAdminView.getPeliculas().get(i).getActive() == true ? "Si" : "No",
                 controllerAdminView.getPeliculas().get(i).getId(),
 
@@ -84,11 +84,11 @@ public class AdminView extends javax.swing.JFrame {
                     }
                 } else if (e.getType() == TableModelEvent.UPDATE && column == 2) {
                     if (tryParseDouble(newValue.toString())) {
-                        pelicula.setPrecio(Double.parseDouble(newValue.toString()));
+                        pelicula.setPrice(Double.parseDouble(newValue.toString()));
                         controllerAdminView.updateMovie(pelicula.getId(), pelicula);
                     } else {
                         JOptionPane.showMessageDialog(null, "Tienes que insertar un valor número decimal");
-                        table.setValueAt(pelicula.getPrecio(), row, column);
+                        table.setValueAt(pelicula.getPrice(), row, column);
                     }
                 } else if (e.getType() == TableModelEvent.UPDATE && column == 1) {
                     if (tryParseDouble(newValue.toString())) {

@@ -93,7 +93,7 @@ public class ShoppingCarView extends javax.swing.JFrame {
 						   ALTO_TITULO
 				  );
 //				puntuaciones[i][j].setOpaque(true);
-				  puntuaciones[i][j].setText(String.valueOf(carrito.get(i+j).getPuntuacion()));
+				  puntuaciones[i][j].setText(String.valueOf(carrito.get(i+j).getRate()));
 				  puntuaciones[i][j].setBackground(Color.BLUE);
 				  puntuaciones[i][j].setForeground(Color.WHITE);
 				  puntuaciones[i][j].setHorizontalAlignment(SwingConstants.CENTER);
@@ -101,7 +101,7 @@ public class ShoppingCarView extends javax.swing.JFrame {
 				  try {
 					  //TODO: cambiar ruta de acceso
 					  URL imageUrl = new URL(
-						  "https://image.tmdb.org/t/p/w300" + carrito.get(i+j).getRutaPortada());
+						  "https://image.tmdb.org/t/p/w300" + carrito.get(i+j).getBackdrop_path());
 					  Image img = ImageIO.read(imageUrl);
 					  img = img.getScaledInstance(
 							  ancho, 
@@ -219,7 +219,7 @@ public class ShoppingCarView extends javax.swing.JFrame {
 
     private void btnVaciarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarCarritoActionPerformed
 		controladorVistaCarrito.vaciarCarrito();
-		JOptionPane.showMessageDialog(null, "Se vació el carrito :'(");
+		JOptionPane.showMessageDialog(null, "Se vaciï¿½ el carrito :'(");
 		dibujarCarrito();
     }//GEN-LAST:event_btnVaciarCarritoActionPerformed
 
