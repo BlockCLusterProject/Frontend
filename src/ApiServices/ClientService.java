@@ -35,7 +35,7 @@ interface ClientApiService {
 	Call<Person> validateUser(
 			@Query("user") String user,
 			@Query("password") String password
-		);
+		);	
 	
 	@GET("api/users/getIdRol/{rol}")
 	Call<Integer> getIdRol(@Query("rol") String rol);
@@ -81,23 +81,6 @@ public class ClientService {
 				.build();
 		apiService = retrofit.create(ClientApiService.class);
 		qrService = retrofit.create(QrApiService.class);
-	}
-
-	public List<Person> searchUsers(String user, String password) {
-		try {
-			Response<List<Person>> response = apiService.searchUsers(user, password).execute();
-			if(response.isSuccessful()) {
-				List<Person> users = response.body();
-				users.forEach(u -> System.out.println(u));
-				return users;
-			} else {
-				System.out.println("Error: " + response.code());
-				return null;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 	public Person validateUser(String user, String password) {

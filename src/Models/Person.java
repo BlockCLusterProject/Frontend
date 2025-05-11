@@ -141,7 +141,9 @@ public class Person {
         this.telefono = telefono;
     }
     
-    
+    public List<Genre> getPreferences(){
+        return preferences;
+    }
     
     
     

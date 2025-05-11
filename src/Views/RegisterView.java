@@ -88,11 +88,11 @@ public class RegisterView extends javax.swing.JFrame {
 
         jLabelUsuario.setText("Usuario");
 
-        jLabelContrasena.setText("Contraseña");
+        jLabelContrasena.setText("Contraseï¿½a");
 
-        jLabel5.setText("Confirmar Contraseña");
+        jLabel5.setText("Confirmar Contraseï¿½a");
 
-        jLabel6.setText("¿Que generos te gustaria ver?");
+        jLabel6.setText("ï¿½Que generos te gustaria ver?");
 
         jRadioButtonAccion.setText("Accion");
         jRadioButtonAccion.addActionListener(new java.awt.event.ActionListener() {
