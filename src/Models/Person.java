@@ -141,7 +141,22 @@ public class Person {
         this.telefono = telefono;
     }
     
+    public List<Genre> getPreferences(){
+        return preferences;
+    }
     
+    public String toString() {
+        return "{" +
+            "\"nombre\":\"" + nombre + "\"," +
+            "\"idRol\":" + 1 + "," +
+            "\"cedula\":\"" + cedula + "\"," +
+            "\"edad\":" + edad + "," +
+            "\"correo\":\"" + correo + "\"," +
+            "\"telefono\":\"" + telefono + "\"," +
+            "\"user\":\"" + user + "\"," +
+            "\"password\":\"" + password + "\"" +
+        "}";
+    }
     
     
     

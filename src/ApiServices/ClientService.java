@@ -35,15 +35,15 @@ interface ClientApiService {
 	Call<Person> validateUser(
 			@Query("user") String user,
 			@Query("password") String password
-		);
+		);	
 	
 	@GET("api/users/getIdRol/{rol}")
 	Call<Integer> getIdRol(@Query("rol") String rol);
 	
 	// Register Client
-	@POST("/api/user/addUser")
+	@POST("api/users/addUser")
 	Call<Person> registerClient(
-			@Body Person user);
+			@Query("user") String user);
 	
 
 	@GET("/api/users/available_movies")
@@ -83,23 +83,6 @@ public class ClientService {
 		qrService = retrofit.create(QrApiService.class);
 	}
 
-	public List<Person> searchUsers(String user, String password) {
-		try {
-			Response<List<Person>> response = apiService.searchUsers(user, password).execute();
-			if(response.isSuccessful()) {
-				List<Person> users = response.body();
-				users.forEach(u -> System.out.println(u));
-				return users;
-			} else {
-				System.out.println("Error: " + response.code());
-				return null;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
 	public Person validateUser(String user, String password) {
 		try {
 			Response<Person> response = apiService.validateUser(user, password).execute();
@@ -129,7 +112,7 @@ public class ClientService {
 		}
 	}
 
-	public boolean registerClient(Person user) {
+	public boolean registerClient(String user) {
 		try {
 			Response<Person> response = apiService.registerClient(user).execute();
 			if(response.isSuccessful()) {
