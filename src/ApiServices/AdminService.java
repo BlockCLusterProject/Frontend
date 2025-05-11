@@ -45,7 +45,7 @@ interface AdminApiService {
     Call<Movie> createMovie(@Query("movie") String movie);
 
     @PATCH("api/movie/update_movies")
-    Call<Movie> updateMovie(@Query("id_movie") int idMovie, @Body Movie movie);
+    Call<Movie> updateMovie(@Query("id_movie") int idMovie, @Query("movie") String movie);
 
     @DELETE("api/movie")
     Call<Movie> deleteMovie(@Query("id_movie") int idMovie);
@@ -100,7 +100,7 @@ public class AdminService {
     	}
     }
     
-    public boolean updateMovie(int idMovie, Movie movie) {
+    public boolean updateMovie(int idMovie, String movie) {
     	try {
     		// System.out.println("Front Service");
     		// System.out.println(movie);

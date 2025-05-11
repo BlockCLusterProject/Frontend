@@ -38,7 +38,7 @@ public class ControllerViewAdmin {
 		return trendingMovies;
 	}
 	
-	public boolean updateMovie(int idMovie, Movie movie) {
+	public boolean updateMovie(int idMovie, String movie) {
 		return service.updateMovie(idMovie, movie);
 	}
 	
