@@ -48,8 +48,8 @@ public class MoviePurchaseView extends javax.swing.JFrame {
 		lblCompanyInfo.setText("<html>" + 
 				"BlockCluster" + "<br>" + 
 				"NIT: 123123123-2" + "<br>" +
-				"Armenia, Quindío" + "<br>" +
-				"Teléfono: 6067462363" + "<br>" +
+				"Armenia, Quindï¿½o" + "<br>" +
+				"Telï¿½fono: 6067462363" + "<br>" +
 				"email: contact@blockcluster.com" + "<br>"
 	+ "</html>");
 	}
@@ -58,17 +58,17 @@ public class MoviePurchaseView extends javax.swing.JFrame {
 		List<Movie> carrito = controladorVistaCompraPelicula.getCarrito();
 		double total = 0;
 		for(Movie movie : carrito) {
-			total += movie.getPrecio();
+			total += movie.getPrice();
 		}
 		lblTotal.setText("$" + String.valueOf(total) + " COP");
 	}
 	
 	private void loadMoviesInfo() {
 		List<Movie> carrito = controladorVistaCompraPelicula.getCarrito();
-		String[] cols = {"Película", "Precio"};
+		String[] cols = {"Pelï¿½cula", "Precio"};
 		DefaultTableModel model = new DefaultTableModel(cols, 0);
 		for(Movie movie : carrito) {
-			Object[] row = {movie.getTitle(), movie.getPrecio()};
+			Object[] row = {movie.getTitle(), movie.getPrice()};
 			model.addRow(row);
 		}
 		
@@ -143,7 +143,7 @@ public class MoviePurchaseView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Película", "Precio"
+                "Pelï¿½cula", "Precio"
             }
         ));
         jScrollPane3.setViewportView(tableMovies);

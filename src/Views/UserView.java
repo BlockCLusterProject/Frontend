@@ -107,7 +107,7 @@ public class UserView extends javax.swing.JFrame implements ActionListener {
 					// w300, w780, w1200, original
 					URL imageUrl = new URL(
 							"https://image.tmdb.org/t/p/w300" +
-					controladorVistaUsuario.entregarPelicula(counter).getRutaPortada());
+					controladorVistaUsuario.entregarPelicula(counter).getBackdrop_path());
 					counter++;
 					Image img = ImageIO.read(imageUrl);
 					img = img.getScaledInstance(ancho, alto, Image.SCALE_DEFAULT);

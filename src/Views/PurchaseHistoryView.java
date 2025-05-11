@@ -31,7 +31,7 @@ public class PurchaseHistoryView extends javax.swing.JFrame {
 	
 	private void fillTable() {
 		List<Movie> history = controller.getHistory();
-		String[] columns = {"Título", "Géneros"};
+		String[] columns = {"Tï¿½tulo", "Gï¿½neros"};
 		DefaultTableModel model = new DefaultTableModel(columns, 0);
 		for(Movie movie : history) {
 			Object[] row = {movie.getTitle(), movie.getGenres()};

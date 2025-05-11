@@ -40,7 +40,7 @@ public class MovieView extends javax.swing.JFrame {
     private void loadLogo() {
         try {
 			URL imageUrl = new URL(
-				"https://image.tmdb.org/t/p/w300" + p.getRutaPortada());
+				"https://image.tmdb.org/t/p/w300" + p.getBackdrop_path());
 			Image img = ImageIO.read(imageUrl);
 			img = img.getScaledInstance(
 					lblFotoPelicula.getWidth(),
@@ -54,15 +54,15 @@ public class MovieView extends javax.swing.JFrame {
 
     private void loadInformation() {
         lblTitulo.setText(p.getTitle());
-        lblPuntuacion.setText("IMDb " + p.getPuntuacion() + " / 10");
-        lblDuracion.setText(p.getDuracion() + " min");
+        lblPuntuacion.setText("IMDb " + p.getRate() + " / 10");
+        lblDuracion.setText(p.getRuntime() + " min");
         String gens = "";
         for(Genre genero : p.getGenres()) {
             gens += genero.name() + "<br/>";
         }
         lblGeneros.setText("<html>" + gens + "</html>");
-        lblSinopsis.setText("<html>" + p.getSinopsis() + "</html>");
-        lblPrecio.setText("$ " + p.getPrecio() + " COP");
+        lblSinopsis.setText("<html>" + p.getOverview() + "</html>");
+        lblPrecio.setText("$ " + p.getPrice() + " COP");
     }
 
 	/**
@@ -105,15 +105,15 @@ public class MovieView extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setText("Título:");
+        jLabel1.setText("Tï¿½tulo:");
 
-        jLabel2.setText("Puntuación:");
+        jLabel2.setText("Puntuaciï¿½n:");
 
-        jLabel3.setText("Duración:");
+        jLabel3.setText("Duraciï¿½n:");
 
         jLabel4.setText("Sinopsis:");
 
-        jLabel5.setText("Géneros:");
+        jLabel5.setText("Gï¿½neros:");
 
         llll.setText("Precio:");
 
@@ -250,8 +250,8 @@ public class MovieView extends javax.swing.JFrame {
     private void btnAgregarAlCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAlCarritoActionPerformed
         // TODO add your handling code here:
         controladorVistaPelicula.agregarCarrito(p);
-        JOptionPane.showMessageDialog(null, "Has agregado la película: " +
-                p.getTitle() + " por: $" + p.getPrecio() + ", al carrito!!");
+        JOptionPane.showMessageDialog(null, "Has agregado la pelï¿½cula: " +
+                p.getTitle() + " por: $" + p.getPrice() + ", al carrito!!");
         regresar();
     }//GEN-LAST:event_btnAgregarAlCarritoActionPerformed
 
