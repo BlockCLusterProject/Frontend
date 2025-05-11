@@ -37,16 +37,15 @@ interface AdminApiService {
     Call<List<Movie>> getMovieDbMovies(
             @Query("genre") int genre);
 
-    @GET("/api/movie/available_movies")
-    Call<List<Movie>> getOwnMovies(
-            @Query("genre") int genre);
+    @GET("/api/movie/getAllMovies")
+    Call<List<Movie>> getAllMovies();
 
     // OWN BACK
     @POST("/api/movie/create_movie")
     Call<Movie> createMovie(@Query("movie") String movie);
 
     @PATCH("api/movie/update_movies")
-    Call<Movie> updateMovie(@Query("id_movie") int idMovie, @Body Movie movie);
+    Call<Movie> updateMovie(@Query("id_movie") int idMovie, @Query("movie") String movie);
 
     @DELETE("api/movie")
     Call<Movie> deleteMovie(@Query("id_movie") int idMovie);
@@ -70,9 +69,10 @@ public class AdminService {
         apiService = retrofit.create(AdminApiService.class);
     }
 
-    public List<Movie> getAvailableMovies(int genre) {
+    public List<Movie> getAllMovies() {
         try {
-            Response<List<Movie>> response = apiService.getOwnMovies(genre).execute();
+            Response<List<Movie>> response = apiService.getAllMovies().execute();
+            System.out.println(response.body().get(0).getTitle());
             if (response.isSuccessful()) {
                 return response.body();
             } else {
@@ -100,7 +100,7 @@ public class AdminService {
     	}
     }
     
-    public boolean updateMovie(int idMovie, Movie movie) {
+    public boolean updateMovie(int idMovie, String movie) {
     	try {
     		// System.out.println("Front Service");
     		// System.out.println(movie);
