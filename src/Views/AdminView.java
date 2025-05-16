@@ -396,9 +396,9 @@ public class AdminView extends javax.swing.JFrame {
 
     private void consultMoviesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultMoviesActionPerformed
     	List<Movie> movies = controllerAdminView.getTrendingMovies();
-    	for(int i = 0; i < movies.size(); i++) {
-    		System.out.print(movies.get(i).getTitle());
-    	}
+        NewMoviesView mv = new NewMoviesView(movies);
+        mv.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_consultMoviesActionPerformed
 
     private void movie_descriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movie_descriptionActionPerformed
