@@ -4,6 +4,7 @@
  */
 package Views;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
 
@@ -30,16 +31,15 @@ public class AsignMoviesView extends javax.swing.JFrame {
 	private JTextField[][] inputFields;
     public AsignMoviesView(List<Movie> movies) {
     	vewController = new AsignMoviesController(movies);
-    	this.inputFields = new JTextField[movies.size()][2];
-    	setLayout(new GridLayout(0, 3, 10, 10));
-    	generateForms();
-    	
+    	this.inputFields = new JTextField[movies.size()][2];	
         initComponents();
         setLocationRelativeTo(this);
+    	generateForms();
     }
     
     private void generateForms() {
     	List<Movie> movies = vewController.getMovies();
+        panelPeliculas.setLayout(new GridLayout(0, 3, 10, 10)); // 3 columnas
         for (int i = 0; i < movies.size(); i++) {
             Movie movie = movies.get(i);
 
@@ -47,23 +47,32 @@ public class AsignMoviesView extends javax.swing.JFrame {
             form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
             form.setBorder(BorderFactory.createTitledBorder(movie.getTitle()));
 
-            JTextField campoCantidad = new JTextField();
-            campoCantidad.setName("cantidad");
+            JLabel lblCantidad = new JLabel("Cantidad:");
+            JTextField txtCantidad = new JTextField(String.valueOf(movie.getCantidad()));
+            txtCantidad.setMaximumSize(new Dimension(80, 25));
+            txtCantidad.setPreferredSize(new Dimension(80, 25));
 
-            JTextField campoPrecio = new JTextField();
-            campoPrecio.setName("precio");
+            JLabel lblPrecio = new JLabel("Precio:");
+            JTextField txtPrecio = new JTextField(String.valueOf(movie.getPrice()));
+            txtPrecio.setMaximumSize(new Dimension(80, 25));
+            txtPrecio.setPreferredSize(new Dimension(80, 25));
 
-            form.add(new JLabel("Cantidad:"));
-            form.add(campoCantidad);
+
+            inputFields[i][0] = txtCantidad;
+            inputFields[i][1] = txtPrecio;
+
+            form.add(lblCantidad);
+            form.add(txtCantidad);
             form.add(Box.createVerticalStrut(5));
-            form.add(new JLabel("Precio:"));
-            form.add(campoPrecio);
+            form.add(lblPrecio);
+            form.add(txtPrecio);
 
-            inputFields[i][0] = campoCantidad;
-            inputFields[i][1] = campoPrecio;
-
-            this.add(form);
+            panelPeliculas.add(form);
         }
+
+        jScrollPane1.setViewportView(panelPeliculas);
+        jScrollPane1.revalidate();
+        jScrollPane1.repaint();
     }
 
     /**
@@ -75,9 +84,10 @@ public class AsignMoviesView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
         btn_goBack = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panelPeliculas = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,26 +100,21 @@ public class AsignMoviesView extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_goBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
-                .addComponent(jToggleButton1)
-                .addContainerGap())
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        javax.swing.GroupLayout panelPeliculasLayout = new javax.swing.GroupLayout(panelPeliculas);
+        panelPeliculas.setLayout(panelPeliculasLayout);
+        panelPeliculasLayout.setHorizontalGroup(
+            panelPeliculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 681, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(306, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(btn_goBack))
-                .addContainerGap())
+        panelPeliculasLayout.setVerticalGroup(
+            panelPeliculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 398, Short.MAX_VALUE)
         );
+
+        jScrollPane1.setViewportView(panelPeliculas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,15 +122,29 @@ public class AsignMoviesView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_goBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
+                .addComponent(jToggleButton1)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(355, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButton1)
+                    .addComponent(btn_goBack))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(14, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(31, 31, 31)))
         );
 
         pack();
@@ -164,7 +183,8 @@ public class AsignMoviesView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_goBack;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JPanel panelPeliculas;
     // End of variables declaration//GEN-END:variables
 }

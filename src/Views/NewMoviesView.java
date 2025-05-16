@@ -219,6 +219,11 @@ public class NewMoviesView extends javax.swing.JFrame implements ActionListener 
         btn_goBack.setText("Regresar");
 
         btn_movies.setText("Seleccionar Pelculas");
+        btn_movies.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_moviesActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -268,6 +273,12 @@ public class NewMoviesView extends javax.swing.JFrame implements ActionListener 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void btn_moviesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_moviesActionPerformed
+        AsignMoviesView am = new AsignMoviesView(seleccionadas);
+        am.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_moviesActionPerformed
 
     /**
      * @param args the command line arguments
