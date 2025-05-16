@@ -12,10 +12,11 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Controllers.AsignMoviesController;
+import Controllers.ControllerAsignMovies;
 import Models.Movie;
 
 /**
@@ -27,18 +28,20 @@ public class AsignMoviesView extends javax.swing.JFrame {
     /**
      * Creates new form AsignMoviesView
      */
-	private AsignMoviesController vewController;
+	private ControllerAsignMovies viewController;
 	private JTextField[][] inputFields;
-    public AsignMoviesView(List<Movie> movies) {
-    	vewController = new AsignMoviesController(movies);
-    	this.inputFields = new JTextField[movies.size()][2];	
+        private List<Movie> moviesReturned;
+    public AsignMoviesView(List<Movie> moviesReturned,List<Movie> moviesSelected) {
+    	viewController = new ControllerAsignMovies(moviesSelected);
+        this.moviesReturned = moviesReturned;
+    	this.inputFields = new JTextField[moviesSelected.size()][2];	
         initComponents();
         setLocationRelativeTo(this);
     	generateForms();
     }
     
     private void generateForms() {
-    	List<Movie> movies = vewController.getMovies();
+    	List<Movie> movies = viewController.getMovies();
         panelPeliculas.setLayout(new GridLayout(0, 3, 10, 10)); // 3 columnas
         for (int i = 0; i < movies.size(); i++) {
             Movie movie = movies.get(i);
@@ -73,6 +76,7 @@ public class AsignMoviesView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(panelPeliculas);
         jScrollPane1.revalidate();
         jScrollPane1.repaint();
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(15);
     }
 
     /**
@@ -92,6 +96,11 @@ public class AsignMoviesView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jToggleButton1.setText("Agregar peliculas");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         btn_goBack.setText("Regresar");
         btn_goBack.addActionListener(new java.awt.event.ActionListener() {
@@ -123,13 +132,13 @@ public class AsignMoviesView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_goBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE)
                 .addComponent(jToggleButton1)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
@@ -151,8 +160,33 @@ public class AsignMoviesView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_goBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_goBackActionPerformed
-        // TODO add your handling code here:
+        NewMoviesView nm = new NewMoviesView(moviesReturned, viewController.getMovies());
+        nm.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_btn_goBackActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        List<Movie> peliculas = viewController.getMovies();
+        for (int i = 0; i < peliculas.size(); i++) {
+            try {
+                int cantidad = Integer.parseInt(inputFields[i][0].getText().trim());
+                double precio = Double.parseDouble(inputFields[i][1].getText().trim());
+
+                peliculas.get(i).setCantidad(cantidad);
+                peliculas.get(i).setPrice(precio);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Error en la película: " + peliculas.get(i).getTitle());
+                return;
+            }
+        }
+        viewController.publishNewMovies(peliculas);
+        JOptionPane.showMessageDialog(this, "Películas actualizadas correctamente.");
+        AdminView av = new AdminView();
+        av.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments

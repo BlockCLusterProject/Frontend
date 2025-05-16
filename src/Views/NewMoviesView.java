@@ -34,11 +34,13 @@ public class NewMoviesView extends javax.swing.JFrame implements ActionListener 
     JButton[][] pelis;
     JLabel[][] titulos;
     JLabel[][] puntuaciones;
-    List<Movie> seleccionadas = new ArrayList<>();
+    List<Movie> seleccionadas;
     int filas; 
 
-    public NewMoviesView(List<Movie> movies) {
+    public NewMoviesView(List<Movie> movies, List<Movie> selectedMovies) {
         controllerNewMovies = new ControllerNewMovies(movies);
+        seleccionadas = selectedMovies == null? new ArrayList<>(): selectedMovies;
+        
         filas = controllerNewMovies.getFilas();
         pelis = new JButton[filas][];
         titulos = new JLabel[filas][];
@@ -217,6 +219,11 @@ public class NewMoviesView extends javax.swing.JFrame implements ActionListener 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btn_goBack.setText("Regresar");
+        btn_goBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_goBackActionPerformed(evt);
+            }
+        });
 
         btn_movies.setText("Seleccionar Pelculas");
         btn_movies.addActionListener(new java.awt.event.ActionListener() {
@@ -271,14 +278,20 @@ public class NewMoviesView extends javax.swing.JFrame implements ActionListener 
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void btn_moviesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_moviesActionPerformed
-        AsignMoviesView am = new AsignMoviesView(seleccionadas);
+        AsignMoviesView am = new AsignMoviesView(controllerNewMovies.getMovies(),seleccionadas);
         am.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_moviesActionPerformed
+
+    private void btn_goBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_goBackActionPerformed
+        AdminView av = new AdminView();
+        av.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_goBackActionPerformed
 
     /**
      * @param args the command line arguments
