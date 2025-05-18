@@ -52,7 +52,7 @@ public class Movie implements Serializable {
     public Movie(
             String titulo,
             int duracion,
-            double puntuacion,
+            double vote_average,
             List<Genre> generos,
             double precio,
             String sinopsis,
@@ -61,7 +61,7 @@ public class Movie implements Serializable {
     ) {
         this.title = titulo;
         this.runtime = duracion;
-        this.vote_average = puntuacion;
+        this.vote_average = vote_average;
         this.price = precio;
         this.sinopsis = sinopsis;
         this.backdrop_path = rutaPortada;
