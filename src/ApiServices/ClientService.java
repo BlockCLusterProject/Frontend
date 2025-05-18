@@ -59,6 +59,9 @@ interface ClientApiService {
 	
 	@GET("api/users/{user}")
 	Call<Person> getClientByUser(@Path("user") String user);
+	
+	@POST("api/users/movie/add-purchase-history")
+	Call<PurchaseHistory> addPurchaseHistory(@Body PurchaseHistory puchase);
 }
 
 interface QrApiService {
@@ -81,6 +84,21 @@ public class ClientService {
 				.build();
 		apiService = retrofit.create(ClientApiService.class);
 		qrService = retrofit.create(QrApiService.class);
+	}
+	
+	public PurchaseHistory addPurchaseHistory(PurchaseHistory purchase) {
+		try {
+			Response<PurchaseHistory> response = apiService.addPurchaseHistory(purchase).execute();
+			if(response.isSuccessful()) {
+				return response.body();
+			} else {
+				System.out.println("Error :" + response.code());
+				return null;
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public Person validateUser(String user, String password) {

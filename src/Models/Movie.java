@@ -19,13 +19,13 @@ public class Movie implements Serializable {
 	// MOVIE FRONTEND
 	@SerializedName("title")
 	@JsonProperty("title")
-    private String titulo;
+    private String title;
 	@JsonProperty("runtime")
 	@SerializedName("runtime")
     private int runtime;
-    @JsonProperty("rate")
-    @SerializedName("rate")
-    private double rate;
+    @JsonProperty("vote_average")
+    @SerializedName("vote_average")
+    private double vote_average;
     @JsonProperty("genres")
     @SerializedName("genres")
     private List<Genre> generos;
@@ -52,16 +52,16 @@ public class Movie implements Serializable {
     public Movie(
             String titulo,
             int duracion,
-            double puntuacion,
+            double vote_average,
             List<Genre> generos,
             double precio,
             String sinopsis,
             String rutaPortada,
             int cantidad
     ) {
-        this.titulo = titulo;
+        this.title = titulo;
         this.runtime = duracion;
-        this.rate = puntuacion;
+        this.vote_average = vote_average;
         this.price = precio;
         this.sinopsis = sinopsis;
         this.backdrop_path = rutaPortada;
@@ -74,9 +74,9 @@ public class Movie implements Serializable {
     @Override
     public String toString() {
         return "{" +
-            "\"title\":\"" + escape(titulo) + "\"," +
+            "\"title\":\"" + escape(title) + "\"," +
             "\"runtime\":" + runtime + "," +
-            "\"vote_average\":" + rate + "," +
+            "\"vote_average\":" + vote_average + "," +
             "\"price\":" + price + "," +
             "\"overview\":\"" + escape(sinopsis) + "\"," +
             "\"backdrop_path\":\"" + escape(backdrop_path) + "\"," +
@@ -92,11 +92,11 @@ public class Movie implements Serializable {
     }
 
     public String getTitle() {
-        return titulo;
+        return title;
     }
 
     public void setTitle(String titulo) {
-        this.titulo = titulo;
+        this.title = titulo;
     }
 
     public int getRuntime() {
@@ -108,11 +108,11 @@ public class Movie implements Serializable {
     }
 
     public double getVote_average() {
-        return rate;
+        return vote_average;
     }
 
     public void setVote_average(double vote_average) {
-        this.rate = vote_average;
+        this.vote_average = vote_average;
     }
 
     public List<Genre> getGenres() {

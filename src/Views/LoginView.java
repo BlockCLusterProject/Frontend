@@ -142,19 +142,16 @@ public class LoginView extends javax.swing.JFrame {
         String passwordEntered = jTextFieldContrasena.getText();
         
         Person client = controladorLogin.validateUser(user, passwordEntered);
-        System.out.println(client.getIdRol());
-        System.out.println(controladorLogin.getIdRol("CLIENTE"));
-        System.out.println(controladorLogin.getIdRol("ADMIN"));
         if(client.getIdRol() == controladorLogin.getIdRol("CLIENTE")) {
+			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
         	UserView userView = new UserView();
         	userView.setVisible(true);
         	this.dispose();
-			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
         }else if(client.getIdRol() == controladorLogin.getIdRol("ADMIN")) {
+			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
         	AdminView adminView = new AdminView();
         	adminView.setVisible(true);
         	this.dispose();
-			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
         } else {
 			JOptionPane.showMessageDialog(
 				null,                                   

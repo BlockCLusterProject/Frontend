@@ -16,7 +16,9 @@ import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 import Controllers.ControllerViewMoviePurchase;
+import Models.ClientSesion;
 import Models.Movie;
+import Models.Person;
 
 /**
  *
@@ -29,6 +31,7 @@ public class MoviePurchaseView extends javax.swing.JFrame {
 	 */
 
 	 ControllerViewMoviePurchase controladorVistaCompraPelicula;
+	 ClientSesion clientSesion;
 
 	public MoviePurchaseView() {
 		initComponents();
@@ -48,8 +51,8 @@ public class MoviePurchaseView extends javax.swing.JFrame {
 		lblCompanyInfo.setText("<html>" + 
 				"BlockCluster" + "<br>" + 
 				"NIT: 123123123-2" + "<br>" +
-				"Armenia, Quind�o" + "<br>" +
-				"Tel�fono: 6067462363" + "<br>" +
+				"Armenia, Quindio" + "<br>" +
+				"Telefono: 6067462363" + "<br>" +
 				"email: contact@blockcluster.com" + "<br>"
 	+ "</html>");
 	}
@@ -65,7 +68,7 @@ public class MoviePurchaseView extends javax.swing.JFrame {
 	
 	private void loadMoviesInfo() {
 		List<Movie> carrito = controladorVistaCompraPelicula.getCarrito();
-		String[] cols = {"Pel�cula", "Precio"};
+		String[] cols = {"Pelicula", "Precio"};
 		DefaultTableModel model = new DefaultTableModel(cols, 0);
 		for(Movie movie : carrito) {
 			Object[] row = {movie.getTitle(), movie.getPrice()};
@@ -75,7 +78,13 @@ public class MoviePurchaseView extends javax.swing.JFrame {
 		tableMovies.setModel(model);
 	}
 
-	private void loadClientInfo() {}
+	private void loadClientInfo() {
+		Person client = ClientSesion.getInstance().getClient();
+		lblClientInfo.setText("<html>" + 
+				client.getNombre() + "<br>" + 
+				"Cel: " + client.getTelefono() + "<br>" + 
+				"</html>");
+	}
 	
 	private void loadQr(){
 		try {
