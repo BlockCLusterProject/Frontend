@@ -1,10 +1,20 @@
 package Models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class PurchaseHistory {
 	private Integer id;
+
+	@JsonProperty("client_id")
 	public Integer client_id;
+
+	@JsonProperty("movie_id")
 	public Integer movie_id;
+	
+	@JsonProperty("quantity")
 	private Integer quantity;
+	
+	@JsonProperty("price")
 	public Double price;
 	
 	public PurchaseHistory() {};

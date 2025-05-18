@@ -144,6 +144,7 @@ public class LoginView extends javax.swing.JFrame {
         Person client = controladorLogin.validateUser(user, passwordEntered);
         if(client.getIdRol() == controladorLogin.getIdRol("CLIENTE")) {
 			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
+			System.out.println("Instancia: " + ClientSesion.getInstance().getClient().getNombre());
         	UserView userView = new UserView();
         	userView.setVisible(true);
         	this.dispose();
