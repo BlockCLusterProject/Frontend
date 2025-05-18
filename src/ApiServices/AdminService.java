@@ -43,6 +43,9 @@ interface AdminApiService {
     // OWN BACK
     @POST("/api/movie/create_movie")
     Call<Movie> createMovie(@Query("movie") String movie);
+    
+    @POST("/api/movie/publishMovies")
+    Call<Boolean> publishMovies(@Query("movie") String movie);
 
     @PATCH("api/movie/update_movies")
     Call<Movie> updateMovie(@Query("id_movie") int idMovie, @Query("movie") String movie);
@@ -127,6 +130,20 @@ public class AdminService {
     		}
     	} catch (IOException e) {
     		return null;
+    	}
+    }
+    
+    public boolean publishMovies(List<Movie> movies) {
+    	try {
+    		String movie = movies.toString();
+    		Response<Boolean> response = apiService.publishMovies(movie).execute();
+    		if(response.isSuccessful()) {
+    			return response.body();
+    		} else {
+    			return false;
+    		}
+    	} catch (IOException e) {
+    		return false;
     	}
     }
 }
