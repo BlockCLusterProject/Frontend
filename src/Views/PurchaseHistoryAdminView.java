@@ -6,6 +6,9 @@ package Views;
 
 import Controllers.ControllerPurchaseHistoryAdmin;
 import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
+
 import Models.PurchaseHistory;
 
 /**
@@ -22,10 +25,8 @@ public class PurchaseHistoryAdminView extends javax.swing.JFrame {
     public PurchaseHistoryAdminView() {
     	controller = new ControllerPurchaseHistoryAdmin();
     	purchaseHistory = controller.getPurchaseHistory();
-    	for(int i = 0; i < purchaseHistory.size(); i++) {
-    		purchaseHistory.get(i).getClient_id();
-    	}
         initComponents();
+        llenarPeliculas();
     }
 
     /**
@@ -38,12 +39,12 @@ public class PurchaseHistoryAdminView extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableInfo = new javax.swing.JTable();
         btn_goBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableInfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -54,9 +55,14 @@ public class PurchaseHistoryAdminView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableInfo);
 
         btn_goBack.setText("Regresar");
+        btn_goBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_goBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,6 +87,34 @@ public class PurchaseHistoryAdminView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_goBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_goBackActionPerformed
+        AdminView av = new AdminView();
+        av.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_goBackActionPerformed
+    
+    private void llenarPeliculas() {
+        DefaultTableModel table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Hacer que solo las dos últimas columnas sean editables
+                return column >= 1; // Las columnas 2 (Precio) y 3 (Activo) serán editables
+            }
+        };
+        table.setColumnIdentifiers(new Object[]{"Cliente", "Pelicula", "Precio", "Cantidad"});
+        //System.out.println(controllerAdminView.getPeliculas().size());
+        for (int i = 0; i < purchaseHistory.size(); i++) {
+            table.addRow(new Object[]{
+            		purchaseHistory.get(i).getClient_id(),
+            		purchaseHistory.get(i).getMovie_id(),
+            		purchaseHistory.get(i).getPrice(),
+            		purchaseHistory.get(i).getQuantity(),
+            });
+        }
+        
+        tableInfo.setModel(table);
+    }
 
     /**
      * @param args the command line arguments
@@ -120,6 +154,6 @@ public class PurchaseHistoryAdminView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_goBack;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableInfo;
     // End of variables declaration//GEN-END:variables
 }
