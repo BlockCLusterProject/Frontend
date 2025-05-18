@@ -7,7 +7,7 @@ public class ClientSesion {
 	private ClientSesion() {}
 	
 	public static ClientSesion getInstance() {
-		if(instance != null) {
+		if(instance == null) {
 			instance = new ClientSesion();
 		}
 		

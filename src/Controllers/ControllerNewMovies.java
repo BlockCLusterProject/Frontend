@@ -38,7 +38,7 @@ public class ControllerNewMovies {
     }
     
     public double getPuntuacionByIdx(int idx) {
-            return movies.get(idx).getRate();
+            return movies.get(idx).getPuntuacion();
     }
     
     public Movie entregarPelicula(int n) {

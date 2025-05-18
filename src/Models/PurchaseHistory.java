@@ -21,6 +21,17 @@ public class PurchaseHistory {
 		this.quantity = quantity;
 		this.price = price;
 	}
+	
+	public PurchaseHistory(
+			Integer client_id,
+			Integer movie_id,
+			Integer quantity,
+			Double price) {
+		this.client_id = client_id;
+		this.movie_id = movie_id;
+		this.quantity = quantity;
+		this.price = price;
+	}
 
 	public Integer getId() {
 		return id;

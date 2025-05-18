@@ -19,13 +19,13 @@ public class Movie implements Serializable {
 	// MOVIE FRONTEND
 	@SerializedName("title")
 	@JsonProperty("title")
-    private String titulo;
+    private String title;
 	@JsonProperty("runtime")
 	@SerializedName("runtime")
     private int runtime;
-    @JsonProperty("rate")
-    @SerializedName("rate")
-    private double rate;
+    @JsonProperty("vote_average")
+    @SerializedName("vote_average")
+    private double puntuacion;
     @JsonProperty("genres")
     @SerializedName("genres")
     private List<Genre> generos;
@@ -50,8 +50,8 @@ public class Movie implements Serializable {
     private int id;
 
     public Movie(
-            String titulo,
-            int duracion,
+            String title,
+            int runtime,
             double puntuacion,
             List<Genre> generos,
             double precio,
@@ -59,9 +59,9 @@ public class Movie implements Serializable {
             String rutaPortada,
             int cantidad
     ) {
-        this.titulo = titulo;
-        this.runtime = duracion;
-        this.rate = puntuacion;
+        this.title = title;
+        this.runtime = runtime;
+        this.puntuacion = puntuacion;
         this.precio = precio;
         this.sinopsis = sinopsis;
         this.rutaPortada = rutaPortada;
@@ -74,9 +74,9 @@ public class Movie implements Serializable {
     @Override
     public String toString() {
         return "{" +
-            "\"title\":\"" + titulo + "\"," +
+            "\"title\":\"" + title + "\"," +
             "\"runtime\":" + runtime + "," +
-            "\"rate\":" + rate + "," +
+            "\"rate\":" + puntuacion + "," +
             "\"genre_ids\":" + genre_ids + "," +
             "\"price\":" + precio + "," +
             "\"overview\":\"" + sinopsis + "\"," +
@@ -87,11 +87,11 @@ public class Movie implements Serializable {
     }
 
     public String getTitle() {
-        return titulo;
+        return title;
     }
 
     public void setTitle(String titulo) {
-        this.titulo = titulo;
+        this.title = titulo;
     }
 
     public int getRuntime() {
@@ -102,12 +102,12 @@ public class Movie implements Serializable {
         this.runtime = runtime;
     }
 
-    public double getRate() {
-        return rate;
+    public double getPuntuacion() {
+        return puntuacion;
     }
 
-    public void setRate(double vote_average) {
-        this.rate = vote_average;
+    public void setPuntuacion(double vote_average) {
+        this.puntuacion = vote_average;
     }
 
     public List<Genre> getGenres() {

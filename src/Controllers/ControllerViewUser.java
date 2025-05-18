@@ -51,7 +51,7 @@ public class ControllerViewUser {
 	}
 
 	public double getPuntuacionByIdx(int idx) {
-		return peliculas.get(idx).getRate();
+		return peliculas.get(idx).getPuntuacion();
 	}
 
 	public int getFilas() {
