@@ -32,13 +32,13 @@ public class Movie implements Serializable {
     @JsonProperty("genre_ids")
     @SerializedName("genre_ids")
     private List<Integer> genre_ids;
-    private double precio;
+    private double price;
     @JsonProperty("overview")
     @SerializedName("overview")
     private String sinopsis;
     @JsonProperty("backdrop_path")
     @SerializedName("backdrop_path")
-    private String rutaPortada;
+    private String backdrop_path;
     @JsonProperty("active")
     @SerializedName("active")
     private boolean active = true;
@@ -62,9 +62,9 @@ public class Movie implements Serializable {
         this.titulo = titulo;
         this.runtime = duracion;
         this.rate = puntuacion;
-        this.precio = precio;
+        this.price = precio;
         this.sinopsis = sinopsis;
-        this.rutaPortada = rutaPortada;
+        this.backdrop_path = rutaPortada;
         this.id = this.counter;
         this.counter++;
     }
@@ -74,16 +74,21 @@ public class Movie implements Serializable {
     @Override
     public String toString() {
         return "{" +
-            "\"title\":\"" + titulo + "\"," +
+            "\"title\":\"" + escape(titulo) + "\"," +
             "\"runtime\":" + runtime + "," +
-            "\"rate\":" + rate + "," +
-            "\"genre_ids\":" + genre_ids + "," +
-            "\"price\":" + precio + "," +
-            "\"overview\":\"" + sinopsis + "\"," +
-            "\"backdrop_path\":\"" + rutaPortada + "\"," +
+            "\"vote_average\":" + rate + "," +
+            "\"price\":" + price + "," +
+            "\"overview\":\"" + escape(sinopsis) + "\"," +
+            "\"backdrop_path\":\"" + escape(backdrop_path) + "\"," +
             "\"active\":" + active + "," +
-            "\"cantidad\":" + cantidad +
+            "\"quantity\":" + cantidad +
         "}";
+    }
+
+    // Método de apoyo para escapar comillas
+    private String escape(String input) {
+        if (input == null) return "";
+        return input.replace("\"", "\\\"");
     }
 
     public String getTitle() {
@@ -102,11 +107,11 @@ public class Movie implements Serializable {
         this.runtime = runtime;
     }
 
-    public double getRate() {
+    public double getVote_average() {
         return rate;
     }
 
-    public void setRate(double vote_average) {
+    public void setVote_average(double vote_average) {
         this.rate = vote_average;
     }
 
@@ -127,11 +132,11 @@ public class Movie implements Serializable {
     }
 
     public double getPrice() {
-        return precio;
+        return price;
     }
 
     public void setPrice(double precio) {
-        this.precio = precio;
+        this.price = precio;
     }
 
     public String getOverview() {
@@ -143,11 +148,11 @@ public class Movie implements Serializable {
     }
 
     public String getBackdrop_path() {
-        return rutaPortada;
+        return backdrop_path;
     }
 
     public void setBackdrop_path(String rutaPortada) {
-        this.rutaPortada = rutaPortada;
+        this.backdrop_path = rutaPortada;
     }
 
     public boolean getActive() {
@@ -158,11 +163,11 @@ public class Movie implements Serializable {
         this.active = active;
     }
 
-    public int getCantidad() {
+    public int getQuantity() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setQuantity(int cantidad) {
         this.cantidad = cantidad;
     }
 
