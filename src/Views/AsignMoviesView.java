@@ -51,7 +51,7 @@ public class AsignMoviesView extends javax.swing.JFrame {
             form.setBorder(BorderFactory.createTitledBorder(movie.getTitle()));
 
             JLabel lblCantidad = new JLabel("Cantidad:");
-            JTextField txtCantidad = new JTextField(String.valueOf(movie.getCantidad()));
+            JTextField txtCantidad = new JTextField(String.valueOf(movie.getQuantity()));
             txtCantidad.setMaximumSize(new Dimension(80, 25));
             txtCantidad.setPreferredSize(new Dimension(80, 25));
 
@@ -173,7 +173,7 @@ public class AsignMoviesView extends javax.swing.JFrame {
                 int cantidad = Integer.parseInt(inputFields[i][0].getText().trim());
                 double precio = Double.parseDouble(inputFields[i][1].getText().trim());
 
-                peliculas.get(i).setCantidad(cantidad);
+                peliculas.get(i).setQuantity(cantidad);
                 peliculas.get(i).setPrice(precio);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Error en la película: " + peliculas.get(i).getTitle());
