@@ -35,7 +35,7 @@ public class Movie implements Serializable {
     private double price;
     @JsonProperty("overview")
     @SerializedName("overview")
-    private String sinopsis;
+    private String overview;
     @JsonProperty("backdrop_path")
     @SerializedName("backdrop_path")
     private String backdrop_path;
@@ -55,7 +55,7 @@ public class Movie implements Serializable {
             double vote_average,
             List<Genre> generos,
             double precio,
-            String sinopsis,
+            String overview,
             String rutaPortada,
             int cantidad
     ) {
@@ -63,7 +63,7 @@ public class Movie implements Serializable {
         this.runtime = duracion;
         this.vote_average = vote_average;
         this.price = precio;
-        this.sinopsis = sinopsis;
+        this.overview = overview;
         this.backdrop_path = rutaPortada;
         this.id = this.counter;
         this.counter++;
@@ -78,7 +78,7 @@ public class Movie implements Serializable {
             "\"runtime\":" + runtime + "," +
             "\"vote_average\":" + vote_average + "," +
             "\"price\":" + price + "," +
-            "\"overview\":\"" + escape(sinopsis) + "\"," +
+            "\"overview\":\"" + escape(overview) + "\"," +
             "\"backdrop_path\":\"" + escape(backdrop_path) + "\"," +
             "\"active\":" + active + "," +
             "\"quantity\":" + cantidad +
@@ -140,11 +140,11 @@ public class Movie implements Serializable {
     }
 
     public String getOverview() {
-        return sinopsis;
+        return overview;
     }
 
     public void setOverview(String sinopsis) {
-        this.sinopsis = sinopsis;
+        this.overview = sinopsis;
     }
 
     public String getBackdrop_path() {
