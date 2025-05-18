@@ -391,11 +391,8 @@ public class AdminView extends javax.swing.JFrame {
         String description = movie_description.getText();
         String image = movie_image.getText();
         int quantity = Integer.parseInt(movie_quantity.getText());
-        List<Genre> generos = new ArrayList<>();
-        Genre selectedGenre = (Genre) movie_genre.getSelectedItem(); // Esto funciona bien
-        generos.add(selectedGenre);
 
-        Movie pelicula = new Movie(title, duration, score, generos, price, description, image, quantity);
+        Movie pelicula = new Movie(title, duration, score, null, price, description, image, quantity);
 		controllerAdminView.createMovie(pelicula);
         peliculas.add(pelicula);
         llenarPeliculas();
