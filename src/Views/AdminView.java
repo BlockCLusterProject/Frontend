@@ -57,7 +57,7 @@ public class AdminView extends javax.swing.JFrame {
         for (int i = 0; i < controllerAdminView.getPeliculas().size(); i++) {
             table.addRow(new Object[]{
                 controllerAdminView.getPeliculas().get(i).getTitle(),
-                controllerAdminView.getPeliculas().get(i).getCantidad(),
+                controllerAdminView.getPeliculas().get(i).getQuantity(),
                 controllerAdminView.getPeliculas().get(i).getPrice(),
                 controllerAdminView.getPeliculas().get(i).getActive() == true ? "Si" : "No",
                 controllerAdminView.getPeliculas().get(i).getId(),
@@ -92,11 +92,11 @@ public class AdminView extends javax.swing.JFrame {
                     }
                 } else if (e.getType() == TableModelEvent.UPDATE && column == 1) {
                     if (tryParseDouble(newValue.toString())) {
-                        pelicula.setCantidad(Integer.parseInt(newValue.toString()));
+                        pelicula.setQuantity(Integer.parseInt(newValue.toString()));
                         controllerAdminView.updateMovie(pelicula.getId(), pelicula.toString());
                     } else {
                         JOptionPane.showMessageDialog(null, "Tienes que insertar un valor número entero");
-                        table.setValueAt(pelicula.getCantidad(), row, column);
+                        table.setValueAt(pelicula.getQuantity(), row, column);
                     }
                 }
             }
@@ -220,6 +220,11 @@ public class AdminView extends javax.swing.JFrame {
         });
 
         jButton3.setText("Historial Ventas");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Cantidad");
 
@@ -410,6 +415,12 @@ public class AdminView extends javax.swing.JFrame {
     private void movie_quantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movie_quantityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_movie_quantityActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        PurchaseHistoryAdminView hist = new PurchaseHistoryAdminView(); 
+        hist.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -54,7 +54,7 @@ public class MovieView extends javax.swing.JFrame {
 
     private void loadInformation() {
         lblTitulo.setText(p.getTitle());
-        lblPuntuacion.setText("IMDb " + p.getRate() + " / 10");
+        lblPuntuacion.setText("IMDb " + p.getVote_average() + " / 10");
         lblDuracion.setText(p.getRuntime() + " min");
         String gens = "";
         for(Genre genero : p.getGenres()) {
