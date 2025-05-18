@@ -47,6 +47,7 @@ interface AdminApiService {
     
     @POST("/api/movie/publishMovies")
     Call<Boolean> publishMovies(@Query("movie") String movie);
+    
     @GET("/api/movie/getPurchaseHistory")
     Call<List<PurchaseHistory>> getPurchaseHistory();
 
