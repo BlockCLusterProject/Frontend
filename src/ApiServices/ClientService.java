@@ -57,8 +57,8 @@ interface ClientApiService {
 	@GET("api/users/get_purchase_history")
 	Call<List<Movie>> getPurchaseHistory();
 	
-	@GET("api/users/{user}")
-	Call<Person> getClientByUser(@Path("user") String user);
+	@GET("api/users/client")
+	Call<Person> getClientByUser(@Query("user") String user);
 	
 	@POST("api/users/movie/add-purchase-history")
 	Call<PurchaseHistory> addPurchaseHistory(@Body PurchaseHistory puchase);
@@ -88,6 +88,8 @@ public class ClientService {
 	
 	public PurchaseHistory addPurchaseHistory(PurchaseHistory purchase) {
 		try {
+			System.out.println("front");
+			System.out.println(new com.google.gson.Gson().toJson(purchase));
 			Response<PurchaseHistory> response = apiService.addPurchaseHistory(purchase).execute();
 			if(response.isSuccessful()) {
 				return response.body();
@@ -193,6 +195,8 @@ public class ClientService {
 	public Person getClientByUser(String user) {
 		try {
 			Response<Person> response = apiService.getClientByUser(user).execute();
+			System.out.println(response);
+			System.out.println(response.body());
 			if(response.isSuccessful()) {
 				return response.body();
 			} else {

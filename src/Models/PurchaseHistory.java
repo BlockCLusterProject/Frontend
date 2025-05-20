@@ -1,20 +1,25 @@
 package Models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 public class PurchaseHistory {
 	private Integer id;
 
 	@JsonProperty("client_id")
-	public Integer client_id;
+	@SerializedName("client_id")
+	public Integer clientId;
 
 	@JsonProperty("movie_id")
-	public Integer movie_id;
+	@SerializedName("movie_id")
+	public Integer movieId;
 	
 	@JsonProperty("quantity")
+	@SerializedName("quantity")
 	private Integer quantity;
 	
 	@JsonProperty("price")
+	@SerializedName("price")
 	public Double price;
 	
 	public PurchaseHistory() {};
@@ -26,8 +31,8 @@ public class PurchaseHistory {
 			Integer quantity,
 			Double price) {
 		this.id = id;
-		this.client_id = client_id;
-		this.movie_id = movie_id;
+		this.clientId = client_id;
+		this.movieId = movie_id;
 		this.quantity = quantity;
 		this.price = price;
 	}
@@ -37,8 +42,8 @@ public class PurchaseHistory {
 			Integer movie_id,
 			Integer quantity,
 			Double price) {
-		this.client_id = client_id;
-		this.movie_id = movie_id;
+		this.clientId = client_id;
+		this.movieId = movie_id;
 		this.quantity = quantity;
 		this.price = price;
 	}
@@ -51,20 +56,20 @@ public class PurchaseHistory {
 		this.id = id;
 	}
 
-	public Integer getClient_id() {
-		return client_id;
+	public Integer getClientId() {
+		return clientId;
 	}
 
-	public void setClient_id(Integer client_id) {
-		this.client_id = client_id;
+	public void setClientId(Integer client_id) {
+		this.clientId = client_id;
 	}
 
-	public Integer getMovie_id() {
-		return movie_id;
+	public Integer getMovieId() {
+		return movieId;
 	}
 
-	public void setMovie_id(Integer movie_id) {
-		this.movie_id = movie_id;
+	public void setMovieId(Integer movie_id) {
+		this.movieId = movie_id;
 	}
 
 	public Integer getQuantity() {
@@ -81,6 +86,12 @@ public class PurchaseHistory {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "PurchaseHistory [client_id=" + clientId + ", movie_id=" + movieId + ", quantity=" + quantity
+				+ ", price=" + price + "]";
 	}
 
 }

@@ -224,10 +224,10 @@ public class ShoppingCarView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVaciarCarritoActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
+		controladorVistaCarrito.buy();
 		MoviePurchaseView vistaCompraPelicula = null;
 		vistaCompraPelicula = new MoviePurchaseView();
 		vistaCompraPelicula.setVisible(true);
-		controladorVistaCarrito.buy();
 		this.dispose();
     }//GEN-LAST:event_btnComprarActionPerformed
 
