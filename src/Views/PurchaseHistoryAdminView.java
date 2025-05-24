@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import Models.PurchaseHistory;
+import Models.PurchaseHistoryDTO;
 
 /**
  *
@@ -21,7 +22,7 @@ public class PurchaseHistoryAdminView extends javax.swing.JFrame {
      * Creates new form PurchaseHistoryAdminView
      */
 	private ControllerPurchaseHistoryAdmin controller;
-	List<PurchaseHistory> purchaseHistory;
+	List<PurchaseHistoryDTO> purchaseHistory;
     public PurchaseHistoryAdminView() {
     	controller = new ControllerPurchaseHistoryAdmin();
     	purchaseHistory = controller.getPurchaseHistory();
@@ -106,8 +107,8 @@ public class PurchaseHistoryAdminView extends javax.swing.JFrame {
         //System.out.println(controllerAdminView.getPeliculas().size());
         for (int i = 0; i < purchaseHistory.size(); i++) {
             table.addRow(new Object[]{
-            		purchaseHistory.get(i).getClient_id(),
-            		purchaseHistory.get(i).getMovie_id(),
+            		purchaseHistory.get(i).getClientName(),
+            		purchaseHistory.get(i).getMovieName(),
             		purchaseHistory.get(i).getPrice(),
             		purchaseHistory.get(i).getQuantity(),
             });

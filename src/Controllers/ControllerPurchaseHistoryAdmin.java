@@ -8,6 +8,7 @@ import java.util.List;
 
 import ApiServices.AdminService;
 import Models.PurchaseHistory;
+import Models.PurchaseHistoryDTO;
 
 /**
  *
@@ -19,7 +20,7 @@ public class ControllerPurchaseHistoryAdmin {
     	_service = new AdminService();
     }
     
-    public List<PurchaseHistory> getPurchaseHistory(){
+    public List<PurchaseHistoryDTO> getPurchaseHistory(){
     	 return _service.getPurchaseHistory();
     }	
 }

@@ -26,6 +26,7 @@ import java.util.Map;
 
 import Models.Movie;
 import Models.PurchaseHistory;
+import Models.PurchaseHistoryDTO;
 import io.github.cdimascio.dotenv.Dotenv;
 
 /**
@@ -49,7 +50,7 @@ interface AdminApiService {
     Call<Boolean> publishMovies(@Query("movie") String movie);
     
     @GET("/api/movie/getPurchaseHistory")
-    Call<List<PurchaseHistory>> getPurchaseHistory();
+    Call<List<PurchaseHistoryDTO>> getPurchaseHistory();
 
     @PATCH("api/movie/update_movies")
     Call<Movie> updateMovie(@Query("id_movie") int idMovie, @Query("movie") String movie);
@@ -151,9 +152,9 @@ public class AdminService {
     	}
     }
     
-    public List<PurchaseHistory> getPurchaseHistory() {
+    public List<PurchaseHistoryDTO> getPurchaseHistory() {
     	try {
-    		Response<List<PurchaseHistory>> response = apiService.getPurchaseHistory().execute();
+    		Response<List<PurchaseHistoryDTO>> response = apiService.getPurchaseHistory().execute();
     		if(response.isSuccessful()) {
     			return response.body();
     		} else {
