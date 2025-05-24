@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Controllers.ControllerPurchaseHistoryView;
 import Models.Movie;
+import Models.PurchaseHistory;
 
 /**
  *
@@ -30,11 +31,11 @@ public class PurchaseHistoryView extends javax.swing.JFrame {
 	}
 	
 	private void fillTable() {
-		List<Movie> history = controller.getHistory();
-		String[] columns = {"T�tulo", "G�neros"};
+		List<PurchaseHistory> history = controller.getHistory();
+		String[] columns = {"Cliente", "Movie"};
 		DefaultTableModel model = new DefaultTableModel(columns, 0);
-		for(Movie movie : history) {
-			Object[] row = {movie.getTitle(), movie.getGenres()};
+		for(PurchaseHistory purchase : history) {
+			Object[] row = {purchase.client_id, purchase.getMovie_id()};
 			model.addRow(row);
 		}
 

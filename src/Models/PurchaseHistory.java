@@ -8,11 +8,11 @@ public class PurchaseHistory {
 
 	@JsonProperty("client_id")
 	@SerializedName("client_id")
-	public Integer clientId;
+	public Integer client_id;
 
 	@JsonProperty("movie_id")
 	@SerializedName("movie_id")
-	public Integer movieId;
+	public Integer movie_id;
 	
 	@JsonProperty("quantity")
 	@SerializedName("quantity")
@@ -31,8 +31,8 @@ public class PurchaseHistory {
 			Integer quantity,
 			Double price) {
 		this.id = id;
-		this.clientId = client_id;
-		this.movieId = movie_id;
+		this.client_id = client_id;
+		this.movie_id = movie_id;
 		this.quantity = quantity;
 		this.price = price;
 	}
@@ -42,10 +42,19 @@ public class PurchaseHistory {
 			Integer movie_id,
 			Integer quantity,
 			Double price) {
-		this.clientId = client_id;
-		this.movieId = movie_id;
+		this.client_id = client_id;
+		this.movie_id = movie_id;
 		this.quantity = quantity;
 		this.price = price;
+	}
+	
+	@Override
+	public String toString() {
+		return "{" +
+			"\"client_id\":" + client_id + "," +
+			"\"movie_id\":" + movie_id + "," +
+			"\"quantity\":" + quantity + "," +
+			"\"price\":" + price + "}";
 	}
 
 	public Integer getId() {
@@ -56,20 +65,20 @@ public class PurchaseHistory {
 		this.id = id;
 	}
 
-	public Integer getClientId() {
-		return clientId;
+	public Integer getClient_id() {
+		return client_id;
 	}
 
-	public void setClientId(Integer client_id) {
-		this.clientId = client_id;
+	public void setClient_id(Integer client_id) {
+		this.client_id = client_id;
 	}
 
-	public Integer getMovieId() {
-		return movieId;
+	public Integer getMovie_id() {
+		return movie_id;
 	}
 
-	public void setMovieId(Integer movie_id) {
-		this.movieId = movie_id;
+	public void setMovie_id(Integer movie_id) {
+		this.movie_id = movie_id;
 	}
 
 	public Integer getQuantity() {
@@ -86,12 +95,6 @@ public class PurchaseHistory {
 
 	public void setPrice(Double price) {
 		this.price = price;
-	}
-
-	@Override
-	public String toString() {
-		return "PurchaseHistory [client_id=" + clientId + ", movie_id=" + movieId + ", quantity=" + quantity
-				+ ", price=" + price + "]";
 	}
 
 }

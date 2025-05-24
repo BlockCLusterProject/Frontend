@@ -57,11 +57,17 @@ interface ClientApiService {
 	@GET("api/users/get_purchase_history")
 	Call<List<Movie>> getPurchaseHistory();
 	
+	@GET("api/users/get_all_purchases")
+	Call<List<PurchaseHistory>> getAllPurchases();
+	
+	@GET("api/users/get_purchase_by_user")
+	Call<List<PurchaseHistory>> getPurchaseByUser(@Query("user") String user);
+	
 	@GET("api/users/client")
 	Call<Person> getClientByUser(@Query("user") String user);
 	
 	@POST("api/users/movie/add-purchase-history")
-	Call<PurchaseHistory> addPurchaseHistory(@Body PurchaseHistory puchase);
+	Call<Boolean> addPurchaseHistory(@Query("purchase") String puchase);
 }
 
 interface QrApiService {
@@ -86,20 +92,48 @@ public class ClientService {
 		qrService = retrofit.create(QrApiService.class);
 	}
 	
-	public PurchaseHistory addPurchaseHistory(PurchaseHistory purchase) {
+	public List<PurchaseHistory> getPuchaseByUser(String user) {
 		try {
-			System.out.println("front");
-			System.out.println(new com.google.gson.Gson().toJson(purchase));
-			Response<PurchaseHistory> response = apiService.addPurchaseHistory(purchase).execute();
+			Response<List<PurchaseHistory>> response = apiService.getPurchaseByUser(user).execute();
 			if(response.isSuccessful()) {
 				return response.body();
 			} else {
 				System.out.println("Error :" + response.code());
 				return null;
 			}
-		} catch(IOException e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public List<PurchaseHistory> getAllPurchases() {
+		try {
+			Response<List<PurchaseHistory>> response = apiService.getAllPurchases().execute();
+			if(response.isSuccessful()) {
+				return response.body();
+			} else {
+				System.out.println("Error :" + response.code());
+				return null;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public boolean addPurchaseHistory(PurchaseHistory purchase) {
+		try {
+			Response<Boolean> response = apiService.addPurchaseHistory(purchase.toString()).execute();
+			if(response.isSuccessful()) {
+				return response.body();
+			} else {
+				System.out.println("Error :" + response.code());
+				return false;
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 
