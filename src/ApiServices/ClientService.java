@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import Models.Person;
+import Models.JwtPersistence;
 import Models.Movie;
 import Models.PurchaseHistory;
 import retrofit2.Call;
@@ -35,7 +36,12 @@ interface ClientApiService {
 	Call<Person> validateUser(
 			@Query("user") String user,
 			@Query("password") String password
+			
 		);	
+	
+	@GET("/api/users/validateJwt")
+	Call<String> validateJwt(
+			@Header("Authorization") String token);
 	
 	@GET("api/users/getIdRol/{rol}")
 	Call<Integer> getIdRol(@Query("rol") String rol);
@@ -86,6 +92,8 @@ public class ClientService {
 		qrService = retrofit.create(QrApiService.class);
 	}
 	
+	
+	
 	public PurchaseHistory addPurchaseHistory(PurchaseHistory purchase) {
 		try {
 			Response<PurchaseHistory> response = apiService.addPurchaseHistory(purchase).execute();
@@ -103,7 +111,8 @@ public class ClientService {
 
 	public Person validateUser(String user, String password) {
 		try {
-			Response<Person> response = apiService.validateUser(user, password).execute();
+			
+			Response<Person> response = apiService.validateUser(user,password).execute();
 			if(response.isSuccessful()) {
 				return response.body();
 			} else {
@@ -113,6 +122,21 @@ public class ClientService {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public boolean validateJwt() {
+		String token = JwtPersistence.getInstance().getToken();
+		try {
+			Response<String> response = apiService.validateJwt("Bearer " + token).execute();
+			if(response.isSuccessful()) {
+				return response.body().equalsIgnoreCase("True");
+			} else {
+				System.out.println("Error: " + response.code());
+				return response.body().equalsIgnoreCase("False");
+			}
+		} catch(IOException e) {
+			return false;
 		}
 	}
 	
