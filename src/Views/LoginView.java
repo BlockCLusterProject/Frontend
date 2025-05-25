@@ -7,8 +7,10 @@ package Views;
 import javax.swing.JOptionPane;
 
 import ApiServices.ClientService;
+import ApiServices.JwtService;
 import Controllers.ControllerViewLogin;
 import Models.ClientSesion;
+import Models.JwtPersistence;
 import Models.Person;
 
 /**
@@ -18,6 +20,7 @@ import Models.Person;
 public class LoginView extends javax.swing.JFrame {
 
     ControllerViewLogin controladorLogin;
+    JwtService jwtService;
     ClientService service;
     /**
      * Creates new form VistaLogin
@@ -25,7 +28,9 @@ public class LoginView extends javax.swing.JFrame {
     public LoginView() {
         initComponents();
         //ationRelativeTo(this);
+        this.jwtService = new JwtService();
         this.service = new ClientService();
+        
         this.controladorLogin = new ControllerViewLogin(service);
     }
     
@@ -142,26 +147,44 @@ public class LoginView extends javax.swing.JFrame {
         String passwordEntered = jTextFieldContrasena.getText();
         
         Person client = controladorLogin.validateUser(user, passwordEntered);
-        System.out.println(client);
-        if(client.getIdRol() == controladorLogin.getIdRol("CLIENTE")) {
-			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
-			System.out.println("Instancia: " + ClientSesion.getInstance().getClient().getNombre());
-        	UserView userView = new UserView();
-        	userView.setVisible(true);
-        	this.dispose();
-        }else if(client.getIdRol() == controladorLogin.getIdRol("ADMIN")) {
-			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
-        	AdminView adminView = new AdminView();
-        	adminView.setVisible(true);
-        	this.dispose();
+        
+        if(client != null) {
+            controladorLogin.initJwtToken();
+            String token = controladorLogin.generateJwtToken(client);
+            JwtPersistence.getInstance().setToken(token);
+            boolean validateJwt = controladorLogin.validateToken();
+            
+            if (validateJwt) {
+            	
+            	if(client.getIdRol() == controladorLogin.getIdRol("CLIENTE")) {
+        			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
+                	UserView userView = new UserView();
+                	userView.setVisible(true);
+                	this.dispose();
+                }else if(client.getIdRol() == controladorLogin.getIdRol("ADMIN")) {
+        			ClientSesion.getInstance().setClient(controladorLogin.getClient(user));
+                	AdminView adminView = new AdminView();
+                	adminView.setVisible(true);
+                	this.dispose();
+                } else {
+        			
+                }
+            }else {
+            	JOptionPane.showMessageDialog(
+        				null,                                   
+        				"Token invalido",
+        				null,                     
+        				JOptionPane.ERROR_MESSAGE               
+        			);
+            }
         } else {
-			JOptionPane.showMessageDialog(
-				null,                                   
-				"Por favor verifique que el usuario y contraseña sean correctos \n (si aun no tiene un usuario debe registrarse)",
-				"Usuario No Registrado",                     
-				JOptionPane.ERROR_MESSAGE               
-			);
-        }
+        	JOptionPane.showMessageDialog(
+    				null,                                   
+    				"Por favor verifique que el usuario y contraseï¿½a sean correctos \n (si aun no tiene un usuario debe registrarse)",
+    				"Usuario No Registrado",                     
+    				JOptionPane.ERROR_MESSAGE               
+    			);
+        }      
   
     }//GEN-LAST:event_jButtonInicioActionPerformed
 

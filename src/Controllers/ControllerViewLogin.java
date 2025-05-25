@@ -4,7 +4,10 @@
  */
 package Controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import ApiServices.ClientService;
+import ApiServices.JwtService;
 import Models.Person;
 
 /**
@@ -14,10 +17,21 @@ import Models.Person;
 public class ControllerViewLogin {
     
     ClientService service;
+    JwtService jwtService;
+    
+    @Autowired
     public ControllerViewLogin(ClientService service){
-    	
+    	this.jwtService = new JwtService();
     	this.service = service;
     	
+    }
+    
+    public String generateJwtToken(Person user) {
+    	return jwtService.generateJwtToken(user);
+    }
+    
+    public void initJwtToken() {
+    	this.jwtService.init();
     }
     
     public Person getClient(String user) {
@@ -28,6 +42,9 @@ public class ControllerViewLogin {
     	return service.validateUser(user, password);
     }
     
+	public boolean validateToken() {
+		return service.validateJwt();
+	}
     public Integer getIdRol(String rol) {
     	return service.getIdRol(rol);
     }

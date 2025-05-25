@@ -10,8 +10,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import ApiServices.ClientService;
+import ApiServices.JwtService;
 import Controllers.ControllerViewRegister;
 import Models.Genre;
+import Models.JwtPersistence;
 import Models.Person;
 
 /**
@@ -22,10 +24,12 @@ public class RegisterView extends javax.swing.JFrame {
 
 	ControllerViewRegister controller;
 	ClientService service;
+	JwtService jwtService;
 	
     public RegisterView() {
     	service = new ClientService();
     	this.controller = new ControllerViewRegister(service);
+    	this.jwtService = new JwtService();
     	
         initComponents();
     }
@@ -365,6 +369,9 @@ public class RegisterView extends javax.swing.JFrame {
         
         if (passwword.equals(confirmation)){
             Person user = new Person(name,id,age,gmail,phone,userName,passwword,genrePreferences);
+            
+            String token = controller.generateJwtToken(user);
+            JwtPersistence.getInstance().setToken(token);
             
             controller.registerClient(user);
             
