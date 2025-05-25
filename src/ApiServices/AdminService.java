@@ -13,6 +13,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import Models.JwtPersistence;
 import Models.Movie;
 import Models.PurchaseHistory;
 import Models.PurchaseHistoryDTO;
@@ -47,7 +49,7 @@ interface AdminApiService {
     Call<Movie> createMovie(@Query("movie") String movie);
     
     @POST("/api/movie/publishMovies")
-    Call<Boolean> publishMovies(@Query("movie") String movie);
+    Call<Boolean> publishMovies(@Query("movie") String movie, @Header("Authorization") String token);
     
     @GET("/api/movie/getPurchaseHistory")
     Call<List<PurchaseHistoryDTO>> getPurchaseHistory();
@@ -141,7 +143,7 @@ public class AdminService {
     public boolean publishMovies(List<Movie> movies) {
     	try {
     		String movie = movies.toString();
-    		Response<Boolean> response = apiService.publishMovies(movie).execute();
+    		Response<Boolean> response = apiService.publishMovies(movie, "Bearer " + JwtPersistence.getInstance().getToken()).execute();
     		if(response.isSuccessful()) {
     			return response.body();
     		} else {
