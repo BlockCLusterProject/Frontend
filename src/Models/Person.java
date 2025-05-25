@@ -22,6 +22,7 @@ public class Person {
     private String user;
     private String password;
     private List<Genre> preferences;
+    private String token;
 
     public Person(
     		String nombre, 
@@ -63,6 +64,13 @@ public class Person {
         this.preferences = preferences;
     }
     
+    public String getToken() {
+    	return token;
+    }
+    
+    public void setToken(String token) {
+    	this.token = token;
+    }
     
     public Integer getIdRol() {
 		return idRol;

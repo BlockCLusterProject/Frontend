@@ -6,21 +6,26 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import Models.Person;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 
+@Service
 public class JwtService {
-
-	@Value("${JWT_SECRET}")
 	private String secretCode;
 	
 	private SecretKey jwtSecret;
 	private final long jwtExpirationMs = 86400000; // 1 dia
 	
+	public JwtService() {
+		Dotenv dotenv = Dotenv.load();
+		secretCode = dotenv.get("JWT_SECRET");
+	}
 	@PostConstruct
 	public void init() {
 		if(secretCode == null || secretCode.trim().isEmpty()) {
@@ -40,24 +45,24 @@ public class JwtService {
 				.compact();
 	}
 	
-	public boolean validateJwtToken(String token) {
-		try {
-			Jwts.parserBuilder()
-				.setSigningKey(jwtSecret)
-				.build()
-				.parseClaimsJws(token);
-			return true;
-		} catch(Exception e) {
-			return false;
-		}
-	}
-	
-	public String extractToken(String authHeader) {
-		if(authHeader != null && authHeader.startsWith("Bearer ")) {
-			return authHeader.substring(7);
-		}
-		
-		return null;
-	}
+//	public boolean validateJwtToken(String token) {
+//		try {
+//			Jwts.parserBuilder()
+//				.setSigningKey(jwtSecret)
+//				.build()
+//				.parseClaimsJws(token);
+//			return true;
+//		} catch(Exception e) {
+//			return false;
+//		}
+//	}
+//	
+//	public String extractToken(String authHeader) {
+//		if(authHeader != null && authHeader.startsWith("Bearer ")) {
+//			return authHeader.substring(7);
+//		}
+//		
+//		return null;
+//	}
 
 }
