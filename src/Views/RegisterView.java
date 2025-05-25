@@ -370,15 +370,18 @@ public class RegisterView extends javax.swing.JFrame {
         if (passwword.equals(confirmation)){
             Person user = new Person(name,id,age,gmail,phone,userName,passwword,genrePreferences);
             
+            controller.initJwtToken();
             String token = controller.generateJwtToken(user);
             JwtPersistence.getInstance().setToken(token);
             
+
             controller.registerClient(user);
             
             UserView vu = new UserView();
             preference.clear(); 
             vu.setVisible(true);
             this.dispose();
+            
         }else {
             JOptionPane.showMessageDialog(null, "confirme su contraseña");
         }
