@@ -49,7 +49,7 @@ interface ClientApiService {
 	// Register Client
 	@POST("api/users/addUser")
 	Call<Person> registerClient(
-			@Query("user") String user);
+			@Query("user") String user,@Header("Authorization") String token);
 	
 
 	@GET("/api/users/available_movies")
@@ -156,7 +156,7 @@ public class ClientService {
 
 	public boolean registerClient(String user) {
 		try {
-			Response<Person> response = apiService.registerClient(user).execute();
+			Response<Person> response = apiService.registerClient(user, "Bearer " + JwtPersistence.getInstance().getToken()).execute();
 			if(response.isSuccessful()) {
 				return true;
 			} else {

@@ -22,4 +22,13 @@ public class ControllerViewRegister {
     public String generateJwtToken(Person user) {
     	return jwtService.generateJwtToken(user);
     }
+    
+    
+    public void initJwtToken() {
+    	this.jwtService.init();
+    }
+    
+	public boolean validateToken() {
+		return service.validateJwt();
+	}
 }
